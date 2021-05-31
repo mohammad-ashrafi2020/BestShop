@@ -10,7 +10,7 @@ namespace framework.Domain
         //    Id = Guid.NewGuid();
         //}
         public long Id { get; set; }
-        public DateTime CreationDate { get; }
+        public DateTime CreationDate { get; set; }
         public DateTime ModifyDate { get; protected set; }
     }
 }
