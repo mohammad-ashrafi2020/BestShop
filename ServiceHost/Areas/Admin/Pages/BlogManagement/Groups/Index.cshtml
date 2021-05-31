@@ -1,0 +1,62 @@
+﻿@page "{handler?}"
+@model ServiceHost.Areas.Admin.Pages.BlogManagement.Groups.IndexModel
+@{
+    ViewData["title"] = "دسته بندی بلاگ";
+    ViewData["selected"] = "BlogGroups";
+}
+<popupLink class="btn btn-success mb-2" text="افزودن گروه"
+           title="گروه جدید" url="/admin/BlogManagement/groups/ShowInsertModal?parent=null"></popupLink>
+<div class="box box-primary">
+    <div class="box-body table-responsive no-padding" onclick="">
+        <table class="table table-bordered bg-white text-center">
+            <thead>
+                <tr>
+                    <th>عنوان</th>
+                    <th>زیر گروه</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Groups.Where(g => g.ParentId == null))
+                {
+                    <tr>
+                        <td>@item.GroupTitle (<small>@item.EnglishGroupTitle</small>)</td>
+                        <td>
+                            @if (Model.Groups.Any(g => g.ParentId == item.Id))
+                            {
+
+                                @foreach (var sub in Model.Groups.Where(g => g.ParentId == item.Id))
+                                {
+                                    <ul class=" table-bordered" style="box-shadow: 0 0 5px rgba(27, 27, 27, 0.12); padding-right: 5px;">
+                                        <li>
+                                            <div class="text-right" style="padding: 5px; margin: 5px">
+                                                @sub.GroupTitle (<small>@sub.EnglishGroupTitle</small>)
+                                                <a href="javascript:void(0)" onclick="DeleteBlogGroup(@sub.Id)" class="btn btn-sm no-margin btn-danger">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                                <popupLink class="btn btn-primary btn-sm" text="ویرایش"
+                                                           title="ویرایش گروه" url="/admin/BlogManagement/groups/ShowEditModal?id=@sub.Id"></popupLink>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                }
+                            }
+                        <td>
+                            <a href="javascript:void(0)" onclick="DeleteBlogGroup(@item.Id)" class="btn btn-sm btn-danger  no-margin">حذف</a>
+                            <popupLink class="btn btn-primary btn-sm" text="ویرایش"
+                                       title="ویرایش گروه" url="/admin/BlogManagement/groups/ShowEditModal?id=@item.Id"></popupLink>
+
+                            <popupLink class="btn btn-success btn-sm" text="افزودن زیر گروه"
+                                       title="افزودن زیر گروه به @item.GroupTitle" url="/admin/BlogManagement/groups/ShowInsertModal?parent=@item.Id"></popupLink>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts
+{
+ 
+}

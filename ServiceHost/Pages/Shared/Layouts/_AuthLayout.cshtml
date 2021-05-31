@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["title"]</title>
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/theme.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+</head>
+<body>
+    <div class="page-wrapper auth-page-wrapper">
+        <main class="page-content">
+            <div class="container">
+                <div class="auth-wrapper">
+                    @RenderBody()
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/assets/js/jquery-3.5.1.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="/assets/js/custom.js"></script>
+    <script src="/global/global.js"></script>
+    <partial name="Shared/_ValidationScriptsPartial" />
+    <partial name="Shared/HandleMessage/_RequestResult" />
+    @await RenderSectionAsync("Scripts", false)
+</body>
+
+</html>

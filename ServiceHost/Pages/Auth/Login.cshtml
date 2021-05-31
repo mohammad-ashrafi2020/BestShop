@@ -1,0 +1,55 @@
+﻿@page
+@model ServiceHost.Pages.Auth.LoginModel
+@{
+    Layout = "Shared/Layouts/_AuthLayout";
+    ViewData["title"] = "ورود به بست شاپ";
+}
+<div class="auth-form shadow-around">
+    <div class="site-logo">
+        <a href="/">
+            <img src="/assets/images/logo.png" alt="logo">
+        </a>
+    </div>
+    <div class="auth-form-title">
+        ورود به بست شاپ
+    </div>
+    <form method="post">
+        <div class="form-element-row">
+            <label for="phone-number" class="label-element">شماره موبایل</label>
+            <div class="form-element-with-icon">
+                <input type="text" class="input-element" id="number_input" asp-for="LoginDto.PhoneNumber">
+                <i class="fad fa-mobile-alt"></i>
+            </div>
+        </div>
+        <div class="form-element-row">
+            <label for="password" class="label-element">
+                <span class="d-flex justify-content-between">
+                    <span>کلمه عبور</span>
+                    <a asp-page="ForgotPassword" class="link--with-border-bottom">رمز عبور خود را فراموش کرده‌ام</a>
+                </span>
+            </label>
+            <div class="form-element-with-icon">
+                <input type="password" class="input-element" asp-for="LoginDto.Password">
+                <i class="fad fa-key-skeleton"></i>
+            </div>
+        </div>
+        <div class="form-element-row">
+            <label class="container-checkbox">
+                مرا به خاطر داشته باش
+                <input type="checkbox" name="reMemberMe" checked="checked">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <div class="form-element-row text-left">
+            <button type="submit" class="btn-element btn-success-element">
+                <i class="fad fa-sign-in-alt"></i>
+                ورود به همتا
+            </button>
+        </div>
+
+    </form>
+    <div class="auth-form-footer">
+        <span>کاربر جدید هستید؟</span>
+        <a asp-page="Register" class="link--with-border-bottom">ثبت نام در همتا</a>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+﻿@model Blog.Application.DTOs.Groups.InsertBlogGroupDto
+
+<form data-ajax="true" method="post" asp-page="Index" asp-page-handler="InsertGroup" class="row">
+    @Html.HiddenFor(m=>m.ParentId)
+    <div class="col-md-6">
+        <label>عنوان گروه :</label>
+        @Html.EditorFor(m => m.GroupTitle)
+    </div>
+    <div class="col-md-6">
+        <label>نام انگلیسی گروه (برای قرارگیری در url)</label>
+        @Html.EditorFor(m => m.EnglishGroupTitle)
+    </div>
+    <div class="col-md-12">
+        <label>MetaDescription</label>
+        @Html.EditorFor(m => m.MetaDescription)
+    </div>
+    <div class="col-md-12">
+        <button type="submit" class="btn btn-success">ثبت اطلاعات</button>
+    </div>
+</form>

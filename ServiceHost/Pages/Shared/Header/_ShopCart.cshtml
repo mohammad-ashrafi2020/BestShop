@@ -1,0 +1,162 @@
+﻿@using framework.Utilities
+@using Account.Application.Utilities
+<div class="user-items">
+    <div class="user-item cart-list">
+        <a href="#">
+            <i class="fal fa-shopping-basket"></i>
+            <span class="bag-items-number">2</span>
+        </a>
+        <ul>
+            <li class="cart-items">
+                <ul class="do-nice-scroll">
+                    <li class="cart-item">
+                        <span class="d-flex align-items-center mb-2">
+                            <a href="#">
+                                <img src="/assets/images/cart/item-1.jpg" alt="">
+                            </a>
+                            <span>
+                                <a href="#">
+                                    <span class="title-item">
+                                        گوشی موبایل شیائومی مدل Redmi 9 ظرفیت 32 گیگابایت
+                                    </span>
+                                </a>
+                                <span class="color d-flex align-items-center">
+                                    رنگ:
+                                    <span style="background-color: #8a2be2;"></span>
+                                </span>
+                            </span>
+                        </span>
+                        <span class="price">4,050,000 تومان</span>
+                        <button class="remove-item">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </li>
+                    <li class="cart-item">
+                        <span class="d-flex align-items-center mb-2">
+                            <a href="#">
+                                <img src="/assets/images/cart/item-2.jpg" alt="">
+                            </a>
+                            <span>
+                                <a href="#">
+                                    <span class="title-item">
+                                        ساعت مچی هوشمند Haylou LS02
+                                    </span>
+                                </a>
+                                <span class="color d-flex align-items-center">
+                                    رنگ:
+                                    <span style="background-color: #000;"></span>
+                                </span>
+                            </span>
+                        </span>
+                        <span class="price">750,000 تومان</span>
+                        <button class="remove-item">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </li>
+                    <li class="cart-item">
+                        <span class="d-flex align-items-center mb-2">
+                            <a href="#">
+                                <img src="/assets/images/cart/item-3.jpg" alt="">
+                            </a>
+                            <span>
+                                <a href="#">
+                                    <span class="title-item">
+                                        هدفون بلوتوثی کیو سی وای مدل T7
+                                    </span>
+                                </a>
+                                <span class="color d-flex align-items-center">
+                                    رنگ:
+                                    <span style="background-color: #fff;"></span>
+                                </span>
+                            </span>
+                        </span>
+                        <span class="price">635,000 تومان</span>
+                        <button class="remove-item">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </li>
+                </ul>
+            </li>
+            <li class="cart-footer">
+                <span class="d-block text-center mb-3">
+                    مبلغ کل:
+                    <span class="total">4,050,000 تومان</span>
+                </span>
+                <span class="d-block text-center px-2">
+                    <a href="#" class="btn-cart">
+                        مشاهده سبد خرید
+                        <i class="mi mi-ShoppingCart"></i>
+                    </a>
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div class="user-item account">
+      
+        @if (_context.IsAuthenticated)
+        {
+            var info = _context.GetUserInfo();
+            <a href="javascript:void(0)">
+                <i class="fal fa-user"></i>
+                <i class="fa fa-chevron-down text-sm mr-1"></i>
+            </a>
+            <ul class="dropdown--wrapper">
+                <li class="header-profile-dropdown-account-container">
+                    <a asp-page="/Profile/Index" class="d-block">
+                        <span class="header-profile-dropdown-user">
+                            <span class="header-profile-dropdown-user-img">
+                                <img src="@Directories.GetBitMapUserAvatar(info.ImageName)" alt="@info.ImageName">
+                            </span>
+                            <span class="header-profile-dropdown-user-info">
+                                <p class="header-profile-dropdown-user-name">
+                                         @info.FullName
+                                </p>
+                                <span class="header-profile-dropdown-user-profile-link">
+                                    مشاهده حساب
+                                    کاربری
+                                </span>
+                            </span>
+                        </span>
+                        <span class="header-profile-dropdown-account">
+                            <span class="header-profile-dropdown-account-item">
+                                <span class="header-profile-dropdown-account-item-title">کیف پول</span>
+                                <span class="header-profile-dropdown-account-item-amount">
+                                    <span class="header-profile-dropdown-account-item-amount-number">@_context.GetUserInfo().WalletAmount.SplitNumber()</span>
+                                    تومان
+                                </span>
+                            </span>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a style="display: block" asp-page="/Auth/Logout">
+                        <i class="fa fa-sign-out ml-1"></i>
+                        خروج از حساب کاربری
+                    </a>
+                </li>
+            </ul>
+        }
+        else
+        {
+            <a href="#" class="btn-auth">
+                <i class="fal fa-user-circle"></i>
+                ورود و عضویت
+            </a>
+            <ul class="dropdown--wrapper">
+
+                <li>
+                    <a asp-page="/Auth/Login" class="dropdown--btn-primary d-block">
+                        <i class="fa fa-sign-in ml-1"></i>
+                        وارد شوید
+                    </a>
+                </li>
+                <li>
+                    <span>کاربر جدید هستید؟</span>
+                    <a asp-page="/Auth/Register" class="border-bottom-dt">ثبت نام</a>
+                </li>
+            </ul>
+
+        }
+
+    </div>
+</div>

@@ -1,0 +1,174 @@
+﻿@{
+    var selected = ViewData["selected"] as string;
+    selected ??= "Index";
+}
+<aside class="main-sidebar">
+    <section class="sidebar">
+        <ul class="sidebar-menu" data-widget="tree">
+            <li class="@(selected == "Index" ? "active" : null)">
+                <a href="/admin">
+                    <i class="fa fa-dashboard"></i>
+                    <span>داشبورد</span>
+                </a>
+            </li>
+            <li class="@(selected == "SiteSettings" ? "active" : null)">
+                <a href="/Admin/SiteSettings">
+                    <i class="ion ion-ios-gear-outline"></i>
+                    <span>تنظیمات سایت</span>
+                </a>
+            </li>
+            <li class="@(selected == "logs" ? "active" : null)">
+                <a href="/admin/logs">
+                    <i class="fa fa-warning"></i>
+                    <span>خطا های سایت</span>
+                </a>
+            </li>
+            <li class="@(selected == "footerLinks" ? "active" : null)">
+                <a href="/admin/FooterLinks">
+                    <i class="fa fa-link"></i>
+                    <span>لینک های فوتر</span>
+                </a>
+            </li>
+            <li class="@(selected == "faq" ? "active" : null)">
+                <a href="/admin/Faq">
+                    <i class="fa fa-question"></i>
+                    <span>سوالات متداول</span>
+                </a>
+            </li>
+            <li class="@(selected == "newsLetter" ? "active" : null)">
+                <a href="/admin/newsLetters">
+                    <i class="fa fa fa-bullhorn"></i>
+                    <span>خبرنامه</span>
+                </a>
+            </li>
+            <li class="@(selected == "rules" ? "active" : null)">
+                <a href="/Admin/rules">
+                    <i class="fa fa-rouble"></i>
+                    <span>قوانین</span>
+                </a>
+            </li>
+            <li class="@(selected == "aboutUs" ? "active" : null)">
+                <a href="/Admin/aboutUs">
+                    <i class="fa fa-random"></i>
+                    <span>درباره ما</span>
+                </a>
+            </li>
+            <li class="@(selected == "discountCodes" ? "active" : null)">
+                <a href="/Admin/DiscountCodes">
+                    <i class="fa fa-percent"></i>
+                    <span>کد های تخفیف</span>
+                </a>
+            </li>
+            <li class="treeview @(selected.Contains("User") ? "active menu-open" : "")">
+                <a href="javascript:void(0)">
+                    <i class="fa fa-user-o"></i> <span>کاربران</span>
+                    <span class="pull-left-container">
+                        <i class="fa fa-angle-right pull-left"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="@(selected == "Users" ? "active" : null)"><a href="/Admin/Users">لیست کاربران</a></li>
+                    <li class="@(selected == "UserRoles" ? "active" : null)"><a href="/Admin/Users/Roles">نقش ها</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview @(selected.StartsWith("prof") ? "active menu-open" : "")">
+                <a href="javascript:void(0)">
+                    <i class="fa fa-money"></i> <span>مالی</span>
+                    <span class="pull-left-container">
+                        <i class="fa fa-angle-right pull-left"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="@(selected == "profitCourses" ? "active" : null)"><a href="/Admin/profits/CourseProfits">سود دوره های آموزشی</a></li>
+                    <li class="@(selected == "profitProducts" ? "active" : null)"><a href="/Admin/profits/ProductProfits">سود محصولات فروشگاه</a></li>
+                    <li class="@(selected == "profWithdrawals" ? "active" : null)"><a href="/Admin/withdrawals">تسویه حساب ها</a></li>
+                    <li class="@(selected == "profCards" ? "active" : null)"><a href="/Admin/Cards">کارت های تایید نشده</a></li>
+                </ul>
+            </li>
+
+            <li class="@(selected == "ContactUs" ? "active" : null)">
+                <a href="/Admin/Contactus">
+                    <i class="fa fa-envelope"></i>
+                    <span>لیست تماس باما</span>
+                </a>
+            </li>
+
+            <li class="@(selected == "tickets" ? "active" : null)">
+                <a href="/Admin/Tickets">
+                    <i class="fa fa-send-o"></i>
+                    <span>تیکت ها</span>
+                </a>
+            </li>
+            <li class="treeview @(selected.Contains("Article") ? "active menu-open" : "")">
+                <a href="javascript:void(0)">
+                    <i class="fa fa-newspaper-o"></i> <span>بلاگ</span>
+                    <span class="pull-left-container">
+                        <i class="fa fa-angle-right pull-left"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="@(selected == "blog" ? "active" : null)"><a href="/Admin/BlogManagement">لیست مقالات</a></li>
+                    <li class="@(selected == "BlogComments" ? "active" : null)"><a href="/Admin/Blog/Comments">نظرات کاربران</a></li>
+                    <li class="@(selected == "BlogGroups" ? "active" : null)"><a href="/Admin/BlogManagement/Groups">دسته بندی</a></li>
+                </ul>
+            </li>
+            <li class="@(selected == "Sellers" ? "active" : null)">
+                <a href="/Admin/Sellers">
+                    <i class="fa fa-users"></i>
+                    <span>فروشندگان</span>
+                </a>
+            </li>
+            <li class="treeview @(selected.Contains("Product") ? "active menu-open" : "")">
+                <a href="javascript:void(0)">
+                    <i class="fa fa-product-hunt"></i> <span>محصولات</span>
+                    <span class="pull-left-container">
+                        <i class="fa fa-angle-right pull-left"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="@(selected == "Products" ? "active" : null)"><a href="/admin/Products">لیست محصولات</a></li>
+                    <li><a href="/admin/Products?status=NewRequest">محصولات تایید نشده</a></li>
+                    <li class="@(selected == "ProductComments" ? "active" : null)"><a href="/admin/Products/comments">نظرات کاربران</a></li>
+                    <li class="@(selected == "ProductGroups" ? "active" : null)"><a href="/admin/Products/Groups">دسته بندی محصولات</a></li>
+                </ul>
+            </li>
+            <li class="@(selected == "amazing" ? "active" : null)">
+                <a href="/Admin/Products/Amazings">
+                    <i class="fa fa-amazon"></i>
+                    <span>شگفت انگیزها</span>
+                </a>
+            </li>
+            <li class="@(selected == "productOrders" ? "active" : null)">
+                <a href="/Admin/Orders/Products">
+                    <i class="fa fa-shopping-basket"></i>
+                    <span>مدیریت سفارشات</span>
+                </a>
+            </li>
+            <li class="@(selected == "sendTypes" ? "active" : null)">
+                <a href="/Admin/SendTypes">
+                    <i class="fa fa-truck"></i>
+                    <span>نحوه ارسال سفارشات</span>
+                </a>
+            </li>
+            <li class="@(selected == "colors" ? "active" : null)">
+                <a href="/Admin/Colors">
+                    <i class="fa fa-pencil"></i>
+                    <span>مدیریت رنگ ها</span>
+                </a>
+            </li>
+            <li class="@(selected == "Sliders" ? "active" : null)">
+                <a href="/Admin/Sliders">
+                    <i class="fa fa-slideshare"></i>
+                    <span>مدیریت اسلایدر ها</span>
+                </a>
+            </li>
+            <li class="@(selected == "Banners" ? "active" : null)">
+                <a href="/Admin/Banners">
+                    <i class="fa fa-slideshare"></i>
+                    <span>مدیریت بنر ها</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+</aside>

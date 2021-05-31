@@ -1,0 +1,100 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["title"]</title>
+    @await RenderSectionAsync("MetaTags", false)
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+    <!-- Bootstrap 4.5.3 -->
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="/assets/css/plugins/apexcharts.css">
+    <link rel="stylesheet" href="/assets/css/plugins/jquery.classycountdown.min.css">
+    <link rel="stylesheet" href="/assets/css/plugins/nouislider.min.css">
+    <link rel="stylesheet" href="/assets/css/plugins/sweetalert2.min.css">
+    <link rel="stylesheet" href="/assets/css/plugins/select2.min.css">
+    <link rel="stylesheet" href="/assets/css/plugins/swiper.min.css">
+    <!-- CSS Template -->
+    <link rel="stylesheet" href="/assets/css/theme.css">
+    <!-- Here goes your custom.css -->
+    <link rel="stylesheet" href="/assets/css/custom.css">
+    <!-- colors: amber,blue,brown,cyan,default,green,indigo,orange,pink,purple,red,teal,yellow -->
+    <link rel="stylesheet" href="/assets/css/colors/default.css" id="colorswitch">
+    @await RenderSectionAsync("Styles", false)
+
+</head>
+<body>
+    <div class="loading">
+        <img src="/global/svg/loading.svg" alt="loading..." />
+    </div>
+    <div class="page-wrapper">
+        <header class="page-header">
+            <partial name="Header/_TopHeader" />
+            <div class="container">
+                <div class="bottom-page-header">
+                    <partial name="Header/_SearchBar" />
+                    <partial name="Header/_ShopCart" />
+                </div>
+                <partial name="Header/_MainNav" />
+            </div>
+        </header>
+        <partial name="Header/ResponsiveHeader/_ResponsiveHeader" />
+
+        <main class="page-content">
+            <div class="container">
+                @RenderBody()
+            </div>
+        </main>
+
+
+        <!-- color switcher -->
+        <div id="colorswitch-option">
+            <button><i class="fas fa-swatchbook"></i></button>
+            <ul>
+                <li data-path="/assets/css/colors/amber.css"><span style="background-color: #ffab00;"></span></li>
+                <li data-path="/assets/css/colors/blue.css"><span style="background-color: #2962ff;"></span></li>
+                <li data-path="/assets/css/colors/brown.css"><span style="background-color: #3e2723;"></span></li>
+                <li data-path="/assets/css/colors/cyan.css"><span style="background-color: #00b8d4;"></span></li>
+                <li data-path="/assets/css/colors/green.css"><span style="background-color: #00c853;"></span></li>
+                <li data-path="/assets/css/colors/indigo.css"><span style="background-color: #304ffe;"></span></li>
+                <li data-path="/assets/css/colors/orange.css"><span style="background-color: #ff6d00;"></span></li>
+                <li data-path="/assets/css/colors/pink.css"><span style="background-color: #c51162;"></span></li>
+                <li data-path="/assets/css/colors/red.css"><span style="background-color: #d50000;"></span></li>
+                <li data-path="/assets/css/colors/teal.css"><span style="background-color: #009688;"></span></li>
+                <li data-path="/assets/css/colors/purple.css"><span style="background-color: #aa00ff;"></span></li>
+                <li data-path="/assets/css/colors/yellow.css"><span style="background-color: #ffd600;"></span></li>
+            </ul>
+        </div>
+        <!-- end color switcher -->
+        <partial name="Footer/_Footer" />
+    </div>
+
+    <!-- JS Global Compulsory -->
+    <script src="/assets/js/jquery-3.5.1.min.js"></script>
+    <script src="/assets/js/plugins/popper.min.js"></script>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <!-- JS Implementing Plugins -->
+    <script src="/assets/js/plugins/apexcharts.min.js"></script>
+    <script src="/assets/js/plugins/jquery.ez-plus.js"></script>
+    <script src="/assets/js/plugins/jquery.knob.js"></script>
+    <script src="/assets/js/plugins/jquery.throttle.js"></script>
+    <script src="/assets/js/plugins/jquery.classycountdown.min.js"></script>
+    <script src="/assets/js/plugins/jquery.nicescroll.min.js"></script>
+    <script src="/assets/js/plugins/nouislider.min.js"></script>
+    <script src="/assets/js/plugins/sweetalert2.all.min.js"></script>
+    <script src="/assets/js/plugins/select2.full.min.js"></script>
+    <script src="/assets/js/plugins/swiper.min.js"></script>
+    <script src="/assets/js/plugins/ResizeSensor.min.js"></script>
+    <script src="/assets/js/plugins/theia-sticky-sidebar.min.js"></script>
+    <script src="/assets/js/plugins/wNumb.js"></script>
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/custom.js"></script>
+    <script src="/global/global.js"></script>
+    <partial name="Shared/HandleMessage/_RequestResult" />
+    @await RenderSectionAsync("Scripts", false)
+</body>
+</html>

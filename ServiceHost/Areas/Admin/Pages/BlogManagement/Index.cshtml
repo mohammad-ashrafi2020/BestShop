@@ -1,0 +1,67 @@
+﻿@page
+@using Blog.Application.DTOs.Posts
+@model ServiceHost.Areas.Admin.Pages.BlogManagement.IndexModel
+@{
+    ViewData["title"] = "بلاگ";
+    ViewData["selected"] = "blog";
+}
+<popupLink class="btn btn-success mb-2" text="افزودن پست"
+           title="پست جدید" url="/admin/BlogManagement/ShowInsertModal?parent=null"></popupLink>
+<partial name="_Add" model="new InsertBlogPostDto()"/>
+<div class="box box-border custom-shadow">
+    <form id="filter" method="get">
+        <input type="hidden" name="pageId" id="pageId" value="" />
+        <div class="box-header with-border">
+            <h3 class="box-title">فیلتر</h3>
+            <div class="box-tools pull-right">
+                <a href="/Admin/Articles" class="btn btn-sm btn-danger btn-flat">
+                    حذف
+                    <i class="fa fa-close">
+                    </i>
+                </a>
+                <button type="submit" class="btn btn-sm btn-primary btn-flat">
+                    فیلتر
+                    <i class="fa fa-search">
+                    </i>
+                </button>
+
+            </div>
+        </div>
+        <div class="box-body" style="">
+            <div class="table-filter">
+                <div class="row">
+                    <div class="col-md-3 form-input">
+                        <label>عنوان :</label>
+                        <input placeholder="عنوان پست : " name="title" type="text" class="form-control" />
+                    </div>
+                    <div class="col-md-3 form-input">
+                        <label>  جستوجو بر اساس :</label>
+                        <select class="form-control" name="type" >
+                            <option value="all">همه</option>
+                            <option value="articles">مقالات</option>
+                            <option value="news">اخبار</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="box box-primary">
+    <div class="box-body table-responsive no-padding">
+        <table class="table table-bordered bg-white text-center">
+            <thead>
+                <tr>
+                    <td>#</td>
+                    <th>عنوان</th>
+                    <th>نویسنده</th>
+                    <th>آخرین بروزرسانی</th>
+                    <th>وضعیت</th>
+                    <th>نوع</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
