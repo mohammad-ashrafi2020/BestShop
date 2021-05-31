@@ -5,12 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Account.Application;
 using Account.Application.Services.Emails;
-using Account.Application.Services.Users;
-using Account.Application.Services.Users.Addresses;
-using Account.Application.Services.Users.Cards;
-using Account.Application.Services.Users.Notifications;
-using Account.Application.Services.Users.UserRoles;
-using Account.Application.Services.Users.Wallets;
 using Account.Domain.Entities.Roles;
 using Account.Infrastructure.Context;
 using AutoMapper;
@@ -33,13 +27,8 @@ namespace Account.Configuration
             service.Configure<EmailConfig>(configuration.GetSection("EmailConfig"));
 
             service.AddAutoMapper(typeof(AutoMapperProfile));
-            service.AddScoped<IUserService, UserService>();
-            service.AddScoped<IUserAddressService, UserAddressService>();
-            service.AddScoped<IUserCardService, UserCardService>();
-            service.AddScoped<IUserRoleService, UserRoleService>();
-            service.AddScoped<IUserNotificationService, UserNotificationService>();
+           
             service.AddTransient<IEmailService, EmailService>();
-            service.AddScoped<IUserWalletService, UserWalletService>();
 
             service.AddDbContext<AccountContext>(option =>
             {

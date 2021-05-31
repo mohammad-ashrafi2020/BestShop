@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Account.Application.Models.DTOs.Addresses;
-using Account.Application.Services.Users.Addresses;
 using Account.Domain.Entities.Users;
 using AutoMapper;
 using framework;
@@ -18,13 +17,11 @@ namespace ServiceHost.Pages.Profile.Addresses
     [ValidateAntiForgeryToken]
     public class IndexModel : RazorBase
     {
-        private IUserAddressService _address;
         private IRenderViewToString _renderView;
         private IMapper _mapper;
 
-        public IndexModel(IApplicationContext context, ILogger<IndexModel> logger, IUserAddressService address, IRenderViewToString renderView, IMapper mapper) : base(context, logger)
+        public IndexModel(IApplicationContext context, ILogger<IndexModel> logger, IRenderViewToString renderView, IMapper mapper) : base(context, logger)
         {
-            _address = address;
             _renderView = renderView;
             _mapper = mapper;
         }
@@ -36,8 +33,8 @@ namespace ServiceHost.Pages.Profile.Addresses
 
         public async Task OnGet()
         {
-            var res = await _address.GetUserAddresses(User.GetUserId());
-            UserAddresses = res.Data;
+            //var res = await _address.GetUserAddresses(User.GetUserId());
+            //UserAddresses = res.Data;
         }
 
         public async Task<IActionResult> OnPostInsertAddress(InsertAddressDto insertAddress)
@@ -45,8 +42,8 @@ namespace ServiceHost.Pages.Profile.Addresses
             insertAddress.UserId = User.GetUserId();
             return await AjaxTryCatch(async () =>
             {
-                var res = await _address.InsertAddress(insertAddress);
-                return res;
+               // var res = await _address.InsertAddress(insertAddress);
+                return ResultModel.Success();
             }, isSuccessReloadPage: true);
         }
         public async Task<IActionResult> OnPostEditAddress(EditAddressDto addressDto)
@@ -54,11 +51,11 @@ namespace ServiceHost.Pages.Profile.Addresses
             addressDto.UserId = User.GetUserId();
             return await AjaxTryCatch(async () =>
             {
-                var address = await _address.AddressIsExistBy(addressDto.Id, User.GetUserId());
-                if (!address)
-                    return ResultModel.NotFound("اطلاعات ارسالی نامعتبر است");
-                var res = await _address.EditAddress(addressDto);
-                return res;
+                //var address = await _address.AddressIsExistBy(addressDto.Id, User.GetUserId());
+                //if (!address)
+                //    return ResultModel.NotFound("اطلاعات ارسالی نامعتبر است");
+                //var res = await _address.EditAddress(addressDto);
+                return ResultModel.Success();
             }, isSuccessReloadPage: true);
         }
         #endregion
@@ -83,18 +80,18 @@ namespace ServiceHost.Pages.Profile.Addresses
         {
             return await AjaxTryCatch(async () =>
              {
-                 var address = await _address.GetAddressById(addressId);
-                 if (address.Status != ResultModelStatus.Success)
-                     return ResultModel<string>.Error("اطلاعات نامعتبر است");
-                 var model = _mapper.Map<EditAddressDto>(address.Data);
-                 var view = await _renderView.RenderToStringAsync("_Edit", model, PageContext);
+                 //var address = await _address.GetAddressById(addressId);
+                 //if (address.Status != ResultModelStatus.Success)
+                 //    return ResultModel<string>.Error("اطلاعات نامعتبر است");
+                 //var model = _mapper.Map<EditAddressDto>(address.Data);
+                 //var view = await _renderView.RenderToStringAsync("_Edit", model, PageContext);
 
                  var res = new ResultModel<string>()
                  {
                      Status = ResultModelStatus.Success,
                      Title = null,
                      Message = null,
-                     Data = view
+                     Data = "view"
                  };
                  return res;
              });
@@ -103,16 +100,16 @@ namespace ServiceHost.Pages.Profile.Addresses
         {
             return await AjaxTryCatch(async () =>
             {
-                var res = await _address.SetDefaultAddress(User.GetUserId(), addressId);
-                return res;
+                //var res = await _address.SetDefaultAddress(User.GetUserId(), addressId);
+                return ResultModel.Success();
             });
         }
         public async Task<IActionResult> OnGetDeleteAddress(long addressId)
         {
             return await AjaxTryCatch(async () =>
             {
-                var res = await _address.DeleteAddress(User.GetUserId(), addressId);
-                return res;
+               // var res = await _address.DeleteAddress(User.GetUserId(), addressId);
+                return ResultModel.Success();
             });
         }
 

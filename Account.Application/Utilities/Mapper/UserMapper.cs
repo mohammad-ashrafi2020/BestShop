@@ -19,7 +19,6 @@ namespace Account.Application.Utilities.Mapper
                 ActivationToken = user.ActivationToken,
                 BirthDate = user.BirthDate,
                 Gender = user.Gender,
-                Id = user.Id,
                 ImageName = user.ImageName,
                 IsActive = user.IsActive,
                 Password = user.Password,

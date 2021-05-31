@@ -21,7 +21,6 @@ namespace Account.Application.Tests.Utils.Notifications
             var notification=new UserNotification()
             {
                 Body = "Test",
-                CreationDate = DateTime.Now,
                 IsSeen = false,
                 UserId = _userId,
                 Title = "Test"

@@ -19,7 +19,6 @@ namespace Account.Application.Tests.Utils.Addresses
             {
                 Address = "Test",
                 City = "Tehran",
-                CreationDate = DateTime.Now,
                 Family = "Ashrafi",
                 IsDelete = false,
                 PostalCode = "1234567890",
@@ -41,7 +40,6 @@ namespace Account.Application.Tests.Utils.Addresses
             {
                 Address = "Test",
                 City = "Tehran",
-                CreationDate = DateTime.Now,
                 Family = "Ashrafi",
                 IsDelete = false,
                 PostalCode = "1234567890",

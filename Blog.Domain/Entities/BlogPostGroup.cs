@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using Blog.Domain.Entities.BlogPostAggregate;
 using framework.Domain;
@@ -10,7 +11,7 @@ namespace Blog.Domain.Entities
         public string GroupTitle { get; set; }
         public string EnglishGroupTitle { get; set; }
         public string MetaDescription { get; set; }
-        public long? ParentId { get; set; }
+        public Guid? ParentId { get; set; }
 
         #region Relations
 

@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Blog.Application.DTOs.Groups;
-using Blog.Application.Services.Groups;
 using Blog.Domain.Entities;
 using framework;
 using Microsoft.AspNetCore.Mvc;
@@ -15,13 +14,11 @@ namespace ServiceHost.Areas.Admin.Pages.BlogManagement.Groups
     [ValidateAntiForgeryToken]
     public class IndexModel : RazorBase
     {
-        private IBlogGroupService _groupService;
         private IRenderViewToString _renderView;
         private IMapper _mapper;
         public IndexModel(IApplicationContext context, ILogger<IndexModel> logger,
-            IBlogGroupService groupService, IMapper mapper, IRenderViewToString renderView) : base(context, logger)
+            IMapper mapper, IRenderViewToString renderView) : base(context, logger)
         {
-            _groupService = groupService;
             _renderView = renderView;
             _mapper = mapper;
         }
@@ -29,7 +26,7 @@ namespace ServiceHost.Areas.Admin.Pages.BlogManagement.Groups
         public List<BlogPostGroup> Groups { get; set; }
         public async Task OnGet()
         {
-            Groups = await _groupService.GetGroupsForAdmin();
+            Groups = new List<BlogPostGroup>();
         }
 
         #region PostHandlers
@@ -37,16 +34,18 @@ namespace ServiceHost.Areas.Admin.Pages.BlogManagement.Groups
         {
             return await AjaxTryCatch(async () =>
             {
-                var res = await _groupService.InsertGroup(model);
-                return res;
+                return ResultModel.NotFound();
+                //var res = await _groupService.InsertGroup(model);
+                //return res;
             }, isSuccessReloadPage: true);
         }
         public async Task<IActionResult> OnPostEditGroup(EditBlogGroupDto model)
         {
             return await AjaxTryCatch(async () =>
             {
-                var res = await _groupService.EditGroup(model);
-                return res;
+                return ResultModel.NotFound();
+                //var res = await _groupService.EditGroup(model);
+                //return res;
             }, isSuccessReloadPage: true);
         }
 
@@ -56,10 +55,7 @@ namespace ServiceHost.Areas.Admin.Pages.BlogManagement.Groups
 
         public async Task<IActionResult> OnGetDeleteGroup(long id)
         {
-            return await AjaxTryCatch(async () =>
-            {
-                return await _groupService.DeleteGroup(id);
-            },isSuccessReloadPage:true);
+            return NotFound();
         }
         public async Task<IActionResult> OnGetShowInsertModal(long? parent)
         {
@@ -87,20 +83,21 @@ namespace ServiceHost.Areas.Admin.Pages.BlogManagement.Groups
         {
             return await AjaxTryCatch(async () =>
             {
-                var group = await _groupService.GetGroupBy(id);
-                if (group.Data == null)
-                    return ResultModel<string>.NotFound();
+                return ResultModel<string>.NotFound();
 
-                var model = _mapper.Map<EditBlogGroupDto>(group.Data);
-                var result = new ResultModel<string>()
-                {
-                    Data = await _renderView.RenderToStringAsync("_Edit", model, PageContext),
-                    Status = ResultModelStatus.Success,
-                    Title = "",
-                    Message = ""
-                };
+                //var group = await _groupService.GetGroupBy(id);
+                //if (group.Data == null)
 
-                return result;
+                //var model = _mapper.Map<EditBlogGroupDto>(group.Data);
+                //var result = new ResultModel<string>()
+                //{
+                //    Data = await _renderView.RenderToStringAsync("_Edit", model, PageContext),
+                //    Status = ResultModelStatus.Success,
+                //    Title = "",
+                //    Message = ""
+                //};
+
+                //return result;
             });
         }
         #endregion
