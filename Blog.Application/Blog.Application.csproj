@@ -13,8 +13,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOs\Comments\" />
-    <Folder Include="Services\PostGroups\Commands\EditGroup\" />
-    <Folder Include="Services\PostGroups\Queries\GetAll\" />
+    <Folder Include="DTOs\Groups\" />
     <Folder Include="Services\Posts\Queries\" />
   </ItemGroup>
 

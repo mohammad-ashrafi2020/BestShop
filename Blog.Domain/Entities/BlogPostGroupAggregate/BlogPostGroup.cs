@@ -23,7 +23,13 @@ namespace Blog.Domain.Entities.BlogPostGroupAggregate
             if (string.IsNullOrWhiteSpace(groupTitle))
                 throw new InvalidDomainDataException("عنوان گروه اجباری است");
 
-            EnglishGroupTitle = englishGroupTitle;
+            if (string.IsNullOrWhiteSpace(englishGroupTitle))
+                throw new InvalidDomainDataException("عنوان انگلیسی اجباری است");
+
+            if (string.IsNullOrWhiteSpace(metaDescription))
+                throw new InvalidDomainDataException("Meta Description Is Required");
+
+            EnglishGroupTitle = englishGroupTitle.Trim().ToLower();
             GroupTitle = groupTitle;
             MetaDescription = metaDescription;
             ParentId = parentId;
@@ -34,7 +40,7 @@ namespace Blog.Domain.Entities.BlogPostGroupAggregate
             if (string.IsNullOrWhiteSpace(groupTitle))
                 throw new InvalidDomainDataException("عنوان گروه اجباری است");
 
-            EnglishGroupTitle = englishGroupTitle;
+            EnglishGroupTitle = englishGroupTitle.Trim().ToLower();
             GroupTitle = groupTitle;
             MetaDescription = metaDescription;
             ParentId = parentId;

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Blog.Application.DTOs.Groups;
 using Blog.Application.ViewModels;
 using Blog.Application.ViewModels.PostGroups;
 using Blog.Domain.Entities;
