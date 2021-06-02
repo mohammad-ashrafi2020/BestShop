@@ -1,10 +1,11 @@
-﻿using framework.Domain;
+﻿using System;
+using _DomainUtils.Domain;
 
 namespace Account.Domain.Entities.Users
 {
-    public class UserAddress:BaseSoftDelete
+    public class UserAddress:BaseEntity
     {
-        public long UserId { get; set; }
+        public Guid UserId { get; set; }
         public string PostalCode { get; set; }
         public string Address { get; set; }
         public string City { get; set; }

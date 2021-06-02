@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using _DomainUtils.Domain;
 using Account.Domain.Enums;
-using framework.Domain;
 
 namespace Account.Domain.Entities.Users
 {

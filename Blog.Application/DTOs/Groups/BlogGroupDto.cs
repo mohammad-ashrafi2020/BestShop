@@ -1,8 +1,6 @@
-﻿using framework.Domain;
-
-namespace Blog.Application.DTOs.Groups
+﻿namespace Blog.Application.DTOs.Groups
 {
-    public class BlogGroupDto:BaseEntity
+    public class BlogGroupDto
     {
         public string GroupTitle { get; set; }
         public string EnglishGroupTitle { get; set; }

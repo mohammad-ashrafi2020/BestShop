@@ -1,8 +1,8 @@
-﻿using framework.Domain;
+﻿using _DomainUtils.Domain;
 
 namespace Shop.Domain.Entities.Products
 {
-    public class ProductGallery:BaseSoftDelete
+    public class ProductGallery:BaseEntity
     {
         public long ProductId { get; set; }
         public string ImageName { get; set; }

@@ -20,7 +20,7 @@ namespace ServiceHost.Pages.Auth
         public RegisterDto RegisterDto { get; set; }
         public void OnGet()
         {
-            if (_context.IsAuthenticated)
+            if (Context.IsAuthenticated)
                 Response.Redirect("/");
 
             RegisterDto = new RegisterDto();
@@ -35,7 +35,7 @@ namespace ServiceHost.Pages.Auth
 
 
             return await TryCatch(async () =>
-                ResultModel.Success(), 
+                    OperationResult.Success(), 
                 successTitle: "ثبت نام با موفقیت انجام شد",
                 successReturn: "/auth/login");
         }

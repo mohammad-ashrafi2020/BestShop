@@ -43,7 +43,7 @@ namespace ServiceHost.Pages.Profile.Addresses
             return await AjaxTryCatch(async () =>
             {
                // var res = await _address.InsertAddress(insertAddress);
-                return ResultModel.Success();
+                return OperationResult.Success();
             }, isSuccessReloadPage: true);
         }
         public async Task<IActionResult> OnPostEditAddress(EditAddressDto addressDto)
@@ -53,9 +53,9 @@ namespace ServiceHost.Pages.Profile.Addresses
             {
                 //var address = await _address.AddressIsExistBy(addressDto.Id, User.GetUserId());
                 //if (!address)
-                //    return ResultModel.NotFound("اطلاعات ارسالی نامعتبر است");
+                //    return OperationResult.NotFound("اطلاعات ارسالی نامعتبر است");
                 //var res = await _address.EditAddress(addressDto);
-                return ResultModel.Success();
+                return OperationResult.Success();
             }, isSuccessReloadPage: true);
         }
         #endregion
@@ -66,9 +66,9 @@ namespace ServiceHost.Pages.Profile.Addresses
             var view = await _renderView.RenderToStringAsync("_Add", new InsertAddressDto(), PageContext);
             return await AjaxTryCatch(async () =>
             {
-                var res = new ResultModel<string>()
+                var res = new OperationResult<string>()
                 {
-                    Status = ResultModelStatus.Success,
+                    Status = OperationResultStatus.Success,
                     Title = null,
                     Message = null,
                     Data = view
@@ -81,14 +81,14 @@ namespace ServiceHost.Pages.Profile.Addresses
             return await AjaxTryCatch(async () =>
              {
                  //var address = await _address.GetAddressById(addressId);
-                 //if (address.Status != ResultModelStatus.Success)
-                 //    return ResultModel<string>.Error("اطلاعات نامعتبر است");
+                 //if (address.Status != OperationResultStatus.Success)
+                 //    return OperationResult<string>.Error("اطلاعات نامعتبر است");
                  //var model = _mapper.Map<EditAddressDto>(address.Data);
                  //var view = await _renderView.RenderToStringAsync("_Edit", model, PageContext);
 
-                 var res = new ResultModel<string>()
+                 var res = new OperationResult<string>()
                  {
-                     Status = ResultModelStatus.Success,
+                     Status = OperationResultStatus.Success,
                      Title = null,
                      Message = null,
                      Data = "view"
@@ -101,7 +101,7 @@ namespace ServiceHost.Pages.Profile.Addresses
             return await AjaxTryCatch(async () =>
             {
                 //var res = await _address.SetDefaultAddress(User.GetUserId(), addressId);
-                return ResultModel.Success();
+                return OperationResult.Success();
             });
         }
         public async Task<IActionResult> OnGetDeleteAddress(long addressId)
@@ -109,7 +109,7 @@ namespace ServiceHost.Pages.Profile.Addresses
             return await AjaxTryCatch(async () =>
             {
                // var res = await _address.DeleteAddress(User.GetUserId(), addressId);
-                return ResultModel.Success();
+                return OperationResult.Success();
             });
         }
 

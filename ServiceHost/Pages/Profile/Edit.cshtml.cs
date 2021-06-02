@@ -43,7 +43,7 @@ namespace ServiceHost.Pages.Profile
             return await TryCatch(async () =>
             {
                 //var res = await _userService.EditUser(EditUserDto);
-                //if (res.Status == ResultModelStatus.Success)
+                //if (res.Status == OperationResultStatus.Success)
                 //{
                 //    var userInfo = _appContext.GetUserInfo();
                 //    userInfo.FullName = $"{EditUserDto.Name} {EditUserDto.Family}";
@@ -51,7 +51,7 @@ namespace ServiceHost.Pages.Profile
                 //    userInfo.ImageName = res.Data.ImageName;
                 //    CookieUtils.SetUserInfoCookie(userInfo, HttpContext);
                 //}
-                return ResultModel.Success();
+                return OperationResult.Success();
             }, successReturn: "/Profile");
         }
 
@@ -60,7 +60,7 @@ namespace ServiceHost.Pages.Profile
         private async Task<bool> GenerateDefaultValues()
         {
             //var user = await _userService.GetUserBy(User.GetUserId());
-            //if (user.Status != ResultModelStatus.Success) return false;
+            //if (user.Status != OperationResultStatus.Success) return false;
             //BirthDate = user.Data.BirthDate;
             //EditUserDto = new EditUserDto()
             //{

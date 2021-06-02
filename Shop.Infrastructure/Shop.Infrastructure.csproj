@@ -13,6 +13,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shop.Domain\Shop.Domain.csproj" />
+    <ProjectReference Include="..\_DomainUtils\_DomainUtils.csproj" />
   </ItemGroup>
 
 </Project>

@@ -26,7 +26,7 @@ namespace ServiceHost.Pages.Auth
             //    return Redirect("/");
 
             //var user = await _userService.GetUserByEmail(email);
-            //if (user.Status != ResultModelStatus.Success)
+            //if (user.Status != OperationResultStatus.Success)
             //    return Redirect("/");
 
             //if (user.Data.ActivationToken != activeCode)
@@ -41,7 +41,7 @@ namespace ServiceHost.Pages.Auth
             ResetPasswordDto.Email = email;
 
             return await TryCatch(async () =>
-                ResultModel.Success(),
+                OperationResult.Success(),
                 successReturn: "/Auth/Login",
                 successMessage: "کلمه عبور با موفقیت تغییر کرد");
         }

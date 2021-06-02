@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
 using Blog.Application.DTOs.Groups;
+using Blog.Application.ViewModels;
+using Blog.Application.ViewModels.PostGroups;
 using Blog.Domain.Entities;
+using Blog.Domain.Entities.BlogPostGroupAggregate;
 
 namespace Blog.Application
 {
@@ -8,10 +11,10 @@ namespace Blog.Application
     {
         public AutoMapperProfile()
         {
-            CreateMap<InsertBlogGroupDto, BlogPostGroup>().ReverseMap();
-            CreateMap<EditBlogGroupDto, BlogPostGroup>().ReverseMap();
+            CreateMap<InsertBlogGroupViewModel, BlogPostGroup>().ReverseMap();
+            CreateMap<EditBlogGroupViewModel, BlogPostGroup>().ReverseMap();
             CreateMap<BlogGroupDto, BlogPostGroup>().ReverseMap();
-            CreateMap<BlogGroupDto, EditBlogGroupDto>().ReverseMap();
+            CreateMap<BlogGroupDto, EditBlogGroupViewModel>().ReverseMap();
         }
     }
 }

@@ -7,16 +7,20 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="10.2.2" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOs\Comments\" />
-    <Folder Include="Services\" />
-    <Folder Include="Utilitis\" />
+    <Folder Include="Services\PostGroups\Commands\EditGroup\" />
+    <Folder Include="Services\PostGroups\Queries\GetAll\" />
+    <Folder Include="Services\Posts\Queries\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Blog.Infrastructure\Blog.Infrastructure.csproj" />
+    <ProjectReference Include="..\Framwork\framework.csproj" />
   </ItemGroup>
 
 </Project>

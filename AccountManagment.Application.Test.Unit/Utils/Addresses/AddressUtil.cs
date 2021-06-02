@@ -7,8 +7,8 @@ namespace Account.Application.Tests.Utils.Addresses
     public  class AddressUtil
     {
         private readonly AccountContext _context;
-        private readonly long _userId;
-        public AddressUtil(AccountContext context,long userId)
+        private readonly Guid _userId;
+        public AddressUtil(AccountContext context,Guid userId)
         {
             _context = context;
             _userId = userId;
@@ -20,7 +20,6 @@ namespace Account.Application.Tests.Utils.Addresses
                 Address = "Test",
                 City = "Tehran",
                 Family = "Ashrafi",
-                IsDelete = false,
                 PostalCode = "1234567890",
                 IsDefaultAddress = isDefaultAddress,
                 Name = "MOhammad",
@@ -34,7 +33,7 @@ namespace Account.Application.Tests.Utils.Addresses
             _context.SaveChanges();
             return address;
         }
-        public  UserAddress CreateNewAddressObject(long userId, bool isDefaultAddress = true)
+        public  UserAddress CreateNewAddressObject(Guid userId, bool isDefaultAddress = true)
         {
             var address = new UserAddress()
             {

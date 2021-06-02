@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using framework.Domain;
+using _DomainUtils.Domain;
 
 namespace Shop.Domain.Entities.Products.Category
 {

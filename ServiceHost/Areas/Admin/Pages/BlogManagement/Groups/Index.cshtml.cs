@@ -34,7 +34,7 @@ namespace ServiceHost.Areas.Admin.Pages.BlogManagement.Groups
         {
             return await AjaxTryCatch(async () =>
             {
-                return ResultModel.NotFound();
+                return OperationResult.NotFound();
                 //var res = await _groupService.InsertGroup(model);
                 //return res;
             }, isSuccessReloadPage: true);
@@ -43,7 +43,7 @@ namespace ServiceHost.Areas.Admin.Pages.BlogManagement.Groups
         {
             return await AjaxTryCatch(async () =>
             {
-                return ResultModel.NotFound();
+                return OperationResult.NotFound();
                 //var res = await _groupService.EditGroup(model);
                 //return res;
             }, isSuccessReloadPage: true);
@@ -68,10 +68,10 @@ namespace ServiceHost.Areas.Admin.Pages.BlogManagement.Groups
             };
             return await AjaxTryCatch(async () =>
             {
-                var result = new ResultModel<string>()
+                var result = new OperationResult<string>()
                 {
                     Data = await _renderView.RenderToStringAsync("_Add", model, PageContext),
-                    Status = ResultModelStatus.Success,
+                    Status = OperationResultStatus.Success,
                     Title = "",
                     Message = ""
                 };
@@ -83,16 +83,16 @@ namespace ServiceHost.Areas.Admin.Pages.BlogManagement.Groups
         {
             return await AjaxTryCatch(async () =>
             {
-                return ResultModel<string>.NotFound();
+                return OperationResult<string>.NotFound();
 
                 //var group = await _groupService.GetGroupBy(id);
                 //if (group.Data == null)
 
                 //var model = _mapper.Map<EditBlogGroupDto>(group.Data);
-                //var result = new ResultModel<string>()
+                //var result = new OperationResult<string>()
                 //{
                 //    Data = await _renderView.RenderToStringAsync("_Edit", model, PageContext),
-                //    Status = ResultModelStatus.Success,
+                //    Status = OperationResultStatus.Success,
                 //    Title = "",
                 //    Message = ""
                 //};

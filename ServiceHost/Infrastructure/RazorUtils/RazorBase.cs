@@ -1,14 +1,9 @@
 ﻿using System;
-using System.IO;
 using System.Threading.Tasks;
-using AutoMapper;
 using framework;
 using framework.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -16,14 +11,14 @@ namespace ServiceHost.Infrastructure.RazorUtils
 {
     public class RazorBase : PageModel
     {
-        protected IApplicationContext _context { get; private set; }
-        protected ILogger _logger { get; private set; }
+        protected IApplicationContext Context { get; private set; }
+        protected ILogger Logger { get; private set; }
         public RazorBase(IApplicationContext context, ILogger logger)
         {
-            _logger = logger;
-            _context = context;
+            Logger = logger;
+            Context = context;
         }
-        public async Task<IActionResult> TryCatch(Func<Task<ResultModel>> func,
+        public async Task<IActionResult> TryCatch(Func<Task<OperationResult>> func,
             string successReturn = null,
             string successMessage = null,
             string successTitle = null,
@@ -36,7 +31,7 @@ namespace ServiceHost.Infrastructure.RazorUtils
                 var res = await func();
                 switch (res.Status)
                 {
-                    case ResultModelStatus.Success:
+                    case OperationResultStatus.Success:
                         {
                             if (successTitle != null)
                                 res.Title = successTitle;
@@ -50,7 +45,7 @@ namespace ServiceHost.Infrastructure.RazorUtils
                             }
                             return Page();
                         }
-                    case ResultModelStatus.Error:
+                    case OperationResultStatus.Error:
                         {
                             if (errorMessage != null)
                                 res.Message = errorMessage;
@@ -62,7 +57,7 @@ namespace ServiceHost.Infrastructure.RazorUtils
                             }
                             return Page();
                         }
-                    case ResultModelStatus.NotFound:
+                    case OperationResultStatus.NotFound:
                         {
                             res.Title ??= "نتیجه ای یافت نشد";
                             var jsonResult = JsonConvert.SerializeObject(res);
@@ -81,7 +76,7 @@ namespace ServiceHost.Infrastructure.RazorUtils
             catch (Exception ex)
             {
                 var message = ex.Message.IsUniCode() ? ex.Message : "عملیات ناموفق بود";
-                var res = ResultModel.Error(errorMessage ?? message);
+                var res = OperationResult.Error(errorMessage ?? message);
                 res.Title = "اعملیات ناموفق";
                 var jsonResult = JsonConvert.SerializeObject(res);
                 TempData["Error"] = jsonResult;
@@ -92,7 +87,7 @@ namespace ServiceHost.Infrastructure.RazorUtils
                 return Page();
             }
         }
-        public async Task<IActionResult> TryCatch<T>(Func<Task<ResultModel<T>>> func,
+        public async Task<IActionResult> TryCatch<T>(Func<Task<OperationResult<T>>> func,
             string successReturn = null,
             string successMessage = null,
             string successTitle = null,
@@ -107,7 +102,7 @@ namespace ServiceHost.Infrastructure.RazorUtils
 
                 switch (res.Status)
                 {
-                    case ResultModelStatus.Success:
+                    case OperationResultStatus.Success:
                         {
                             if (successTitle != null)
                                 res.Title = successTitle;
@@ -121,7 +116,7 @@ namespace ServiceHost.Infrastructure.RazorUtils
                             }
                             return Page();
                         }
-                    case ResultModelStatus.Error:
+                    case OperationResultStatus.Error:
                         {
                             if (errorMessage != null)
                                 res.Message = errorMessage;
@@ -133,7 +128,7 @@ namespace ServiceHost.Infrastructure.RazorUtils
                             }
                             return Page();
                         }
-                    case ResultModelStatus.NotFound:
+                    case OperationResultStatus.NotFound:
                         {
                             var jsonResult = JsonConvert.SerializeObject(res);
                             TempData["NotFound"] = jsonResult;
@@ -152,7 +147,7 @@ namespace ServiceHost.Infrastructure.RazorUtils
             catch (Exception ex)
             {
                 var message = ex.Message.IsUniCode() ? ex.Message : "عملیات ناموفق بود";
-                var res = ResultModel.Error(errorMessage ?? message);
+                var res = OperationResult.Error(errorMessage ?? message);
                 var jsonResult = JsonConvert.SerializeObject(res);
                 TempData["Error"] = jsonResult;
                 if (errorReturn != null)
@@ -162,7 +157,7 @@ namespace ServiceHost.Infrastructure.RazorUtils
                 return Page();
             }
         }
-        public async Task<ContentResult> AjaxTryCatch(Func<Task<ResultModel>> func,
+        public async Task<ContentResult> AjaxTryCatch(Func<Task<OperationResult>> func,
             bool isSuccessReloadPage = false,
             bool isErrorReloadPage = false)
         {
@@ -178,18 +173,18 @@ namespace ServiceHost.Infrastructure.RazorUtils
                 };
                 switch (res.Status)
                 {
-                    case ResultModelStatus.Success:
+                    case OperationResultStatus.Success:
                         {
                             var jsonResult = JsonConvert.SerializeObject(model);
                             return Content(jsonResult);
                         }
-                    case ResultModelStatus.Error:
+                    case OperationResultStatus.Error:
                         {
                             model.IsReloadPage = isErrorReloadPage;
                             var jsonResult = JsonConvert.SerializeObject(model);
                             return Content(jsonResult);
                         }
-                    case ResultModelStatus.NotFound:
+                    case OperationResultStatus.NotFound:
                         {
                             model.IsReloadPage = isErrorReloadPage;
                             model.Title ??= "نتیجه ای یافت نشد";
@@ -204,7 +199,7 @@ namespace ServiceHost.Infrastructure.RazorUtils
             catch (Exception ex)
             {
                 var message = ex.Message.IsUniCode() ? ex.Message : "عملیات ناموفق بود";
-                var res = ResultModel.Error(message);
+                var res = OperationResult.Error(message);
                 var model = new AjaxResult()
                 {
                     Status = res.Status,
@@ -216,7 +211,7 @@ namespace ServiceHost.Infrastructure.RazorUtils
                 return Content(jsonResult);
             }
         }
-        public async Task<ContentResult> AjaxTryCatch<T>(Func<Task<ResultModel<T>>> func,
+        public async Task<ContentResult> AjaxTryCatch<T>(Func<Task<OperationResult<T>>> func,
             bool isSuccessReloadPage = false,
             bool isErrorReloadPage = false)
         {
@@ -233,19 +228,19 @@ namespace ServiceHost.Infrastructure.RazorUtils
                 };
                 switch (res.Status)
                 {
-                    case ResultModelStatus.Success:
+                    case OperationResultStatus.Success:
                         {
                             var jsonResult = JsonConvert.SerializeObject(model);
                             return Content(jsonResult);
                         }
-                    case ResultModelStatus.Error:
+                    case OperationResultStatus.Error:
                         {
                             model.IsReloadPage = isErrorReloadPage;
 
                             var jsonResult = JsonConvert.SerializeObject(model);
                             return Content(jsonResult);
                         }
-                    case ResultModelStatus.NotFound:
+                    case OperationResultStatus.NotFound:
                         {
                             model.IsReloadPage = isErrorReloadPage;
 
@@ -261,7 +256,7 @@ namespace ServiceHost.Infrastructure.RazorUtils
             catch (Exception ex)
             {
                 var message = ex.Message.IsUniCode() ? ex.Message : "عملیات ناموفق بود";
-                var res = ResultModel.Error(message);
+                var res = OperationResult.Error(message);
                 var model = new AjaxResult()
                 {
                     Status = res.Status,
@@ -280,7 +275,7 @@ namespace ServiceHost.Infrastructure.RazorUtils
             public string Title { get; set; }
             public bool IsReloadPage { get; set; }
             public Object Data { get; set; }
-            public ResultModelStatus Status { get; set; }
+            public OperationResultStatus Status { get; set; }
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Blog.Application;
-using Blog.Infrastructure.Context;
+using Blog.Infrastructure.Persistent.EF.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,7 +15,10 @@ namespace Blog.Configuration
             service.AddDbContext<BlogContext>(option =>
             {
                 option.UseSqlServer(connectionString,
-                    builder => builder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
+                    builder =>
+                    {
+                        builder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+                    });
             });
         }
     }

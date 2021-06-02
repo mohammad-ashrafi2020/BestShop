@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using framework.Domain;
+using _DomainUtils.Domain;
 using Shop.Domain.Enums;
 
 namespace Shop.Domain.Entities.Orders
 {
     public class Order : BaseEntity
     {
-        public long UserId { get; set; }
+        public Guid UserId { get; set; }
         public int Price { get; set; }
         public int? Discount { get; set; }
         public string DiscountTitle { get; set; }

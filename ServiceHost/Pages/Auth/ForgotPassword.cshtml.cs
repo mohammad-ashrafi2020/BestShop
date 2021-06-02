@@ -20,7 +20,7 @@ namespace ServiceHost.Pages.Auth
 
         public void OnGet()
         {
-            if (_context.IsAuthenticated)
+            if (Context.IsAuthenticated)
                 Response.Redirect("/");
         }
 
@@ -29,9 +29,9 @@ namespace ServiceHost.Pages.Auth
             return await TryCatch(async () =>
             {
                 //var res = await _userService.ForgotPassword(PasswordDto);
-                //if (res.Status == ResultModelStatus.NotFound)
+                //if (res.Status == OperationResultStatus.NotFound)
                 //    res.Message = "کاربری با ایمیل وارد شده یافت نشد";
-                return ResultModel.Success();
+                return OperationResult.Success();
             },successReturn:"/Auth/Login",successMessage:"لینک تغییر کلمه عبور به ایمیل شما ارسال شد");
         }
     }

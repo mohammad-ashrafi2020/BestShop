@@ -1,10 +1,10 @@
 ﻿using System;
 using Blog.Domain.Entities;
-using framework.Domain;
+using Blog.Domain.Entities.BlogPostGroupAggregate;
 
 namespace Blog.Application.DTOs.Posts
 {
-    public class BlogPostDto: BaseEntity
+    public class BlogPostDto
     {
         public long AuthorId { get; set; }
         public string AuthorName { get; set; }

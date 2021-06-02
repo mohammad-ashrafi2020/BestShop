@@ -8,9 +8,9 @@ namespace Account.Application.Tests.Utils.Notifications
     public class NotificationUtil
     {
         private readonly AccountContext _context;
-        private readonly long _userId;
+        private readonly Guid _userId;
 
-        public NotificationUtil(AccountContext context, long userId)
+        public NotificationUtil(AccountContext context, Guid userId)
         {
             _context = context;
             _userId = userId;

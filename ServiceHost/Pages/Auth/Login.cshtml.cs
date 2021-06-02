@@ -26,7 +26,7 @@ namespace ServiceHost.Pages.Auth
         public LoginDto LoginDto { get; set; }
         public void OnGet(string returnUrl)
         {
-            if (_context.IsAuthenticated)
+            if (Context.IsAuthenticated)
                 Response.Redirect("/");
         }
 
@@ -36,9 +36,9 @@ namespace ServiceHost.Pages.Auth
         //    return await TryCatch(async () =>
         //    {
         //        var user = await _userService.LoginUser(LoginDto);
-        //        if (user.Status != ResultModelStatus.Success)
+        //        if (user.Status != OperationResultStatus.Success)
         //        {
-        //            if (user.Status == ResultModelStatus.NotFound)
+        //            if (user.Status == OperationResultStatus.NotFound)
         //                user.Message = "کاربری با مشخصات وارد شده یافت شد";
         //            return user;
         //        }

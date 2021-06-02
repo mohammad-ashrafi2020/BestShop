@@ -1,5 +1,4 @@
-﻿using framework.Domain;
-using Shop.Domain.Enums;
+﻿using _DomainUtils.Domain;
 
 namespace Shop.Domain.Entities.Sellers
 {
