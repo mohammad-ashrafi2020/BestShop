@@ -27,7 +27,7 @@ namespace Blog.Application.Services.PostGroups.Commands.EditGroup
                 if (await _Context.BlogPostGroups.AnyAsync(c => c.EnglishGroupTitle == request.EnglishGroupTitle, cancellationToken))
                     return OperationResult.Error("عنوان انگلیسی تکراری است");
 
-            group.Edit(request.EnglishGroupTitle, request.GroupTitle, request.MetaDescription, request.ParentId);
+            group.Edit(request.EnglishGroupTitle, request.GroupTitle, request.MetaDescription);
             _Context.Update(group);
 
             return OperationResult.Success();

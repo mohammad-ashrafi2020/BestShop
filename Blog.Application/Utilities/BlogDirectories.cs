@@ -2,6 +2,6 @@
 {
     public static class BlogDirectories
     {
-        public static string BlogPost(string slug) => $"wwwroot/images/blog/{slug}";
+        public static string BlogPost = $"wwwroot/images/blog";
     }
 }

@@ -11,7 +11,7 @@ namespace Blog.Infrastructure.Persistent.EF.Mapping
             builder.ToTable("BlogPosts", "blog");
             builder.HasKey(b => b.Id);
             builder.HasIndex(b => b.ShortLink).IsUnique();
-            builder.HasIndex(b => b.UrlTitle).IsUnique();
+            builder.HasIndex(b => b.Slug).IsUnique();
             builder.Property(b => b.CreationDate)
                 .HasDefaultValueSql("GetDate()");
 
@@ -44,7 +44,7 @@ namespace Blog.Infrastructure.Persistent.EF.Mapping
                 .IsRequired()
                 .HasMaxLength(800);
 
-            builder.Property(b => b.UrlTitle)
+            builder.Property(b => b.Slug)
                 .IsRequired()
                 .IsUnicode(false)
                 .HasMaxLength(400);

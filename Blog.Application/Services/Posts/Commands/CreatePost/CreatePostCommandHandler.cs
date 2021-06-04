@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using Blog.Application.Common;
 using Blog.Application.Utilities;
 using Blog.Domain.Entities.BlogPostAggregate;
@@ -18,34 +17,32 @@ namespace Blog.Application.Services.Posts.Commands.CreatePost
     public class CreatePostCommandHandler : IBaseRequestHandler<CreatePostCommand>
     {
         public BlogContext _Context { get; }
-        public IMapper _Mapper { get; }
-        public CreatePostCommandHandler(BlogContext context, IMapper mapper)
+        public CreatePostCommandHandler(BlogContext context)
         {
             _Context = context;
-            _Mapper = mapper;
         }
 
         public async Task<OperationResult> Handle(CreatePostCommand request, CancellationToken cancellationToken)
         {
-            if(_Context.BlogPosts.Any(p=>p.UrlTitle==request.UrlTitle))
+            if (_Context.BlogPosts.Any(p => p.Slug == request.Slug))
                 return OperationResult.Error("عنوان انگلیسی تکراری است");
 
-            if(!request.ImageFile.IsImage())
+            if (!request.ImageFile.IsImage())
                 return OperationResult.Error("عکس نامعتبر است");
 
-            if(request.UrlTitle.IsUniCode())
+            if (request.Slug.IsUniCode())
                 return OperationResult.Error("عنوان انگلیسی فقط قادر به ذخیره متن انگلیسی می باشد");
 
 
             var imageName = await SaveFileInServer.SaveFile(request.ImageFile,
-                BlogDirectories.BlogPost(request.UrlTitle.ToSlug()));
+                BlogDirectories.BlogPost);
 
             await _Context.BlogPosts.AddAsync(
                 new BlogPost(
                     request.AuthorId,
                     request.Title,
                     request.MetaDescription,
-                    request.UrlTitle,
+                    request.Slug,
                     request.Description.SanitizeText(),
                     imageName,
                     request.ImageAlt,

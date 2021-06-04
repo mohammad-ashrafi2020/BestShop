@@ -9,8 +9,6 @@ namespace Blog.Configuration
     {
         public static void Init(IServiceCollection service, string connectionString)
         {
-            service.AddAutoMapper(typeof(AutoMapperProfile));
-
            
             service.AddDbContext<BlogContext>(option =>
             {

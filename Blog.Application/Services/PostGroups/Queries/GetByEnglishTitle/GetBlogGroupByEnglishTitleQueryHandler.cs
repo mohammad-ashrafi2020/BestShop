@@ -11,16 +11,19 @@ namespace Blog.Application.Services.PostGroups.Queries.GetByEnglishTitle
 {
     public class GetBlogGroupByEnglishTitleQueryHandler:IBaseRequestHandler<GetBlogGroupByEnglishTitleQuery,BlogPostGroupDto>
     {
+        private readonly BlogContext _context;
+
         public GetBlogGroupByEnglishTitleQueryHandler(BlogContext context)
         {
-            _Context = context;
+            _context = context;
         }
 
-        public BlogContext _Context { get; }
 
         public async Task<BlogPostGroupDto> Handle(GetBlogGroupByEnglishTitleQuery request, CancellationToken cancellationToken)
         {
-            return await _Context.BlogPostGroups.Select(s => new BlogPostGroupDto()
+            return await _context.BlogPostGroups
+                .Where(g=>!g.IsDelete)
+                .Select(s => new BlogPostGroupDto()
             {
                 EnglishGroupTitle = s.EnglishGroupTitle,
                 GroupTitle = s.GroupTitle,

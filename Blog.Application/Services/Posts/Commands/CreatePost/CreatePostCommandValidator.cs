@@ -11,7 +11,7 @@ namespace Blog.Application.Services.Posts.Commands.CreatePost
             RuleFor(r => r.Description)
                 .NotEmpty().WithMessage(framework.ValidationMessages.required("متن مقاله"));
 
-            RuleFor(r => r.UrlTitle)
+            RuleFor(r => r.Slug)
                 .NotEmpty().WithMessage(framework.ValidationMessages.required("نام انگلیسی"));
 
             RuleFor(r => r.ImageAlt)

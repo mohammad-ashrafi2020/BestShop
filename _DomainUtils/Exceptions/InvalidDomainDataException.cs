@@ -9,5 +9,10 @@ namespace _DomainUtils.Exceptions
         {
             ErrorMessage = message;
         }
+
+        public InvalidDomainDataException()
+        {
+            
+        }
     }
 }

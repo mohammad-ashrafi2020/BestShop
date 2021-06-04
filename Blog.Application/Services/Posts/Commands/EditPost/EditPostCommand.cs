@@ -1,16 +1,14 @@
-﻿using System;
-using Blog.Application.Common;
+﻿using Blog.Application.Common;
 using Microsoft.AspNetCore.Http;
 
-namespace Blog.Application.Services.Posts.Commands.CreatePost
+namespace Blog.Application.Services.Posts.Commands.EditPost
 {
-    public class CreatePostCommand : IBaseRequest, ICommitTableRequest
+    public class EditPostCommand : IBaseRequest
     {
-        public CreatePostCommand(Guid authorId, string title, string slug, string metaDescription, string description, string imageAlt, string tags, int timeRequiredToStudy, long groupId, long? subGroupId, string dateRelease, bool isSpecial, bool isActive, IFormFile imageFile)
+        public EditPostCommand(string title, string urlTitle, string metaDescription, string description, string imageAlt, string tags, int timeRequiredToStudy, long groupId, long? subGroupId, string dateRelease, bool isSpecial, bool isActive, IFormFile imageFile, long id)
         {
-            AuthorId = authorId;
             Title = title;
-            Slug = slug;
+            UrlTitle = urlTitle;
             MetaDescription = metaDescription;
             Description = description;
             ImageAlt = imageAlt;
@@ -22,11 +20,12 @@ namespace Blog.Application.Services.Posts.Commands.CreatePost
             IsSpecial = isSpecial;
             IsActive = isActive;
             ImageFile = imageFile;
+            Id = id;
         }
 
-        public Guid AuthorId { get; private set; }
+        public long Id { get; private set; }
         public string Title { get; private set; }
-        public string Slug { get; private set; }
+        public string UrlTitle { get; private set; }
         public string MetaDescription { get; private set; }
         public string Description { get; private set; }
         public string ImageAlt { get; private set; }
@@ -39,6 +38,4 @@ namespace Blog.Application.Services.Posts.Commands.CreatePost
         public bool IsActive { get; private set; }
         public IFormFile ImageFile { get; private set; }
     }
-
-  
 }

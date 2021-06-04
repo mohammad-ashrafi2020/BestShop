@@ -12,16 +12,16 @@ namespace Blog.Application.Services.PostGroups.Queries.GetAll
 {
     public class GetAllPostGroupQueryHandler : IBaseRequestHandler<GetAllPostGroupQuery, List<BlogPostGroupDto>>
     {
-        public BlogContext _Context { get; }
+        private readonly BlogContext _context;
 
         public GetAllPostGroupQueryHandler(BlogContext context)
         {
-            _Context = context;
+            _context = context;
         }
 
         public async Task<List<BlogPostGroupDto>> Handle(GetAllPostGroupQuery request, CancellationToken cancellationToken)
         {
-            var data = _Context.BlogPostGroups.OrderByDescending(d => d.Id)
+            var data = _context.BlogPostGroups.OrderByDescending(d => d.Id)
                 .Select(s => new BlogPostGroupDto()
                 {
                     EnglishGroupTitle = s.EnglishGroupTitle,

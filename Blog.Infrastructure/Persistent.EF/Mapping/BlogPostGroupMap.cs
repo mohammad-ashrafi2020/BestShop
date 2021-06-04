@@ -29,7 +29,7 @@ namespace Blog.Infrastructure.Persistent.EF.Mapping
                 .HasMaxLength(500);
 
 
-            builder.OwnsMany(b => b.Groups);
+            builder.HasMany(b=>b.Groups);
         }
     }
 }
