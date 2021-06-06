@@ -1,8 +1,8 @@
-﻿using System;
-using Account.Application.Models.DTOs.Account;
+﻿using Account.Application.Models.DTOs.Account;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using ServiceHost.Infrastructure.DTOs;
+using System;
 
 namespace ServiceHost.Infrastructure.Cookies
 {

@@ -1,11 +1,11 @@
-﻿using System.Text.Encodings.Web;
-using Microsoft.AspNetCore.Mvc.TagHelpers;
+﻿using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.AspNetCore.Razor.TagHelpers;
+using System.Text.Encodings.Web;
 
 namespace ServiceHost.TagHelpers
 {
-    [HtmlTargetElement("popupLink",TagStructure = TagStructure.NormalOrSelfClosing)]
-    public class PopUpLink:TagHelper
+    [HtmlTargetElement("popupLink", TagStructure = TagStructure.NormalOrSelfClosing)]
+    public class PopUpLink : TagHelper
     {
         public string Title { get; set; }
         public string Url { get; set; }
@@ -17,8 +17,8 @@ namespace ServiceHost.TagHelpers
         {
             output.TagName = "button";
             output.Content.Append(Text);
-            output.Attributes.Add("class",Class);
-            output.Attributes.Add("onclick",$"OpenModal('{Url}','{ModalTarget}','{Title}','{Size}',null)");
+            output.Attributes.Add("class", Class);
+            output.Attributes.Add("onclick", $"OpenModal('{Url}','{ModalTarget}','{Title}','{Size}',null)");
             base.Process(context, output);
         }
     }

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using AutoMapper;
 using Blog.Application.DTOs.Groups;
 using Blog.Domain.Entities;
@@ -8,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ServiceHost.Infrastructure;
 using ServiceHost.Infrastructure.RazorUtils;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ServiceHost.Areas.Admin.Pages.BlogManagement.Groups
 {

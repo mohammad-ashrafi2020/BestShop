@@ -1,11 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using framework;
+﻿using framework;
 using framework.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System;
+using System.Threading.Tasks;
 
 namespace ServiceHost.Infrastructure.RazorUtils
 {

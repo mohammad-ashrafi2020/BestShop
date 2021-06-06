@@ -1,11 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using Account.Application.Models.DTOs.Auth;
+﻿using Account.Application.Models.DTOs.Auth;
 using framework;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ServiceHost.Infrastructure;
 using ServiceHost.Infrastructure.RazorUtils;
+using System;
+using System.Threading.Tasks;
 
 namespace ServiceHost.Pages.Auth
 {
@@ -35,7 +35,7 @@ namespace ServiceHost.Pages.Auth
 
 
             return await TryCatch(async () =>
-                    OperationResult.Success(), 
+                    OperationResult.Success(),
                 successTitle: "ثبت نام با موفقیت انجام شد",
                 successReturn: "/auth/login");
         }

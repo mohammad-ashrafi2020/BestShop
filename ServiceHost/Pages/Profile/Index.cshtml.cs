@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Account.Application.Models.DTOs.Account;
 using framework;
 using framework.UserUtil;
@@ -6,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ServiceHost.Infrastructure;
 using ServiceHost.Infrastructure.RazorUtils;
+using System.Threading.Tasks;
 
 namespace ServiceHost.Pages.Profile
 {

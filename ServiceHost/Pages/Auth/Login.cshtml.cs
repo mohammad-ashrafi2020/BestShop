@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Account.Application.Models.DTOs.Account;
+﻿using Account.Application.Models.DTOs.Account;
 using Account.Application.Models.DTOs.Auth;
 using Account.Configuration;
 using framework;
@@ -11,6 +9,9 @@ using Microsoft.Extensions.Logging;
 using ServiceHost.Infrastructure;
 using ServiceHost.Infrastructure.Cookies;
 using ServiceHost.Infrastructure.RazorUtils;
+using System;
+using System.Threading.Tasks;
+
 namespace ServiceHost.Pages.Auth
 {
     public class LoginModel : RazorBase
@@ -59,7 +60,7 @@ namespace ServiceHost.Pages.Auth
                 Expires = reMemberMe ? DateTimeOffset.Now.AddDays(30) :
                 DateTimeOffset.Now.AddDays(1)
             });
-           // CookieUtils.SetUserInfoCookie(userDto, HttpContext, await _walletService.BalanceWallet(userDto.Id));
+            // CookieUtils.SetUserInfoCookie(userDto, HttpContext, await _walletService.BalanceWallet(userDto.Id));
         }
 
         #endregion

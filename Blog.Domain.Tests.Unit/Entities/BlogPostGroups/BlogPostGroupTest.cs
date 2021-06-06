@@ -1,7 +1,9 @@
 ﻿using System;
 using _DomainUtils.Exceptions;
 using Blog.Domain.Entities.BlogPostGroupAggregate;
+using Blog.Domain.Entities.BlogPostGroupAggregate.Rules;
 using FluentAssertions;
+using NSubstitute;
 using Xunit;
 
 namespace Blog.Domain.Tests.Unit.Entities.BlogPostGroups
@@ -9,9 +11,13 @@ namespace Blog.Domain.Tests.Unit.Entities.BlogPostGroups
     public class BlogPostGroupTest
     {
         private BlogPostGroup blogGroup;
+        private IEnglishTitleUniquenessChecker _checker;
+
         public BlogPostGroupTest()
         {
-            blogGroup = new("Test Title", "گروه تست", "Meta Description");
+            _checker = NSubstitute.Substitute.For<IEnglishTitleUniquenessChecker>();
+            _checker.IsUnique(NSubstitute.Arg.Any<string>()).Returns(true);
+            blogGroup = new("Test Title", "گروه تست", "Meta Description",_checker);
         }
 
         [Fact(DisplayName = "Create Group")]
@@ -27,7 +33,7 @@ namespace Blog.Domain.Tests.Unit.Entities.BlogPostGroups
             //Act
             Action action = () =>
             {
-                var post = new BlogPostGroup(null, "Test", "Test");
+                var post = new BlogPostGroup(null, "Test", "Test", _checker);
             };
             //Asserts
             action.Should().Throw<InvalidDomainDataException>()
@@ -39,7 +45,7 @@ namespace Blog.Domain.Tests.Unit.Entities.BlogPostGroups
             //Act
             Action action = () =>
             {
-                var post = new BlogPostGroup("test T", null, "Test");
+                var post = new BlogPostGroup("test T", null, "Test", _checker);
             };
             //Asserts
             action.Should().Throw<InvalidDomainDataException>()
@@ -51,7 +57,7 @@ namespace Blog.Domain.Tests.Unit.Entities.BlogPostGroups
             //Act
             Action action = () =>
             {
-                var post = new BlogPostGroup("test T", "Test", null);
+                var post = new BlogPostGroup("test T", "Test", null, _checker);
             };
             //Asserts
             action.Should().Throw<InvalidDomainDataException>()
@@ -61,7 +67,7 @@ namespace Blog.Domain.Tests.Unit.Entities.BlogPostGroups
         public void Should_Edit_Group()
         {
             //Act
-            blogGroup.Edit("Edited ", "Edited", "Edited");
+            blogGroup.Edit("Edited ", "Edited", "Edited", _checker);
 
             //Asserts
             blogGroup.EnglishGroupTitle.Should().Be("edited");
@@ -73,7 +79,7 @@ namespace Blog.Domain.Tests.Unit.Entities.BlogPostGroups
             //Act
             Action action = () =>
             {
-                blogGroup.Edit(null, "Edited", "Edited");
+                blogGroup.Edit(null, "Edited", "Edited", _checker);
 
             };
             //Asserts
@@ -86,7 +92,7 @@ namespace Blog.Domain.Tests.Unit.Entities.BlogPostGroups
             //Act
             Action action = () =>
             {
-                blogGroup.Edit("Edited", null, "Edited");
+                blogGroup.Edit("Edited", null, "Edited", _checker);
 
             };
 
@@ -100,7 +106,7 @@ namespace Blog.Domain.Tests.Unit.Entities.BlogPostGroups
             //Act
             Action action = () =>
             {
-                blogGroup.Edit("Edited", "Test", null);
+                blogGroup.Edit("Edited", "Test", null, _checker);
 
             };
 
@@ -112,7 +118,7 @@ namespace Blog.Domain.Tests.Unit.Entities.BlogPostGroups
         public void AddChild()
         {
             //Act
-            blogGroup.AddChild("Test ","test","Test");
+            blogGroup.AddChild("Test ","test","Test", _checker);
 
             //Asserts
             blogGroup.Groups.Should().HaveCount(1);

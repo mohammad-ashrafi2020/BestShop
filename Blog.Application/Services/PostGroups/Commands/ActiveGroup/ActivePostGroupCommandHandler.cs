@@ -20,7 +20,7 @@ namespace Blog.Application.Services.PostGroups.Commands.ActiveGroup
         {
             var group = await _db.BlogPostGroups
                 .AsTracking()
-                .SingleOrDefaultAsync(d => d.Id == request.GroupId && d.IsDelete, cancellationToken);
+                .FirstOrDefaultAsync(d => d.Id == request.GroupId && d.IsDelete, cancellationToken);
 
             if (group == null)
                 return OperationResult.NotFound();

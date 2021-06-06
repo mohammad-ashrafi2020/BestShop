@@ -8,7 +8,7 @@ namespace Blog.Application.Services.PostGroups.Commands.CreateGroup
         public CreateGroupCommand(string groupTitle, string englishGroupTitle, string metaDescription, long? parentId)
         {
             GroupTitle = groupTitle;
-            EnglishGroupTitle = englishGroupTitle;
+            EnglishGroupTitle = englishGroupTitle.ToLower();
             MetaDescription = metaDescription;
             ParentId = parentId;
         }

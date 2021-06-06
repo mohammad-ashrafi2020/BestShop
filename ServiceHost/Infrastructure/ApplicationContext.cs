@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using ServiceHost.Infrastructure.DTOs;
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Principal;
 using System.Text;
 using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Http;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
-using ServiceHost.Infrastructure.DTOs;
 
 namespace ServiceHost.Infrastructure
 {

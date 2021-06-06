@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Account.Application.Models.DTOs.Addresses;
+﻿using Account.Application.Models.DTOs.Addresses;
 using Account.Domain.Entities.Users;
 using AutoMapper;
 using framework;
@@ -11,6 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ServiceHost.Infrastructure;
 using ServiceHost.Infrastructure.RazorUtils;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ServiceHost.Pages.Profile.Addresses
 {
@@ -42,7 +42,7 @@ namespace ServiceHost.Pages.Profile.Addresses
             insertAddress.UserId = User.GetUserId();
             return await AjaxTryCatch(async () =>
             {
-               // var res = await _address.InsertAddress(insertAddress);
+                // var res = await _address.InsertAddress(insertAddress);
                 return OperationResult.Success();
             }, isSuccessReloadPage: true);
         }
@@ -108,7 +108,7 @@ namespace ServiceHost.Pages.Profile.Addresses
         {
             return await AjaxTryCatch(async () =>
             {
-               // var res = await _address.DeleteAddress(User.GetUserId(), addressId);
+                // var res = await _address.DeleteAddress(User.GetUserId(), addressId);
                 return OperationResult.Success();
             });
         }

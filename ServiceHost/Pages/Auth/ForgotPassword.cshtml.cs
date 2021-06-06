@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
-using Account.Application.Models.DTOs.Auth;
+﻿using Account.Application.Models.DTOs.Auth;
 using framework;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ServiceHost.Infrastructure;
 using ServiceHost.Infrastructure.RazorUtils;
+using System.Threading.Tasks;
 
 namespace ServiceHost.Pages.Auth
 {
@@ -32,7 +32,7 @@ namespace ServiceHost.Pages.Auth
                 //if (res.Status == OperationResultStatus.NotFound)
                 //    res.Message = "کاربری با ایمیل وارد شده یافت نشد";
                 return OperationResult.Success();
-            },successReturn:"/Auth/Login",successMessage:"لینک تغییر کلمه عبور به ایمیل شما ارسال شد");
+            }, successReturn: "/Auth/Login", successMessage: "لینک تغییر کلمه عبور به ایمیل شما ارسال شد");
         }
     }
 }

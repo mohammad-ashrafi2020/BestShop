@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Principal;
 using System.Text;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 
 namespace ServiceHost.Infrastructure.Security
 {
-    public class Identity:IIdentity
+    public class Identity : IIdentity
     {
         private IHttpContextAccessor _accessor;
         private IConfiguration _configuration;
@@ -18,14 +18,14 @@ namespace ServiceHost.Infrastructure.Security
             _accessor = accessor;
             _configuration = configuration;
         }
-      
+
         public string? AuthenticationType { get; }
 
         public bool IsAuthenticated
         {
             get
             {
-                
+
                 var token = _accessor.HttpContext.Request.Cookies["BestShopCookie"];
                 if (!string.IsNullOrWhiteSpace(token))
                 {

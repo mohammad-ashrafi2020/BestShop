@@ -13,6 +13,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOs\Posts\" />
+    <Folder Include="Services\PostGroups\DomainServices\" />
   </ItemGroup>
 
   <ItemGroup>

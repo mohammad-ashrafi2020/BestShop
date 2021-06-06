@@ -1,8 +1,8 @@
-using System.Threading.Tasks;
 using Blog.Application.DTOs.Posts;
 using Microsoft.Extensions.Logging;
 using ServiceHost.Infrastructure;
 using ServiceHost.Infrastructure.RazorUtils;
+using System.Threading.Tasks;
 
 namespace ServiceHost.Areas.Admin.Pages.BlogManagement
 {
@@ -16,7 +16,7 @@ namespace ServiceHost.Areas.Admin.Pages.BlogManagement
 
         public BlogPostFilterDto FilterDto { get; set; }
         public async Task OnGet(int pageId = 1, string search = "",
-            string postType = "all", string searchOn ="", string category = "")
+            string postType = "all", string searchOn = "", string category = "")
         {
             FilterDto = new BlogPostFilterDto();
         }
