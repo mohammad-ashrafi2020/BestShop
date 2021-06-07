@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using _DomainUtils.Domain;
 using _DomainUtils.Exceptions;
+using _DomainUtils.Utils;
 using Blog.Domain.Entities.BlogPostAggregate;
 using Blog.Domain.Entities.BlogPostGroupAggregate.Rules;
 
@@ -39,6 +40,9 @@ namespace Blog.Domain.Entities.BlogPostGroupAggregate
             if (!checker.IsUnique(englishGroupTitle.Trim().ToLower()))
                 throw new InvalidDomainDataException("عنوان انگلیسی تکراری است");
 
+            if (englishGroupTitle.Domain_IsUniCode())
+                throw new InvalidDomainDataException("عنوان انگلیسی فقط باید شامل حرف انگلیسی باشد");
+
             EnglishGroupTitle = englishGroupTitle.Trim().ToLower();
             GroupTitle = groupTitle;
             MetaDescription = metaDescription;
@@ -57,14 +61,18 @@ namespace Blog.Domain.Entities.BlogPostGroupAggregate
             if (string.IsNullOrWhiteSpace(metaDescription))
                 throw new InvalidDomainDataException("Meta Description Is Required");
 
+            if (englishGroupTitle.Domain_IsUniCode())
+                throw new InvalidDomainDataException("عنوان انگلیسی فقط باید شامل حرف انگلیسی باشد");
+
             if (EnglishGroupTitle != englishGroupTitle.Trim().ToLower())
                 if (!checker.IsUnique(englishGroupTitle))
                     throw new InvalidDomainDataException("عنوان انگلیسی تکراری است");
 
+           
+
             EnglishGroupTitle = englishGroupTitle.Trim().ToLower();
             GroupTitle = groupTitle;
             MetaDescription = metaDescription;
-            ParentId = null;
             ModifyDate = DateTime.Now;
         }
 

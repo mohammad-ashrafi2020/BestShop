@@ -1,8 +1,8 @@
-using Blog.Application.DTOs.Posts;
 using Microsoft.Extensions.Logging;
 using ServiceHost.Infrastructure;
 using ServiceHost.Infrastructure.RazorUtils;
 using System.Threading.Tasks;
+using Blog.Application.Services.Posts.Queries.DTOs;
 
 namespace ServiceHost.Areas.Admin.Pages.BlogManagement
 {

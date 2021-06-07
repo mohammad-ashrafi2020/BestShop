@@ -28,7 +28,9 @@ namespace Blog.Application.Services.PostGroups.Queries.GetAll
                     GroupTitle = s.GroupTitle,
                     Id = s.Id,
                     Slug = s.EnglishGroupTitle.ToSlug(),
-                    ParentId = s.ParentId
+                    ParentId = s.ParentId,
+                    MetaDescription = s.MetaDescription,
+                    IsActive = s.IsDelete
                 });
 
             return await data.ToListAsync(cancellationToken);

@@ -49,6 +49,7 @@ namespace _DomainUtils.Domain
         {
             CreationDate = DateTime.Now;
             Id = Guid.NewGuid();
+            IsDelete = false;
         }
     }
 }

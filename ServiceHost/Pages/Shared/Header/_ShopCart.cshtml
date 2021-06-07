@@ -1,5 +1,4 @@
 ﻿@using framework.Utilities
-@using Account.Application.Utilities
 <div class="user-items">
     <div class="user-item cart-list">
         <a href="#">
@@ -93,7 +92,7 @@
     </div>
     <div class="user-item account">
       
-        @if (_context.IsAuthenticated)
+        @*@if (_context.IsAuthenticated)
         {
             var info = _context.GetUserInfo();
             <a href="javascript:void(0)">
@@ -137,7 +136,7 @@
             </ul>
         }
         else
-        {
+        {*@
             <a href="#" class="btn-auth">
                 <i class="fal fa-user-circle"></i>
                 ورود و عضویت
@@ -156,7 +155,7 @@
                 </li>
             </ul>
 
-        }
+        
 
     </div>
 </div>

@@ -15,7 +15,7 @@ namespace Blog.Application.Services.PostGroups.DomainServices
 
         public bool IsUnique(string englishTitle)
         {
-            return _db.BlogPostGroups.Any(g => g.EnglishGroupTitle != englishTitle.ToLower());
+            return !_db.BlogPostGroups.Any(g => g.EnglishGroupTitle == englishTitle.ToLower());
         }
     }
 }

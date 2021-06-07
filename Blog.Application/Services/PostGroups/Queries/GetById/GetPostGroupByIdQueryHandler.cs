@@ -29,7 +29,8 @@ namespace Blog.Application.Services.PostGroups.Queries.GetById
                     GroupTitle = s.GroupTitle,
                     Id = s.Id,
                     ParentId = s.ParentId,
-                    Slug = s.EnglishGroupTitle.ToSlug()
+                    Slug = s.EnglishGroupTitle.ToSlug(),
+                    MetaDescription = s.MetaDescription
                 }).SingleOrDefaultAsync(g => g.Id == request.Id, cancellationToken);
 
             return group;

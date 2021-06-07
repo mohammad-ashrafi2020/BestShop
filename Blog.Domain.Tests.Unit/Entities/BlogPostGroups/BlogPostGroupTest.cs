@@ -17,7 +17,7 @@ namespace Blog.Domain.Tests.Unit.Entities.BlogPostGroups
         {
             _checker = NSubstitute.Substitute.For<IEnglishTitleUniquenessChecker>();
             _checker.IsUnique(NSubstitute.Arg.Any<string>()).Returns(true);
-            blogGroup = new("Test Title", "گروه تست", "Meta Description",_checker);
+            blogGroup = new("Test Title", "گروه تست", "Meta Description", _checker);
         }
 
         [Fact(DisplayName = "Create Group")]
@@ -26,6 +26,19 @@ namespace Blog.Domain.Tests.Unit.Entities.BlogPostGroups
             //Asserts
             blogGroup.Should().NotBeNull();
             blogGroup.EnglishGroupTitle.Should().Be("test title");//.ToLower()
+        }
+        [Fact(DisplayName = "Create Group")]
+        public void Should_Throw_Exception_When_EnglishTitle_is_Unicode()
+        {
+            //Act
+            Action action = () =>
+            {
+                //Arrange
+                var newGroup = new BlogPostGroup("متن فارسی", "Test", "Test", _checker);
+            };
+
+            //Asserts
+            action.Should().Throw<InvalidDomainDataException>().WithMessage("عنوان انگلیسی فقط باید شامل حرف انگلیسی باشد");
         }
         [Fact(DisplayName = "Create Group")]
         public void CreateGroup_Should_Throw_Exception_When_Create_User_Width_Null_Value()
@@ -74,6 +87,30 @@ namespace Blog.Domain.Tests.Unit.Entities.BlogPostGroups
             blogGroup.ModifyDate.Should().NotBeNull();
         }
         [Fact(DisplayName = "Edit Group")]
+        public void EditGroup_Should_Throw_Exception_When_EnglishTitle_is_Unicode()
+        {
+            //Act
+            Action action = () =>
+            {
+                blogGroup.Edit("متن فارسی ", "Edited", "Edited", _checker);
+            };
+            //Asserts
+            action.Should().Throw<InvalidDomainDataException>().WithMessage("عنوان انگلیسی فقط باید شامل حرف انگلیسی باشد");
+        }
+        [Fact(DisplayName = "Edit Group")]
+        public void EditGroup_Should_Throw_Exception_When_EnglishTitle_is_Duplicated()
+        {
+            //Act
+            Action action = () =>
+            {
+                _checker.IsUnique(Arg.Any<string>()).Returns(false);
+                blogGroup.Edit("duplicated", "Edited", "Edited", _checker);
+            };
+            //Asserts
+            action.Should().Throw<InvalidDomainDataException>()
+                .WithMessage("عنوان انگلیسی تکراری است");
+        }
+        [Fact(DisplayName = "Edit Group")]
         public void EditGroup_Should_Throw_Exception_When_EnglishTitle_Is_Null()
         {
             //Act
@@ -118,7 +155,7 @@ namespace Blog.Domain.Tests.Unit.Entities.BlogPostGroups
         public void AddChild()
         {
             //Act
-            blogGroup.AddChild("Test ","test","Test", _checker);
+            blogGroup.AddChild("Test ", "test", "Test", _checker);
 
             //Asserts
             blogGroup.Groups.Should().HaveCount(1);
