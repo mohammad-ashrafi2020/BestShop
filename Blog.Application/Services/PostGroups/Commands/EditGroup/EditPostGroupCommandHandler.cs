@@ -23,12 +23,8 @@ namespace Blog.Application.Services.PostGroups.Commands.EditGroup
 
         public async Task<OperationResult> Handle(EditPostGroupCommand request, CancellationToken cancellationToken)
         {
-            var group = await Context.BlogPostGroups.SingleOrDefaultAsync(d => d.Id == request.Id, cancellationToken: cancellationToken);
-
-
-            if (group.EnglishGroupTitle != request.EnglishGroupTitle)
-                if (await Context.BlogPostGroups.AnyAsync(c => c.EnglishGroupTitle == request.EnglishGroupTitle, cancellationToken))
-                    return OperationResult.Error("عنوان انگلیسی تکراری است");
+            var group = await Context.BlogPostGroups
+                .AsTracking().SingleOrDefaultAsync(d => d.Id == request.Id, cancellationToken: cancellationToken);
 
             group.Edit(request.EnglishGroupTitle, request.GroupTitle, request.MetaDescription,_checker);
             Context.Update(group);
