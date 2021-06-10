@@ -3,25 +3,26 @@ using ServiceHost.Infrastructure;
 using ServiceHost.Infrastructure.RazorUtils;
 using System.Threading.Tasks;
 using Blog.Application.Services.Posts.Queries.DTOs;
+using Blog.Application.Services.Posts.Queries.GetAllByFilter;
+using framework.Enums;
+using MediatR;
 
 namespace ServiceHost.Areas.Admin.Pages.BlogManagement
 {
     public class IndexModel : RazorBase
     {
-
-        public IndexModel(IApplicationContext context, ILogger<IndexModel> logger) : base(context, logger)
+        private IMediator _mediator;
+        public IndexModel(IApplicationContext context, ILogger<IndexModel> logger, IMediator mediator) : base(context, logger)
         {
+            _mediator = mediator;
         }
-
 
         public BlogPostFilterDto FilterDto { get; set; }
         public async Task OnGet(int pageId = 1, string search = "",
-            string postType = "all", string searchOn = "", string category = "")
+            SearchOn searchOn = SearchOn.All, string category = "")
         {
-            FilterDto = new BlogPostFilterDto();
+            FilterDto = await _mediator.Send(new GetAllPostByFilterQuery(searchOn, category, search, 10, pageId));
         }
-
-
 
     }
 }

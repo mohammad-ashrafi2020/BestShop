@@ -11,7 +11,7 @@ namespace ServiceHost.TagHelpers
         public string Url { get; set; }
         public string ModalTarget { get; set; } = "defaultModal";
         public string Size { get; set; } = "lg";
-        public string Class { get; set; }
+        public string Class { get; set; } = "btn btn-info";
         public string Text { get; set; }
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {

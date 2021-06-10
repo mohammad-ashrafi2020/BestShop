@@ -1,5 +1,6 @@
 ﻿@page
 @using Blog.Application.ViewModels.Posts
+@using framework.DateUtil
 @model ServiceHost.Areas.Admin.Pages.BlogManagement.IndexModel
 @{
     ViewData["title"] = "بلاگ";
@@ -7,7 +8,7 @@
 }
 <popupLink class="btn btn-success mb-2" text="افزودن پست"
            title="پست جدید" url="/admin/BlogManagement/ShowInsertModal?parent=null"></popupLink>
-<partial name="_Add" model="new InsertBlogPostDto()"/>
+
 <div class="box box-border custom-shadow">
     <form id="filter" method="get">
         <input type="hidden" name="pageId" id="pageId" value="" />
@@ -36,7 +37,7 @@
                     </div>
                     <div class="col-md-3 form-input">
                         <label>  جستوجو بر اساس :</label>
-                        <select class="form-control" name="type" >
+                        <select class="form-control" name="type">
                             <option value="all">همه</option>
                             <option value="articles">مقالات</option>
                             <option value="news">اخبار</option>
@@ -57,10 +58,33 @@
                     <th>نویسنده</th>
                     <th>آخرین بروزرسانی</th>
                     <th>وضعیت</th>
-                    <th>نوع</th>
+                    <td></td>
                 </tr>
             </thead>
             <tbody>
+                @foreach (var item in Model.FilterDto.Posts)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Title</td>
+                        <td>@item.AuthorName</td>
+                        <td>@item.UpdateDate.ToPersianDateTime()</td>
+                        <td>
+                            @if (item.IsActive)
+                            {
+                                <span class="label label-success">فعال</span>
+                            }
+                            else
+                            {
+                                <span class="label label-success">غیرفعال</span>
+                            }
+                        </td>
+                        <td>
+                            <DeleteItem><i class="fa fa-trash"></i></DeleteItem>
+                            <popupLink><i class="fa fa-edit"></i></popupLink>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>

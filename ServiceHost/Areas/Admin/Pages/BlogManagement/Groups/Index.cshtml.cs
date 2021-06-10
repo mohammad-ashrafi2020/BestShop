@@ -39,16 +39,15 @@ namespace ServiceHost.Areas.Admin.Pages.BlogManagement.Groups
         #region PostHandlers
         public async Task<IActionResult> OnPostInsertGroup(InsertBlogGroupViewModel model)
         {
-            return await AjaxTryCatch(async () =>
-            {
-                return await _mediator.Send(new CreateGroupCommand(model.GroupTitle, model.EnglishGroupTitle,
-                    model.MetaDescription, model.ParentId));
-            }, isSuccessReloadPage: true);
+            return await AjaxTryCatch(async () => 
+                await _mediator.Send(
+                    new CreateGroupCommand(model.GroupTitle, model.EnglishGroupTitle, model.MetaDescription, model.ParentId))
+                , isSuccessReloadPage: true);
         }
         public async Task<IActionResult> OnPostEditGroup(EditBlogGroupViewModel model)
         {
             return await AjaxTryCatch(async () =>
-                await _mediator.Send(new EditPostGroupCommand(model.Id, model.ParentId, model.MetaDescription, model.EnglishGroupTitle, model.GroupTitle)), isSuccessReloadPage: true);
+                await _mediator.Send(new EditPostGroupCommand(model.Id, model.MetaDescription, model.EnglishGroupTitle, model.GroupTitle)), isSuccessReloadPage: true);
         }
 
         #endregion
@@ -84,7 +83,7 @@ namespace ServiceHost.Areas.Admin.Pages.BlogManagement.Groups
         }
         public async Task<IActionResult> OnGetShowEditModal(long id)
         {
-            return await AjaxTryCatch<string>(async () =>
+            return await AjaxTryCatch(async () =>
             {
 
                 var group = await _mediator.Send(new GetPostGroupByIdQuery(id));

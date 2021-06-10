@@ -1,5 +1,43 @@
 ﻿@model Blog.Application.ViewModels.Posts.InsertBlogPostDto
 
-<form method="post" data-ajax="true" asp-page="Index" asp-page-handler="InsertPost">
-
+<form method="post" class="row" enctype="multipart/form-data" data-ajax="true" asp-page="Index" asp-page-handler="InsertPost">
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.Title)
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.UrlTitle)
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.DateRelease)
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.Tags)
+    </div>
+    <div class="col-md-12">
+        @Html.EditorFor(m => m.MetaDescription)
+    </div>
+    <div class="col-md-12">
+        @Html.EditorFor(m => m.Description)
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.ImageFile)
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.ImageAlt)
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.IsActive)
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.IsSpecial)
+    </div>
+    <div class="col-md-6">
+        <label asp-for="GroupId"></label>
+        <select class="select2 form-control" asp-for="GroupId"></select>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="SubGroupId"></label>
+        <select class="select2 form-control" asp-for="SubGroupId"></select>
+    </div>
+    <button type="submit" class="btn btn-success pull-left">ثبت اطلاعات</button>
 </form>
