@@ -102,7 +102,7 @@ namespace ServiceHost.Areas.Admin.Pages.BlogManagement
         public async Task<IActionResult> OnGetToggleStatus(long id)
         {
             return await AjaxTryCatch(async () =>
-                await _mediator.Send(new ToggleBlogPostStatusCommand(id)), true);
+                await _mediator.Send(new TogglePostStatusCommand(id)), true);
         }
     }
 }

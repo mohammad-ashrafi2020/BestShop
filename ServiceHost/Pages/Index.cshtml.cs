@@ -19,7 +19,7 @@ namespace ServiceHost.Pages
 
         public void OnGet()
         {
-
+            Response.Redirect("/admin");
         }
     }
 }

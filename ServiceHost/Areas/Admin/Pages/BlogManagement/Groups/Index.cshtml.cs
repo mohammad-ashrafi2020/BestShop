@@ -42,7 +42,7 @@ namespace ServiceHost.Areas.Admin.Pages.BlogManagement.Groups
         {
             return await AjaxTryCatch(async () =>
                 await _mediator.Send(
-                    new CreateGroupCommand(model.GroupTitle, model.EnglishGroupTitle, model.MetaDescription, model.ParentId))
+                    new CreatePostGroupCommand(model.GroupTitle, model.EnglishGroupTitle, model.MetaDescription, model.ParentId))
                 , isSuccessReloadPage: true);
         }
         public async Task<IActionResult> OnPostEditGroup(EditBlogGroupViewModel model)

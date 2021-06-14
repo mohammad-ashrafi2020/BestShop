@@ -36,8 +36,8 @@ namespace Blog.Application.Tests.Integration.Services.PostGroups.Commands
         {
             //Arrange
             _checker.IsUnique(Arg.Any<string>()).Returns(true);
-            var command = new CreateGroupCommand("Test", "Test 21", "Test", null);
-            var handler = new CreateGroupCommandHandler(_db, _checker);
+            var command = new CreatePostGroupCommand("Test", "Test 21", "Test", null);
+            var handler = new CreatePostGroupCommandHandler(_db, _checker);
 
             //Act
             var res = await handler.Handle(command, new CancellationToken());
@@ -56,8 +56,8 @@ namespace Blog.Application.Tests.Integration.Services.PostGroups.Commands
             _db.BlogPostGroups.Add(blogGroup);
             await _db.SaveChangesAsync();
 
-            var command = new CreateGroupCommand("Child", "Child", "Test", blogGroup.Id);
-            var handler = new CreateGroupCommandHandler(_db, _checker);
+            var command = new CreatePostGroupCommand("Child", "Child", "Test", blogGroup.Id);
+            var handler = new CreatePostGroupCommandHandler(_db, _checker);
 
             //Act
             var res = await handler.Handle(command, new CancellationToken());
@@ -75,8 +75,8 @@ namespace Blog.Application.Tests.Integration.Services.PostGroups.Commands
         public async Task Should_Return_NotFound_When_NotFound_Parent()
         {
             //Arrange
-            var command = new CreateGroupCommand("Child", "child 2", "Test", 200);//200 = fakeId => null Entity
-            var handler = new CreateGroupCommandHandler(_db, _checker);
+            var command = new CreatePostGroupCommand("Child", "child 2", "Test", 200);//200 = fakeId => null Entity
+            var handler = new CreatePostGroupCommandHandler(_db, _checker);
 
             //Act
             var res = await handler.Handle(command, new CancellationToken());
@@ -95,9 +95,9 @@ namespace Blog.Application.Tests.Integration.Services.PostGroups.Commands
             _db.BlogPostGroups.Add(blogGroup);
             await _db.SaveChangesAsync();
             //Arrange
-            var command = new CreateGroupCommand("Test", "Test", "Test", null);
+            var command = new CreatePostGroupCommand("Test", "Test", "Test", null);
             _checker.IsUnique(Arg.Any<string>()).Returns(false);
-            var handler = new CreateGroupCommandHandler(_db, _checker);
+            var handler = new CreatePostGroupCommandHandler(_db, _checker);
 
             //Act
             Action action = () =>
