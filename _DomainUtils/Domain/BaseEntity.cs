@@ -24,6 +24,7 @@ namespace _DomainUtils.Domain
         public BaseEntity()
         {
             CreationDate = DateTime.Now;
+            IsDelete = false;
         }
     }
     public class BaseEntity

@@ -8,20 +8,21 @@ using Blog.Infrastructure.Persistent.EF.Context;
 using framework.Utilities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Blog.Application.Services.PostGroups.Queries.GetAll
+namespace Blog.Application.Services.PostGroups.Queries.GetChildGroups
 {
-    public class GetAllPostGroupQueryHandler : IBaseRequestHandler<GetAllPostGroupQuery, List<BlogPostGroupDto>>
+    public class GetBlogChildGroupsQueryHandler:IBaseRequestHandler<GetBlogChildGroupsQuery, List<BlogPostGroupDto>>
     {
         private readonly BlogContext _context;
 
-        public GetAllPostGroupQueryHandler(BlogContext context)
+        public GetBlogChildGroupsQueryHandler(BlogContext context)
         {
             _context = context;
         }
-
-        public async Task<List<BlogPostGroupDto>> Handle(GetAllPostGroupQuery request, CancellationToken cancellationToken)
+        public async Task<List<BlogPostGroupDto>> Handle(GetBlogChildGroupsQuery request, CancellationToken cancellationToken)
         {
-            var data = _context.BlogPostGroups.OrderByDescending(d => d.Id)
+            var data = _context.BlogPostGroups
+                .Where(g=>g.ParentId==request.ParentId && !g.IsDelete)
+                .OrderByDescending(d => d.Id)
                 .Select(s => new BlogPostGroupDto()
                 {
                     EnglishGroupTitle = s.EnglishGroupTitle,
@@ -30,11 +31,10 @@ namespace Blog.Application.Services.PostGroups.Queries.GetAll
                     Slug = s.EnglishGroupTitle.ToSlug(),
                     ParentId = s.ParentId,
                     MetaDescription = s.MetaDescription,
-                    IsActive = !s.IsDelete
+                    IsActive = true
                 });
 
             return await data.ToListAsync(cancellationToken);
         }
-
     }
 }

@@ -4,8 +4,10 @@
     ViewData["title"] = "دسته بندی بلاگ";
     ViewData["selected"] = "BlogGroups";
 }
-<popupLink class="btn btn-success mb-2" text="افزودن گروه"
-           title="گروه جدید" url="/admin/BlogManagement/groups/ShowInsertModal?parent=null"></popupLink>
+<popupLink class="btn btn-success mb-2"
+           title="گروه جدید" url="/admin/BlogManagement/groups/ShowInsertModal?parent=null">
+    افزودن گروه
+</popupLink>
 <div class="box box-primary">
     <div class="box-body table-responsive no-padding" onclick="">
         <table class="table table-bordered bg-white text-center">
@@ -33,15 +35,21 @@
                                                 @sub.GroupTitle (<small>@sub.EnglishGroupTitle</small>)
                                                 @if (sub.IsActive)
                                                 {
-                                                    <Question url="/Admin/BlogManagement/groups/ToggleStatus?id=@sub.Id" class="btn btn-sm no-margin btn-danger">حذف</Question>
+                                                    <Question url="/Admin/BlogManagement/groups/ToggleStatus?id=@sub.Id" class="btn btn-sm no-margin btn-danger">
+                                                        حذف
+                                                    </Question>
                                                 }
                                                 else
                                                 {
-                                                    <Question url="/Admin/BlogManagement/groups/ToggleStatus?id=@sub.Id" class="btn btn-sm no-margin btn-primary">فعال سازی</Question>
+                                                    <Question url="/Admin/BlogManagement/groups/ToggleStatus?id=@sub.Id" class="btn btn-sm no-margin btn-primary">
+                                                        فعال سازی
+                                                    </Question>
                                                 }
-                                              
-                                                <popupLink class="btn btn-primary btn-sm" text="ویرایش"
-                                                           title="ویرایش گروه" url="/admin/BlogManagement/groups/ShowEditModal?id=@sub.Id"></popupLink>
+
+                                                <popupLink class="btn btn-primary btn-sm"
+                                                           title="ویرایش گروه" url="/admin/BlogManagement/groups/ShowEditModal?id=@sub.Id">
+                                                    ویرایش
+                                                </popupLink>
                                             </div>
                                         </li>
                                     </ul>
@@ -51,17 +59,26 @@
                         <td>
                             @if (item.IsActive)
                             {
-                                <Question url="/Admin/BlogManagement/groups/ToggleStatus?id=@item.Id" class="btn btn-sm no-margin btn-danger">حذف</Question>
+                                <Question url="/Admin/BlogManagement/groups/ToggleStatus?id=@item.Id" class="btn btn-sm no-margin btn-danger">
+                                    حذف
+                                </Question>
                             }
                             else
                             {
-                                <Question url="/Admin/BlogManagement/groups/ToggleStatus?id=@item.Id" class="btn btn-sm no-margin btn-primary">فعال سازی</Question>
+                                <Question url="/Admin/BlogManagement/groups/ToggleStatus?id=@item.Id" class="btn btn-sm no-margin btn-primary">
+                                    فعال سازی
+                                </Question>
                             }
-                            <popupLink class="btn btn-primary btn-sm" text="ویرایش"
-                                       title="ویرایش گروه" url="/admin/BlogManagement/groups/ShowEditModal?id=@item.Id"></popupLink>
+                            <popupLink class="btn btn-primary btn-sm" title="ویرایش گروه"
+                                       url="/admin/BlogManagement/groups/ShowEditModal?id=@item.Id">
+                                ویرایش
+                            </popupLink>
 
-                            <popupLink class="btn btn-success btn-sm" text="افزودن زیر گروه"
-                                       title="افزودن زیر گروه به @item.GroupTitle" url="/admin/BlogManagement/groups/ShowInsertModal?parent=@item.Id"></popupLink>
+                            <popupLink class="btn btn-success btn-sm"
+                                       title="افزودن زیر گروه به @item.GroupTitle"
+                                       url="/admin/BlogManagement/groups/ShowInsertModal?parent=@item.Id">
+                                افزودن زیر گروه
+                            </popupLink>
                         </td>
                     </tr>
                 }

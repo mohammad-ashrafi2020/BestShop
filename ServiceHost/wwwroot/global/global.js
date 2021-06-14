@@ -213,18 +213,7 @@ $(document).ready(function () {
             }
             return false;
         });
-    if (document.getElementById("select_")) {
-        $("#select_").select2();
-    }
-    if (document.getElementById("select_1")) {
-        $("#select_1").select2();
-    }
-    if (document.getElementById("select_2")) {
-        $("#select_2").select2();
-    }
-    if (document.getElementById("select_custom")) {
-        $("#select_custom").select2();
-    }
+
     if (document.getElementById("number_input")) {
         setInputFilter(document.getElementById("number_input"),
             function (value) {
@@ -309,6 +298,10 @@ function OpenModal(url, name, title, modalSize = "lg", callback = "undefined") {
             const form = $("#" + name + ' form');
             if (form) {
                 $.validator.unobtrusive.parse(form);
+                $('.select2').select2();
+                loadCkeditor5();
+                loadCkeditor4();
+                loadCalender();
             }
             if (document.getElementById("number_input")) {
                 setInputFilter(document.getElementById("number_input"),
@@ -351,4 +344,100 @@ function OpenStaticModal(content, name, title) {
         $('#' + name + ' .modal-content').addClass('fullScreenModalContent');
     }
 }
-//Validation
+function loadCalender() {
+    if ($(".dateSelect ")) {
+        $('.dateSelect').pDatepicker({
+            format: 'YYYY/MM/D',
+            initialValue: false
+        });
+    }
+
+}
+function loadCkeditor5() {
+    if (!document.querySelector('.ckeditor5'))
+        return;
+    $("body").prepend(`<script src="/dashboard/ckeditor5/build/ckeditor.js"></script>`);
+
+    ClassicEditor
+        .create(document.querySelector('.ckeditor5'), {
+            simpleUpload: {
+                uploadUrl: '/Upload/Article'
+            },
+            toolbar: {
+                items: [
+                    'highlight',
+                    'removeFormat',
+                    '|',
+                    'bold',
+                    'italic',
+                    'underline',
+                    'alignment',
+                    'link',
+                    '|',
+                    'bulletedList',
+                    'numberedList',
+                    'indent',
+                    'outdent',
+                    '|',
+                    'fontBackgroundColor',
+                    'fontFamily',
+                    'fontColor',
+                    'fontSize',
+                    '|',
+                    'htmlEmbed',
+                    'imageUpload',
+                    'imageInsert',
+                    'mediaEmbed',
+                    '|',
+                    'blockQuote',
+                    'insertTable',
+                    'specialCharacters',
+                    'horizontalLine',
+                    '|',
+                    'undo',
+                    'redo',
+                    '|',
+                    'code',
+                    'codeBlock',
+                    'exportWord'
+                ]
+            },
+            language: 'fa',
+            image: {
+                toolbar: [
+                    'imageTextAlternative',
+                    'imageStyle:full',
+                    'imageStyle:side',
+                    'linkImage'
+                ]
+            },
+            table: {
+                contentToolbar: [
+                    'tableColumn',
+                    'tableRow',
+                    'mergeTableCells',
+                    'tableProperties'
+                ]
+            },
+            licenseKey: '',
+
+        })
+        .then(editor => {
+            window.editor = editor;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
+function loadCkeditor4() {
+    if (!document.getElementById("ckeditor4"))
+        return;
+
+    $("body").prepend(`<script src="/dashboard/ckeditor4/ckeditor/ckeditor.js"></script>`);
+    setTimeout(() => {
+        CKEDITOR.replace('ckeditor4', {
+            customConfig: '/dashboard/ckeditor4/ckeditor/config.js'
+        });
+    }, 500);
+}

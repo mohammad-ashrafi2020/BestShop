@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Posts\" />
+    <Folder Include="Services\Posts\Commands\" />
   </ItemGroup>
 
   <ItemGroup>

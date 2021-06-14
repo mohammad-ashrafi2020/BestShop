@@ -4,14 +4,14 @@
         if (isOk.length == 0) {
             $(".loading").fadeIn();
             $("form button[type=submit]").attr("disabled", "true");
-            setTimeout(function() {
+            setTimeout(function () {
                 var s = $(".input-validation-error");
                 console.log(s.length);
                 if (s.length > 0) {
                     $(".loading").fadeOut();
                     $("form button[type=submit]").removeAttr("disabled");
                 }
-            },100,1);
+            }, 100, 1);
         }
     });
 function setInputFilter(textbox, inputFilter) {
@@ -53,25 +53,22 @@ function changePage(id) {
     $("#pageId").val(id);
     $("#filter").submit();
 }
-function AddFooterRow() {
-    var count = $("#rowCount").val();
 
-    for (var i = 0; i < count; i++) {
-        $("#table-body").append(
-            "<tr>" +
-            "<td><input type='text' autocomplete='off' name='title' class='form-control'/></td>" +
-            "<td><input type='text' autocomplete='off' name='url' class='form-control'/></td></tr>"
-        );
-    }
+function LoadChildrenGroups(wraperId, thisId) {
+    var groupId = $(`#${thisId}`).val();
+    $.ajax({
+        url: "/admin/BlogManagement/Groups/LoadChildGroups?parentId=" + groupId,
+        type: "get"
+    }).done(function (data) {
+        $(`#${wraperId}`).html('');
+
+        $(`#${wraperId}`).append('<option>انتخاب کنید</option>');
+        for (var item in data) {
+           
+            var group = data[item].value;
+            console.log(group);
+
+            $(`#${wraperId}`).append(`<option value='${group.value}'>${group.title}</option>`)
+        }
+    });
 }
-function AddRow() {
-    var count = $("#rowCount").val();
-
-    for (var i = 0; i < count; i++) {
-        $("#table-body").append(
-            "<tr>" +
-            "<td><input type='text' autocomplete='off' name='ProductModel.Keys' class='form-control'/></td>" +
-            "<td><input type='text' autocomplete='off' name='ProductModel.Values' class='form-control'/></td></tr>"
-        );
-    }
-} 

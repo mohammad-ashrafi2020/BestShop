@@ -1,1 +1,71 @@
-﻿
+﻿@using Blog.Application.Services.PostGroups.Queries.GetAll
+@using Blog.Application.Utilities
+@using MediatR
+@model Blog.Application.ViewModels.Posts.EditBlogPostViewModel
+@inject IMediator _mediator
+@{
+    var groups = _mediator.Send(new GetAllPostGroupQuery()).Result;
+}
+<form method="post" class="row" enctype="multipart/form-data" data-ajax="true" asp-page="Index" asp-page-handler="EditPost">
+    <div class="col-md-12">
+        <img style="width: 100%;height: 400px" src="@BlogDirectories.GetBlogPost(Model.ImageName)" />
+    </div>
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.ImageName)
+
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.Title)
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.UrlTitle)
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.DateRelease)
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.Tags)
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.TimeRequiredToStudy)
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.MetaDescription)
+    </div>
+    <div class="col-md-12">
+        @Html.EditorFor(m => m.Description)
+    </div>
+    <div class="col-md-6">
+        <label asp-for="GroupId"></label>
+        <select class="select2 form-control" asp-for="GroupId" onchange="LoadChildrenGroups('parentGroups','postGroup')" id="postGroup">
+            <option>انتخاب کنید</option>
+            @foreach (var item in groups.Where(g => g.ParentId == null && g.IsActive))
+            {
+                <option value="@item.Id">@item.GroupTitle</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="SubGroupId"></label>
+        <select class="select2 form-control" asp-for="SubGroupId" id="parentGroups">
+            <option>انتخاب کنید</option>
+            @foreach (var item in groups.Where(g => g.ParentId == Model.GroupId && g.IsActive))
+            {
+                <option value="@item.Id">@item.GroupTitle</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-6">
+        <div class="form-input">
+            <label asp-for="ImageFile"></label>
+            <input type="file" class="form-control" asp-for="ImageFile" />
+            <span asp-validation-for="ImageFile"></span>
+        </div>
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.ImageAlt)
+    </div>
+    <div class="col-md-6 mt-3 mb-3">
+        @Html.EditorFor(m => m.IsSpecial)
+    </div>
+    <button type="submit" class="btn btn-success pull-left mt-3 ml-3">ثبت اطلاعات</button>
+</form>

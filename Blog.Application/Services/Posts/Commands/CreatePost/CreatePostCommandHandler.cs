@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Blog.Application.Common;
 using Blog.Application.Utilities;
 using Blog.Domain.Entities.BlogPostAggregate;
+using Blog.Domain.Entities.BlogPostAggregate.Rules;
 using Blog.Infrastructure.Persistent.EF.Context;
 using framework;
 using framework.DateUtil;
@@ -16,17 +17,16 @@ namespace Blog.Application.Services.Posts.Commands.CreatePost
 {
     public class CreatePostCommandHandler : IBaseRequestHandler<CreatePostCommand>
     {
-        public BlogContext _Context { get; }
-        public CreatePostCommandHandler(BlogContext context)
+        private readonly BlogContext _context;
+        private readonly IPostSlugUniquenessChecker _slgChecker;
+        public CreatePostCommandHandler(BlogContext context, IPostSlugUniquenessChecker slgChecker)
         {
-            _Context = context;
+            _context = context;
+            _slgChecker = slgChecker;
         }
 
         public async Task<OperationResult> Handle(CreatePostCommand request, CancellationToken cancellationToken)
         {
-            if (_Context.BlogPosts.Any(p => p.Slug == request.Slug))
-                return OperationResult.Error("عنوان انگلیسی تکراری است");
-
             if (!request.ImageFile.IsImage())
                 return OperationResult.Error("عکس نامعتبر است");
 
@@ -37,7 +37,7 @@ namespace Blog.Application.Services.Posts.Commands.CreatePost
             var imageName = await SaveFileInServer.SaveFile(request.ImageFile,
                 BlogDirectories.BlogPost);
 
-            await _Context.BlogPosts.AddAsync(
+            await _context.BlogPosts.AddAsync(
                 new BlogPost(
                     request.AuthorId,
                     request.Title,
@@ -52,7 +52,7 @@ namespace Blog.Application.Services.Posts.Commands.CreatePost
                     request.GroupId,
                     request.SubGroupId,
                     request.DateRelease.ToMiladi(),
-                    request.IsSpecial), cancellationToken);
+                    request.IsSpecial, _slgChecker), cancellationToken);
 
             return OperationResult.Success();
         }
@@ -60,7 +60,7 @@ namespace Blog.Application.Services.Posts.Commands.CreatePost
         private string GenerateShortLink(int length)
         {
             var key = Guid.NewGuid().ToString().Replace("-", "").Substring(0, length);
-            while (_Context.BlogPosts.Any(p => p.ShortLink == key))
+            while (_context.BlogPosts.Any(p => p.ShortLink == key))
             {
                 key = Guid.NewGuid().ToString().Replace("-", "").Substring(0, length);
             }
