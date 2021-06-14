@@ -1,5 +1,6 @@
 ﻿using System;
 using Blog.Application.Common;
+using framework.Utilities;
 using Microsoft.AspNetCore.Http;
 
 namespace Blog.Application.Services.Posts.Commands.CreatePost
@@ -10,7 +11,7 @@ namespace Blog.Application.Services.Posts.Commands.CreatePost
         {
             AuthorId = authorId;
             Title = title;
-            Slug = slug;
+            Slug = slug.ToSlug();
             MetaDescription = metaDescription;
             Description = description;
             ImageAlt = imageAlt;

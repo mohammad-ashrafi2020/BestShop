@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Blog.Application.Common;
 using Blog.Application.Services.Posts.Queries.GetById;
 using Blog.Application.Utilities;
+using Blog.Domain.Entities.BlogPostAggregate.Rules;
 using Blog.Infrastructure.Persistent.EF.Context;
 using framework;
 using framework.DateUtil;
@@ -16,12 +17,15 @@ namespace Blog.Application.Services.Posts.Commands.EditPost
 {
     public class EditPostCommandHandler : IBaseRequestHandler<EditPostCommand>
     {
-        private BlogContext _context;
+        private readonly BlogContext _context;
         private IMediator _mediator;
-        public EditPostCommandHandler(BlogContext context, IMediator mediator)
+        private readonly IPostSlugUniquenessChecker _slgChecker;
+
+        public EditPostCommandHandler(BlogContext context, IMediator mediator, IPostSlugUniquenessChecker slgChecker)
         {
             _context = context;
             _mediator = mediator;
+            _slgChecker = slgChecker;
         }
         public async Task<OperationResult> Handle(EditPostCommand request, CancellationToken cancellationToken)
         {
@@ -29,11 +33,8 @@ namespace Blog.Application.Services.Posts.Commands.EditPost
             if (post == null)
                 return OperationResult.NotFound();
 
-            if (post.Slug != request.UrlTitle)
-                if (await _context.BlogPosts.AnyAsync(b => b.Slug == request.UrlTitle))
-                    return OperationResult.Error("عنوان انگلیسی تکراری است");
-
             var imageName = post.ImageName;
+            var oldImage = post.ImageName;
             var slug = request.UrlTitle.ToSlug();
             //Save New Image
             if (request.ImageFile != null)
@@ -43,7 +44,7 @@ namespace Blog.Application.Services.Posts.Commands.EditPost
             //Edit Post
             post.Edit(request.Tags, request.Title, request.MetaDescription, slug,
                 request.Description, imageName, request.ImageAlt, request.TimeRequiredToStudy, request.GroupId, request.SubGroupId
-                , request.DateRelease.ToMiladi(), request.IsSpecial);
+                , request.DateRelease.ToMiladi(), request.IsSpecial, _slgChecker);
 
             _context.Update(post);
             await _context.SaveChangesAsync(cancellationToken);
@@ -51,7 +52,7 @@ namespace Blog.Application.Services.Posts.Commands.EditPost
             //If User Enter New Image Then Delete Old Image
             if (request.ImageFile != null)
                 if (request.ImageFile.IsImage())
-                    DeleteFileFromServer.DeleteFile(imageName, BlogDirectories.BlogPost);
+                    DeleteFileFromServer.DeleteFile(oldImage, BlogDirectories.BlogPost);
 
             return OperationResult.Success();
         }

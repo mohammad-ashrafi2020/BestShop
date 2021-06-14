@@ -8,6 +8,8 @@ namespace Blog.Application.Mapper
     {
         public static BlogPostDto MapBlogPostToDto(BlogPost blogPost)
         {
+            if (blogPost == null)
+                return null;
             return new BlogPostDto()
             {
                 AuthorId = blogPost.AuthorId,

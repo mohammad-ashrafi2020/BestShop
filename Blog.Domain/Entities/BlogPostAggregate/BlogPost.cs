@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using _DomainUtils.Domain;
 using _DomainUtils.Exceptions;
+using _DomainUtils.Utils;
+using Blog.Domain.Entities.BlogPostAggregate.Rules;
 using Blog.Domain.Entities.BlogPostGroupAggregate;
 
 namespace Blog.Domain.Entities.BlogPostAggregate
@@ -30,19 +32,24 @@ namespace Blog.Domain.Entities.BlogPostAggregate
 
         #endregion
 
-
-
+        private BlogPost()
+        {
+            //For Ef
+        }
         public BlogPost(Guid authorId, string title, string metaDescription, string slug, string description,
             string imageName, string imageAlt, string tags, string shortLink, int timeRequiredToStudy,
-            long groupId, long? subGroupId, DateTime dateRelease, bool isSpecial)
+            long groupId, long? subGroupId, DateTime dateRelease, bool isSpecial, IPostSlugUniquenessChecker _slugChecker)
         {
             if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(description))
                 throw new InvalidDomainDataException("Title And Description Is Required");
 
+            if (!_slugChecker.IsUniq(slug.Domain_ToSlug()))
+                throw new InvalidDomainDataException("عنوان انگلیسی تکراری است");
+
             AuthorId = authorId;
             Title = title;
             MetaDescription = metaDescription;
-            Slug = slug;
+            Slug = slug.Domain_ToSlug();
             Description = description;
             ImageName = imageName;
             ImageAlt = imageAlt;
@@ -58,10 +65,15 @@ namespace Blog.Domain.Entities.BlogPostAggregate
 
         public void Edit(string tags, string title, string metaDescription, string slug, string description,
             string imageName, string imageAlt, int timeRequiredToStudy,
-            long groupId, long? subGroupId, DateTime dateRelease, bool isSpecial)
+            long groupId, long? subGroupId, DateTime dateRelease, bool isSpecial, IPostSlugUniquenessChecker _slugChecker)
         {
             if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(description))
                 throw new InvalidDomainDataException("Title And Description Is Required");
+
+            if (Slug != slug.Domain_ToSlug())
+                if (!_slugChecker.IsUniq(slug.Domain_ToSlug()))
+                    throw new InvalidDomainDataException("عنوان انگلیسی تکراری است");
+
 
             ModifyDate = DateTime.Now;
             Tags = tags;

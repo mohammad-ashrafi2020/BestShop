@@ -28,7 +28,7 @@ namespace ServiceHost
         {
             var sqlConnection = Configuration.GetConnectionString("DefaultConnection");
             services.AddRazorPages();
-            BlogConfiguration.Init(services, sqlConnection);
+            BlogBootstrapper.Init(services, sqlConnection);
             services.AddHttpContextAccessor();
             services.AddTransient<IRenderViewToString, RenderViewToString>();
             services.AddScoped<IApplicationContext,ApplicationContext>();

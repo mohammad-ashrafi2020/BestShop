@@ -2,25 +2,43 @@
 using _DomainUtils.Exceptions;
 using Xunit;
 using Blog.Domain.Entities.BlogPostAggregate;
+using Blog.Domain.Entities.BlogPostAggregate.Rules;
 using FluentAssertions;
+using NSubstitute;
 
 namespace Blog.Domain.Tests.Unit.Entities.BlogPosts
 {
     public class BlogPostTest
     {
-        private BlogPost _post;
+        private readonly BlogPost _post;
+        private IPostSlugUniquenessChecker _slugChecker;
         public BlogPostTest()
         {
+            _slugChecker = Substitute.For<IPostSlugUniquenessChecker>();
+            _slugChecker.IsUniq(Arg.Any<string>()).Returns(true);
             //Arrange
             _post = new(Guid.NewGuid(), "Test Title",
                  "Meta", "test-s", "Test", "test.jpg", "test",
-                 "test", "test", 10, 1, null, DateTime.Now, true);
+                 "test", "test", 10, 1, null, DateTime.Now, true, _slugChecker);
         }
         [Fact(DisplayName = "Create Post")]
         public void Should_Create_BlogPost()
         {
             //Asserts
             Assert.NotNull(_post);
+        }
+        [Fact(DisplayName = "Create Post")]
+        public void Should_Return_Exception_When_Slug_Is_Duplicated()
+        {
+            Action action = new Action(() =>
+            {
+                _slugChecker.IsUniq(Arg.Any<string>()).Returns(false);
+                var post = new BlogPost(Guid.NewGuid(), "Test Title",
+                    "Meta", "test-s", "Test", "test.jpg", "test",
+                    "test", "test", 10, 1, null, DateTime.Now, true, _slugChecker);
+            });
+            //Asserts
+            action.Should().Throw<InvalidDomainDataException>();
         }
         [Fact(DisplayName = "Create Post")]
         public void Should_Return_Exception_When_Title_Or_Description_Is_Null()
@@ -31,7 +49,8 @@ namespace Blog.Domain.Tests.Unit.Entities.BlogPosts
                 //Arrange
                 var blogPost = new BlogPost(Guid.NewGuid(), null,
                     "Meta", "test-s", "Test",
-                    "test.jpg", "test", "test", "test", 10, 1, null, DateTime.Now, true);
+                    "test.jpg", "test", "test", "test", 10, 1,
+                    null, DateTime.Now, true, _slugChecker);
             };
 
             //Asserts
@@ -70,7 +89,7 @@ namespace Blog.Domain.Tests.Unit.Entities.BlogPosts
         {
             //Act
             _post.Edit("Edited", "Edited", "Edited", "Edited", "Edited", "Edited", "Edited", 2,
-                2, 2, DateTime.Now, true);
+                2, 2, DateTime.Now, true, _slugChecker);
 
             //Asserts
             _post.Tags.Should().Be("Edited");
@@ -83,14 +102,30 @@ namespace Blog.Domain.Tests.Unit.Entities.BlogPosts
             Action action = () =>
             {
                 _post.Edit("Edited", null, "Edited", "Edited", "Edited", "Edited", "Edited", 2,
-                    2, 2, DateTime.Now, true);
+                    2, 2, DateTime.Now, true, _slugChecker);
             };
 
 
             //Asserts
             action.Should().Throw<InvalidDomainDataException>();
         }
+        [Fact(DisplayName = "EditPost")]
+        public void Should_Throw_Domain_Exception_When_Edit_Post_With_Duplicated_Slug()
+        {
+            //Act
+            Action action = () =>
+            {
+                _slugChecker.IsUniq(Arg.Any<string>()).Returns(false);
+                _post.Edit("Edited", "Edited", "Edited", "Edited", "Edited", 
+                    "Edited", "Edited", 2,
+                    2, 2, DateTime.Now, true, _slugChecker);
+            };
 
+
+            //Asserts
+            action.Should().Throw<InvalidDomainDataException>()
+                .WithMessage("عنوان انگلیسی تکراری است");
+        }
         [Fact(DisplayName = "IncreaseVisit")]
         public void Should_Increase_Visit_For_Post()
         {

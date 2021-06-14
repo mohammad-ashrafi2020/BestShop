@@ -22,6 +22,8 @@ namespace Blog.Application.Services.Posts.Queries.GetAllByFilter
         public async Task<BlogPostFilterDto> Handle(GetAllPostByFilterQuery request, CancellationToken cancellationToken)
         {
             var result = _Context.BlogPosts
+                .Include(c=>c.Group)
+                .Include(c=>c.SubGroup)
                 .Select(s => BlogPostMapper.MapBlogPostToDto(s));
 
             if (request.SearchOn == SearchOn.Active)

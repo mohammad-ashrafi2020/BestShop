@@ -30,7 +30,8 @@ namespace Blog.Application.Services.PostGroups.Queries.GetByEnglishTitle
                 Id = s.Id,
                 ParentId = s.ParentId,
                 Slug = s.EnglishGroupTitle.ToSlug(),
-                MetaDescription = s.MetaDescription
+                MetaDescription = s.MetaDescription,
+                IsActive = !s.IsDelete
             }).SingleOrDefaultAsync(u => u.EnglishGroupTitle == request.EnglishTitle
                 , cancellationToken: cancellationToken);
         }

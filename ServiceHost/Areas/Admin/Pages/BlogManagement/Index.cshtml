@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{handler?}"
 @using Blog.Application.ViewModels.Posts
 @using framework.DateUtil
 @model ServiceHost.Areas.Admin.Pages.BlogManagement.IndexModel
@@ -6,8 +6,8 @@
     ViewData["title"] = "بلاگ";
     ViewData["selected"] = "blog";
 }
-<popupLink class="btn btn-success mb-2" text="افزودن پست"
-           title="پست جدید" url="/admin/BlogManagement/ShowInsertModal?parent=null"></popupLink>
+<popupLink class="btn btn-success mb-2"
+           title="پست جدید" url="/admin/BlogManagement/ShowAddPage">افزودن پست</popupLink>
 
 <div class="box box-border custom-shadow">
     <form id="filter" method="get">
@@ -76,12 +76,12 @@
                             }
                             else
                             {
-                                <span class="label label-success">غیرفعال</span>
+                                <span class="label label-danger">غیرفعال</span>
                             }
                         </td>
                         <td>
-                            <DeleteItem><i class="fa fa-trash"></i></DeleteItem>
-                            <popupLink><i class="fa fa-edit"></i></popupLink>
+                            <DeleteItem url="/admin/BlogManagement/ToggleStatus?id=@item.Id" class="btn btn-sm btn-danger no-margin"><i class="fa fa-trash"></i></DeleteItem>
+                            <popupLink url="/admin/BlogManagement/ShowEditPage?id=@item.Id" class="btn btn-sm btn-info no-margin"><i class="fa fa-edit"></i></popupLink>
                         </td>
                     </tr>
                 }

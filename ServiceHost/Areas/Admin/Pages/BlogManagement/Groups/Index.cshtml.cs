@@ -11,6 +11,7 @@ using Blog.Application.Services.PostGroups.Commands.TogglePostGroupStatus;
 using Blog.Application.Services.PostGroups.Queries.DTOs;
 using Blog.Application.Services.PostGroups.Queries.GetAll;
 using Blog.Application.Services.PostGroups.Queries.GetById;
+using Blog.Application.Services.PostGroups.Queries.GetChildGroups;
 using Blog.Application.ViewModels.PostGroups;
 using Blog.Domain.Entities.BlogPostGroupAggregate;
 using MediatR;
@@ -39,7 +40,7 @@ namespace ServiceHost.Areas.Admin.Pages.BlogManagement.Groups
         #region PostHandlers
         public async Task<IActionResult> OnPostInsertGroup(InsertBlogGroupViewModel model)
         {
-            return await AjaxTryCatch(async () => 
+            return await AjaxTryCatch(async () =>
                 await _mediator.Send(
                     new CreateGroupCommand(model.GroupTitle, model.EnglishGroupTitle, model.MetaDescription, model.ParentId))
                 , isSuccessReloadPage: true);
@@ -53,11 +54,10 @@ namespace ServiceHost.Areas.Admin.Pages.BlogManagement.Groups
         #endregion
 
         #region GetHandlers
-
         public async Task<IActionResult> OnGetToggleStatus(long id)
         {
             return await AjaxTryCatch(async () =>
-                await _mediator.Send(new TogglePostGroupStatusCommand(id)),true);
+                await _mediator.Send(new TogglePostGroupStatusCommand(id)), true);
         }
         public async Task<IActionResult> OnGetShowInsertModal(long? parent)
         {
@@ -109,6 +109,23 @@ namespace ServiceHost.Areas.Admin.Pages.BlogManagement.Groups
                 return result;
             });
         }
+        #endregion
+
+        #region AjaxRequests
+
+        public async Task<IActionResult> OnGetLoadChildGroups(long parentId)
+        {
+            var group = await _mediator.Send(new GetBlogChildGroupsQuery(parentId));
+            List<ObjectResult> values = new List<ObjectResult>();
+
+            foreach (var item in group)
+            {
+                values.Add(new ObjectResult(new { value = item.Id, title = item.GroupTitle }));
+            }
+
+            return new JsonResult(values);
+        }
+
         #endregion
     }
 }

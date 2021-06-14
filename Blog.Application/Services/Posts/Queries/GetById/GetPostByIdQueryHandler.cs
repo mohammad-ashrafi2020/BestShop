@@ -12,21 +12,22 @@ namespace Blog.Application.Services.Posts.Queries.GetById
 {
     public class GetPostByIdQueryHandler : IBaseRequestHandler<GetPostByIdQuery, BlogPostDto>
     {
+        private readonly BlogContext _context;
+
         public GetPostByIdQueryHandler(BlogContext context)
         {
-            _Context = context;
+            _context = context;
         }
-
-        public BlogContext _Context { get; }
 
         public async Task<BlogPostDto> Handle(GetPostByIdQuery request, CancellationToken cancellationToken)
         {
-            return await _Context.BlogPosts
+            var value = await _context.BlogPosts
                 .Include(c => c.Group)
                 .Include(c => c.SubGroup)
-                .Select(s =>
-                    BlogPostMapper.MapBlogPostToDto(s))
                 .SingleOrDefaultAsync(s => s.Id == request.PostId, cancellationToken: cancellationToken);
+           
+
+            return BlogPostMapper.MapBlogPostToDto(value);
         }
 
     }
