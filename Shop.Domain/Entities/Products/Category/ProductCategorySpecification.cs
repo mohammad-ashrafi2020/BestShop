@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using framework.Domain;
+using _DomainUtils.Domain;
 
 namespace Shop.Domain.Entities.Products.Category
 {

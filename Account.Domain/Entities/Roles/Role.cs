@@ -1,12 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Account.Domain.Entities.Users;
-using framework.Domain;
 
 namespace Account.Domain.Entities.Roles
 {
-    public class Role:BaseSoftDelete
+    public class Role
     {
+        public int Id { get; set; }
         public string RoleTitle { get; set; }
+        public DateTime CreationDate { get; set; }
+        public bool IsDelete { get; set; }
 
         #region Relations
         public ICollection<RolePermission> Permissions { get; set; }

@@ -6,11 +6,12 @@ namespace framework.SecurityUtil
     {
         public static string SanitizeText(this string text)
         {
-            var htmlSanitizer = new HtmlSanitizer();
+            var htmlSanitizer = new HtmlSanitizer
+            {
+                KeepChildNodes = true,
+                AllowDataAttributes = true
+            };
 
-            htmlSanitizer.KeepChildNodes = true;
-
-            htmlSanitizer.AllowDataAttributes = true;
 
             return htmlSanitizer.Sanitize(text);
         }

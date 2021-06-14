@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using framework.Domain;
+using _DomainUtils.Domain;
 using Shop.Domain.Entities.Orders;
 
 namespace Shop.Domain.Entities.Products.Comments

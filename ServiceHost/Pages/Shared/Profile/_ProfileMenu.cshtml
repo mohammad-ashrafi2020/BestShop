@@ -1,8 +1,5 @@
-﻿@using Account.Application.Utilities
-@using framework.Utilities
-@{
-    var info = _context.GetUserInfo();
-}
+﻿@using framework.Utilities
+
 <div class="col-lg-3 col-md-4 mb-md-0 mb-3 sticky-sidebar">
     <div class="sidebar-widget">
         <div class="banner mb-3">
@@ -14,14 +11,14 @@
         <div class="profile-sidebar shadow-around">
             <div class="d-flex align-items-center">
                 <div class="profile-avatar">
-                    <img src="@Directories.GetBitMapUserAvatar(info.ImageName)" alt="@info.FullName">
+                    <img src="" alt="">
                 </div>
                 <div class="profile-info">
                     <div class="d-block">
-                        <h6><strong>@info.FullName</strong></h6>
+                        <h6><strong>Mohammad Ashrafi</strong></h6>
                     </div>
                     <div class="d-block">
-                        <strong class="text-muted">@info.PhoneNumber</strong>
+                        <strong class="text-muted">09351171196</strong>
                     </div>
                 </div>
             </div>
@@ -31,7 +28,7 @@
                         <a href="#">
                             <span>کیف پول</span>
                             <span>
-                                @info.WalletAmount.SplitNumber() <span class="text-info font-weight-bold">تومان</span>
+                                2000 <span class="text-info font-weight-bold">تومان</span>
                             </span>
                         </a>
                     </li>

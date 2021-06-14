@@ -31,9 +31,15 @@
                                         <li>
                                             <div class="text-right" style="padding: 5px; margin: 5px">
                                                 @sub.GroupTitle (<small>@sub.EnglishGroupTitle</small>)
-                                                <a href="javascript:void(0)" onclick="DeleteBlogGroup(@sub.Id)" class="btn btn-sm no-margin btn-danger">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
+                                                @if (sub.IsActive)
+                                                {
+                                                    <Question url="/Admin/BlogManagement/groups/ToggleStatus?id=@sub.Id" class="btn btn-sm no-margin btn-danger">حذف</Question>
+                                                }
+                                                else
+                                                {
+                                                    <Question url="/Admin/BlogManagement/groups/ToggleStatus?id=@sub.Id" class="btn btn-sm no-margin btn-primary">فعال سازی</Question>
+                                                }
+                                              
                                                 <popupLink class="btn btn-primary btn-sm" text="ویرایش"
                                                            title="ویرایش گروه" url="/admin/BlogManagement/groups/ShowEditModal?id=@sub.Id"></popupLink>
                                             </div>
@@ -43,7 +49,14 @@
                                 }
                             }
                         <td>
-                            <a href="javascript:void(0)" onclick="DeleteBlogGroup(@item.Id)" class="btn btn-sm btn-danger  no-margin">حذف</a>
+                            @if (item.IsActive)
+                            {
+                                <Question url="/Admin/BlogManagement/groups/ToggleStatus?id=@item.Id" class="btn btn-sm no-margin btn-danger">حذف</Question>
+                            }
+                            else
+                            {
+                                <Question url="/Admin/BlogManagement/groups/ToggleStatus?id=@item.Id" class="btn btn-sm no-margin btn-primary">فعال سازی</Question>
+                            }
                             <popupLink class="btn btn-primary btn-sm" text="ویرایش"
                                        title="ویرایش گروه" url="/admin/BlogManagement/groups/ShowEditModal?id=@item.Id"></popupLink>
 
@@ -58,5 +71,5 @@
 </div>
 @section Scripts
 {
- 
+
 }

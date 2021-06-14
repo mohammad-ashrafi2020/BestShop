@@ -8,14 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Account.Configuration;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Primitives;
-using ServiceHost.Infrastructure;
-using System.Security.Claims;
 using Blog.Configuration;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using ServiceHost.Infrastructure;
 using ServiceHost.Infrastructure.RazorUtils;
 
 namespace ServiceHost
@@ -32,23 +26,12 @@ namespace ServiceHost
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = Configuration.GetConnectionString("DefaultConnection");
-            AccountConfiguration.Init(services, connectionString, Configuration);
-            AccountConfiguration.AddAuthentication(services, Configuration);
-            BlogConfiguration.Init(services, connectionString);
-
-            #region DepenDencyRegistered
+            var sqlConnection = Configuration.GetConnectionString("DefaultConnection");
+            services.AddRazorPages();
+            BlogConfiguration.Init(services, sqlConnection);
             services.AddHttpContextAccessor();
-            services.AddScoped<IApplicationContext, ApplicationContext>();
-            services.AddSingleton<IRenderViewToString, RenderViewToString>();
-            #endregion
-
-            services.AddRazorPages()
-                .AddRazorPagesOptions(options =>
-                {
-                    options.Conventions.AuthorizeFolder("/Profile");
-                    options.Conventions.AuthorizeAreaFolder("Admin","/");
-                });
+            services.AddTransient<IRenderViewToString, RenderViewToString>();
+            services.AddScoped<IApplicationContext,ApplicationContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,14 +44,15 @@ namespace ServiceHost
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseJwtAuthentication();
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

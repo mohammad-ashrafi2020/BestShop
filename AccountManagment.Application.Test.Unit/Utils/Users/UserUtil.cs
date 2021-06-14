@@ -23,7 +23,6 @@ namespace Account.Application.Tests.Utils.Users
                 ActivationCode = "123",
                 ActivationToken = Guid.NewGuid(),
                 BirthDate = DateTime.Now,
-                CreationDate = DateTime.Now,
                 Email = email,
                 Family = "ashrafi",
                 Name = "mohammad",
@@ -47,7 +46,6 @@ namespace Account.Application.Tests.Utils.Users
                 ActivationCode = "123",
                 ActivationToken = Guid.NewGuid(),
                 BirthDate = DateTime.Now,
-                CreationDate = DateTime.Now,
                 Email = email,
                 Family = "ashrafi",
                 Name = "mohammad",
@@ -78,7 +76,6 @@ namespace Account.Application.Tests.Utils.Users
                 ActivationToken = user.ActivationToken,
                 BirthDate = user.BirthDate,
                 CreationDate = user.CreationDate,
-                Id = user.Id,
                 ImageName = user.ImageName,
                 IsActive = user.IsActive,
                 LastSendCodeDate = user.LastSendCodeDate

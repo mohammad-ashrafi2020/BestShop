@@ -1,7 +1,6 @@
 ﻿@model string
-<div class="text-dark font-weight-bold">
-    <div class="form-element-row mb-0">
-        <input type="file" class="input-element" asp-for="@Model">
-    </div>
+<div class="form-input">
+    <label asp-for="@Model"></label>
+    <input type="file" class="form-control" asp-for="@Model">
     <span asp-validation-for="@Model" class="text-danger"></span>
 </div>

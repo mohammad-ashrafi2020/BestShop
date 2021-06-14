@@ -1,24 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using Account.Application;
 using Account.Application.Services.Emails;
-using Account.Application.Services.Users;
-using Account.Application.Services.Users.Addresses;
-using Account.Application.Services.Users.Cards;
-using Account.Application.Services.Users.Notifications;
-using Account.Application.Services.Users.UserRoles;
-using Account.Application.Services.Users.Wallets;
-using Account.Domain.Entities.Roles;
 using Account.Infrastructure.Context;
-using AutoMapper;
-using framework.Domain;
+using framework;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,13 +20,8 @@ namespace Account.Configuration
             service.Configure<EmailConfig>(configuration.GetSection("EmailConfig"));
 
             service.AddAutoMapper(typeof(AutoMapperProfile));
-            service.AddScoped<IUserService, UserService>();
-            service.AddScoped<IUserAddressService, UserAddressService>();
-            service.AddScoped<IUserCardService, UserCardService>();
-            service.AddScoped<IUserRoleService, UserRoleService>();
-            service.AddScoped<IUserNotificationService, UserNotificationService>();
+           
             service.AddTransient<IEmailService, EmailService>();
-            service.AddScoped<IUserWalletService, UserWalletService>();
 
             service.AddDbContext<AccountContext>(option =>
             {

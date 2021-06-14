@@ -1,4 +1,4 @@
-﻿using framework.Domain;
+﻿using _DomainUtils.Domain;
 using Shop.Domain.Entities.Products.Category;
 
 namespace Shop.Domain.Entities.Products

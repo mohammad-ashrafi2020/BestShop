@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using framework.Domain;
+using _DomainUtils.Domain;
 using Shop.Domain.Entities.Orders;
 
 namespace Shop.Domain.Entities.Sellers
 {
-    public class SellerStore:BaseSoftDelete
+    public class SellerStore:BaseEntity
     {
         public long SellerProductId { get; set; }
         public string ColorName { get; set; }

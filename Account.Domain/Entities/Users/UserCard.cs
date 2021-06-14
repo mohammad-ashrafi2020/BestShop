@@ -1,8 +1,8 @@
-﻿using framework.Domain;
+﻿using _DomainUtils.Domain;
 
 namespace Account.Domain.Entities.Users
 {
-    public class UserCard:BaseSoftDelete
+    public class UserCard:BaseEntity
     {
         public long UserId { get; set; }
         public string CardNumber { get; set; }

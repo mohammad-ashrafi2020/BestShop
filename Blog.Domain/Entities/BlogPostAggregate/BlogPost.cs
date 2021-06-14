@@ -1,35 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using framework.Domain;
+using _DomainUtils.Domain;
+using _DomainUtils.Exceptions;
+using Blog.Domain.Entities.BlogPostGroupAggregate;
 
 namespace Blog.Domain.Entities.BlogPostAggregate
 {
-    public class BlogPost : BaseEntity
+    public class BlogPost : BaseEntity<long>
     {
-        public BlogPost(long authorId, string title, string metaDescription, string urlTitle, string description,
-            string imageName, string imageAlt, string tags, string shortLink, int timeRequiredToStudy,
-            long groupId, long? subGroupId, DateTime dateRelease, bool isSpecial)
-        {
-            AuthorId = authorId;
-            Title = title;
-            MetaDescription = metaDescription;
-            UrlTitle = urlTitle;
-            Description = description;
-            ImageName = imageName;
-            ImageAlt = imageAlt;
-            Tags = tags;
-            ShortLink = shortLink;
-            TimeRequiredToStudy = timeRequiredToStudy;
-            GroupId = groupId;
-            SubGroupId = subGroupId;
-            Visit = 0;
-            DateRelease = dateRelease;
-            IsSpecial = isSpecial;
-        }
-
-        public long AuthorId { get; private set; }
+        public Guid AuthorId { get; private set; }
         public string Title { get; private set; }
-        public string UrlTitle { get; private set; }
+        public string Slug { get; private set; }
         public string MetaDescription { get; private set; }
         public string Description { get; private set; }
         public string ImageName { get; private set; }
@@ -43,18 +24,64 @@ namespace Blog.Domain.Entities.BlogPostAggregate
         public DateTime DateRelease { get; private set; }
         public bool IsSpecial { get; private set; }
 
-
-        public void Edit(string tag)
-        {
-            ModifyDate = DateTime.Now;
-        }
-
         #region Relation
-
-        public ICollection<BlogPostComment> Comments { get; set; }
         public BlogPostGroup Group { get; set; }
         public BlogPostGroup SubGroup { get; set; }
 
         #endregion
+
+
+
+        public BlogPost(Guid authorId, string title, string metaDescription, string slug, string description,
+            string imageName, string imageAlt, string tags, string shortLink, int timeRequiredToStudy,
+            long groupId, long? subGroupId, DateTime dateRelease, bool isSpecial)
+        {
+            if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(description))
+                throw new InvalidDomainDataException("Title And Description Is Required");
+
+            AuthorId = authorId;
+            Title = title;
+            MetaDescription = metaDescription;
+            Slug = slug;
+            Description = description;
+            ImageName = imageName;
+            ImageAlt = imageAlt;
+            Tags = tags;
+            ShortLink = shortLink;
+            TimeRequiredToStudy = timeRequiredToStudy;
+            GroupId = groupId;
+            SubGroupId = subGroupId;
+            Visit = 0;
+            DateRelease = dateRelease;
+            IsSpecial = isSpecial;
+        }
+
+        public void Edit(string tags, string title, string metaDescription, string slug, string description,
+            string imageName, string imageAlt, int timeRequiredToStudy,
+            long groupId, long? subGroupId, DateTime dateRelease, bool isSpecial)
+        {
+            if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(description))
+                throw new InvalidDomainDataException("Title And Description Is Required");
+
+            ModifyDate = DateTime.Now;
+            Tags = tags;
+            Title = title;
+            MetaDescription = metaDescription;
+            Slug = slug;
+            Description = description;
+            ImageName = imageName;
+            ImageAlt = imageAlt;
+            TimeRequiredToStudy = timeRequiredToStudy;
+            GroupId = groupId;
+            SubGroupId = subGroupId;
+            Visit = 0;
+            DateRelease = dateRelease;
+            IsSpecial = isSpecial;
+        }
+
+        public void IncreaseVisit()
+        {
+            Visit += 1;
+        }
     }
 }

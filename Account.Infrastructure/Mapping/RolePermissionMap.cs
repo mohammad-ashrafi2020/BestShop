@@ -10,6 +10,7 @@ namespace Account.Infrastructure.Mapping
         {
             builder.ToTable("RolePermissions", "dbo");
             builder.HasKey(b => b.Id);
+
             builder.Property(b => b.CreationDate)
                 .HasDefaultValueSql("GetDate()");
 

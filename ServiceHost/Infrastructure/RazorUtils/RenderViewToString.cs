@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -10,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace ServiceHost.Infrastructure.RazorUtils
 {
@@ -32,14 +32,14 @@ namespace ServiceHost.Infrastructure.RazorUtils
             _serviceProvider = serviceProvider;
         }
 
-        public async Task<string> RenderToStringAsync(string viewName, object model,PageContext context)
+        public async Task<string> RenderToStringAsync(string viewName, object model, PageContext context)
         {
             var httpContext = new DefaultHttpContext { RequestServices = _serviceProvider };
-           
+
 
             using (var sw = new StringWriter())
             {
-                
+
                 var viewResult = _razorViewEngine.FindView(context, viewName, false);
 
 

@@ -33,11 +33,20 @@ namespace framework.Utilities
             return !isNumber;
         }
 
-        public static string FixTextForUrl(this string url)
+        public static string ToSlug(this string text)
         {
-            return url.Trim().ToLower().Replace("$", "").Replace(" ","-")
-                .Replace("%", "").Replace("^", "").Replace("*", "")
-                .Replace("@", "").Replace("!", "").Replace("~", "");
+            return text.Trim().ToLower()
+                .Replace("$", "")
+                .Replace(" ","-")
+                .Replace("%", "")
+                .Replace("^", "")
+                .Replace("*", "")
+                .Replace("@", "")
+                .Replace("!", "")
+                .Replace("&", "")
+                .Replace("?", "")
+                .Replace("=", "")
+                .Replace("~", "");
         }
         public static bool IsUniCode(this string value)
         {

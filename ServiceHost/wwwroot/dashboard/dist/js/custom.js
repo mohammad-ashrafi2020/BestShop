@@ -32,17 +32,14 @@ function setInputFilter(textbox, inputFilter) {
 };
 
 $(document).ready(function () {
-    if (document.getElementById("select_")) {
-        $("#select_").select2();
+    if ($(".select2")) {
+        $(".select2").select2();
     }
-    if (document.getElementById("select_1")) {
-        $("#select_1").select2();
-    }
-    if (document.getElementById("select_2")) {
-        $("#select_2").select2();
-    }
-    if (document.getElementById("select_custom")) {
-        $("#select_custom").select2();
+    if ($(".dateSelect")) {
+        $('.dateSelect').pDatepicker({
+            format: 'YYYY/MM/D',
+            initialValue: false
+        });
     }
     if (document.getElementById("number_input")) {
         setInputFilter(document.getElementById("number_input"),

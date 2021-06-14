@@ -1,10 +1,11 @@
-﻿using framework.Domain;
+﻿using System;
+using _DomainUtils.Domain;
 
 namespace Shop.Domain.Entities.Orders
 {
     public class OrderAddress:BaseEntity
     {
-        public long OrderId { get; set; }
+        public Guid OrderId { get; set; }
         public string Shire { get; set; }
         public string City { get; set; }
         public string Village { get; set; }

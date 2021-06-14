@@ -5,11 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Entities\BlogPostGroupAggregate\Rules\" />
     <Folder Include="Enums\" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Framwork\framework.csproj" />
+    <ProjectReference Include="..\_DomainUtils\_DomainUtils.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using framework.Domain;
+using _DomainUtils.Domain;
 
 namespace Shop.Domain.Entities.Sellers
 {
-    public class Seller : BaseSoftDelete
+    public class Seller : BaseEntity
     {
         public long UserId { get; set; }
         public string ShopName { get; set; }

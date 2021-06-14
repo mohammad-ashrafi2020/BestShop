@@ -9,7 +9,7 @@ namespace Account.Application.Tests.Fixture
 {
     public  class PublicFixture : IDisposable
     {
-        public readonly long UserId = 1;
+        public readonly Guid UserId;
         public AccountContext _context;
         private readonly User _user;
         public PublicFixture()

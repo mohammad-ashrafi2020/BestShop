@@ -1,69 +1,67 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using AutoMapper;
-using Blog.Application.DTOs.Groups;
-using Blog.Application.Services.Groups;
-using Blog.Domain.Entities;
 using framework;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ServiceHost.Infrastructure;
 using ServiceHost.Infrastructure.RazorUtils;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Blog.Application.Services.PostGroups.Commands.CreateGroup;
+using Blog.Application.Services.PostGroups.Commands.EditGroup;
+using Blog.Application.Services.PostGroups.Commands.TogglePostGroupStatus;
+using Blog.Application.Services.PostGroups.Queries.DTOs;
+using Blog.Application.Services.PostGroups.Queries.GetAll;
+using Blog.Application.Services.PostGroups.Queries.GetById;
+using Blog.Application.ViewModels.PostGroups;
+using Blog.Domain.Entities.BlogPostGroupAggregate;
+using MediatR;
 
 namespace ServiceHost.Areas.Admin.Pages.BlogManagement.Groups
 {
     [ValidateAntiForgeryToken]
     public class IndexModel : RazorBase
     {
-        private IBlogGroupService _groupService;
         private IRenderViewToString _renderView;
-        private IMapper _mapper;
-        public IndexModel(IApplicationContext context, ILogger<IndexModel> logger,
-            IBlogGroupService groupService, IMapper mapper, IRenderViewToString renderView) : base(context, logger)
+        private IMediator _mediator;
+
+        public IndexModel(IApplicationContext context, ILogger<IndexModel> logger
+           , IRenderViewToString renderView, IMediator mediator) : base(context, logger)
         {
-            _groupService = groupService;
             _renderView = renderView;
-            _mapper = mapper;
+            _mediator = mediator;
         }
 
-        public List<BlogPostGroup> Groups { get; set; }
+        public List<BlogPostGroupDto> Groups { get; set; }
         public async Task OnGet()
         {
-            Groups = await _groupService.GetGroupsForAdmin();
+            Groups = await _mediator.Send(new GetAllPostGroupQuery());
         }
 
         #region PostHandlers
-        public async Task<IActionResult> OnPostInsertGroup(InsertBlogGroupDto model)
+        public async Task<IActionResult> OnPostInsertGroup(InsertBlogGroupViewModel model)
         {
-            return await AjaxTryCatch(async () =>
-            {
-                var res = await _groupService.InsertGroup(model);
-                return res;
-            }, isSuccessReloadPage: true);
+            return await AjaxTryCatch(async () => 
+                await _mediator.Send(
+                    new CreateGroupCommand(model.GroupTitle, model.EnglishGroupTitle, model.MetaDescription, model.ParentId))
+                , isSuccessReloadPage: true);
         }
-        public async Task<IActionResult> OnPostEditGroup(EditBlogGroupDto model)
+        public async Task<IActionResult> OnPostEditGroup(EditBlogGroupViewModel model)
         {
             return await AjaxTryCatch(async () =>
-            {
-                var res = await _groupService.EditGroup(model);
-                return res;
-            }, isSuccessReloadPage: true);
+                await _mediator.Send(new EditPostGroupCommand(model.Id, model.MetaDescription, model.EnglishGroupTitle, model.GroupTitle)), isSuccessReloadPage: true);
         }
 
         #endregion
 
         #region GetHandlers
 
-        public async Task<IActionResult> OnGetDeleteGroup(long id)
+        public async Task<IActionResult> OnGetToggleStatus(long id)
         {
             return await AjaxTryCatch(async () =>
-            {
-                return await _groupService.DeleteGroup(id);
-            },isSuccessReloadPage:true);
+                await _mediator.Send(new TogglePostGroupStatusCommand(id)),true);
         }
         public async Task<IActionResult> OnGetShowInsertModal(long? parent)
         {
-            var model = new InsertBlogGroupDto()
+            var model = new InsertBlogGroupViewModel()
             {
                 EnglishGroupTitle = null,
                 MetaDescription = null,
@@ -72,10 +70,10 @@ namespace ServiceHost.Areas.Admin.Pages.BlogManagement.Groups
             };
             return await AjaxTryCatch(async () =>
             {
-                var result = new ResultModel<string>()
+                var result = new OperationResult<string>()
                 {
                     Data = await _renderView.RenderToStringAsync("_Add", model, PageContext),
-                    Status = ResultModelStatus.Success,
+                    Status = OperationResultStatus.Success,
                     Title = "",
                     Message = ""
                 };
@@ -87,15 +85,23 @@ namespace ServiceHost.Areas.Admin.Pages.BlogManagement.Groups
         {
             return await AjaxTryCatch(async () =>
             {
-                var group = await _groupService.GetGroupBy(id);
-                if (group.Data == null)
-                    return ResultModel<string>.NotFound();
 
-                var model = _mapper.Map<EditBlogGroupDto>(group.Data);
-                var result = new ResultModel<string>()
+                var group = await _mediator.Send(new GetPostGroupByIdQuery(id));
+                if (group == null)
+                    return OperationResult<string>.NotFound();
+
+                var model = new EditBlogGroupViewModel()
+                {
+                    EnglishGroupTitle = group.EnglishGroupTitle,
+                    GroupTitle = group.GroupTitle,
+                    Id = group.Id,
+                    ParentId = group.ParentId,
+                    MetaDescription = group.MetaDescription
+                };
+                var result = new OperationResult<string>()
                 {
                     Data = await _renderView.RenderToStringAsync("_Edit", model, PageContext),
-                    Status = ResultModelStatus.Success,
+                    Status = OperationResultStatus.Success,
                     Title = "",
                     Message = ""
                 };

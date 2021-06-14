@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Account.Infrastructure\Account.Infrastructure.csproj" />
     <ProjectReference Include="..\Framwork\framework.csproj" />
+    <ProjectReference Include="..\_DomainUtils\_DomainUtils.csproj" />
   </ItemGroup>
 
 </Project>

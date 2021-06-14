@@ -1,10 +1,11 @@
-﻿using framework.Domain;
+﻿using System;
+using _DomainUtils.Domain;
 
 namespace Account.Domain.Entities.Users
 {
     public class UserNotification:BaseEntity
     {
-        public long UserId { get; set; }
+        public Guid UserId { get; set; }
         public string Title { get; set; }
         public string Body { get; set; }
         public bool IsSeen { get; set; }

@@ -1,8 +1,8 @@
-﻿using framework.Domain;
+﻿using _DomainUtils.Domain;
 
 namespace Shop.Domain.Entities.Sellers
 {
-    public class SellerSendType:BaseSoftDelete
+    public class SellerSendType:BaseEntity
     {
         public long SellerId { get; set; }
         public string SendTitle { get; set; }

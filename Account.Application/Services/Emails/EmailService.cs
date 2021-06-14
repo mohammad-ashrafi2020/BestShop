@@ -1,25 +1,20 @@
 ﻿using System;
 using System.Net.Mail;
 using Account.Application.Models.DTOs.Account;
-using AngleSharp;
-using framework.Domain;
+using framework;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
-using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 namespace Account.Application.Services.Emails
 {
     public class EmailService : IEmailService
     {
-        private readonly IHttpContextAccessor _accessor;
-
         private string SiteBaseUrl { get; }
         private EmailConfig Options { get; }
 
         public EmailService(IHttpContextAccessor accessor, IOptions<EmailConfig> emailConfig)
         {
-            _accessor = accessor;
-            SiteBaseUrl = $"{_accessor.HttpContext.Request.Scheme}://{_accessor.HttpContext.Request.Host}";
+            SiteBaseUrl = $"{accessor.HttpContext.Request.Scheme}://{accessor.HttpContext.Request.Host}";
             Options = emailConfig.Value;
         }
 

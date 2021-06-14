@@ -72,9 +72,6 @@ $("#image_selector").change(function () {
     UploadImage(this);
 });
 
-function DeleteBlogGroup(id) {
-    Question("/Admin/BlogManagement/groups/DeleteGroup?id=" + id, "آیا از حذف اطمینان دارید ؟");
-}
 $("#ArticleModel_GroupId").select2();
 $("#ArticleModel_GroupId").change(function () {
     $.ajax({
