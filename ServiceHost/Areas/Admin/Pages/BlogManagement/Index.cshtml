@@ -58,6 +58,7 @@
                     <th>نویسنده</th>
                     <th>آخرین بروزرسانی</th>
                     <th>وضعیت</th>
+                    <th>پست ویژه</th>
                     <td></td>
                 </tr>
             </thead>
@@ -77,6 +78,16 @@
                             else
                             {
                                 <span class="label label-danger">غیرفعال</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.IsSpecial)
+                            {
+                                <span class="label label-success">بله</span>
+                            }
+                            else
+                            {
+                                <span class="label label-danger">خیر</span>
                             }
                         </td>
                         <td>
