@@ -25,7 +25,6 @@ namespace ServiceHost.Infrastructure.Security
         {
             get
             {
-
                 var token = _accessor.HttpContext.Request.Cookies["BestShopCookie"];
                 if (!string.IsNullOrWhiteSpace(token))
                 {

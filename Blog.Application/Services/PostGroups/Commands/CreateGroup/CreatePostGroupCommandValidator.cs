@@ -2,9 +2,9 @@
 
 namespace Blog.Application.Services.PostGroups.Commands.CreateGroup
 {
-    public class CreateGroupCommandValidator : AbstractValidator<CreateGroupCommand>
+    public class CreatePostGroupCommandValidator : AbstractValidator<CreatePostGroupCommand>
     {
-        public CreateGroupCommandValidator()
+        public CreatePostGroupCommandValidator()
         {
             RuleFor(r => r.EnglishGroupTitle)
                 .NotEmpty().WithMessage(framework.ValidationMessages.required("عنوان انگلیسی"));

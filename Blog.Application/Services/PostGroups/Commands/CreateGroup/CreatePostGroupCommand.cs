@@ -3,9 +3,9 @@ using Blog.Application.Common;
 
 namespace Blog.Application.Services.PostGroups.Commands.CreateGroup
 {
-    public class CreateGroupCommand : IBaseRequest, ICommitTableRequest
+    public class CreatePostGroupCommand : IBaseRequest, ICommitTableRequest
     {
-        public CreateGroupCommand(string groupTitle, string englishGroupTitle, string metaDescription, long? parentId)
+        public CreatePostGroupCommand(string groupTitle, string englishGroupTitle, string metaDescription, long? parentId)
         {
             GroupTitle = groupTitle;
             EnglishGroupTitle = englishGroupTitle.ToLower();

@@ -18,24 +18,26 @@ namespace Blog.Application.Services.Posts.Commands.EditPost
     public class EditPostCommandHandler : IBaseRequestHandler<EditPostCommand>
     {
         private readonly BlogContext _context;
-        private IMediator _mediator;
         private readonly IPostSlugUniquenessChecker _slgChecker;
 
-        public EditPostCommandHandler(BlogContext context, IMediator mediator, IPostSlugUniquenessChecker slgChecker)
+        public EditPostCommandHandler(BlogContext context, IPostSlugUniquenessChecker slgChecker)
         {
             _context = context;
-            _mediator = mediator;
             _slgChecker = slgChecker;
         }
         public async Task<OperationResult> Handle(EditPostCommand request, CancellationToken cancellationToken)
         {
-            var post = await _context.BlogPosts.SingleOrDefaultAsync(p => p.Id == request.Id, cancellationToken: cancellationToken);
+            var post = await _context.BlogPosts
+                .AsTracking()
+                .SingleOrDefaultAsync(p => p.Id == request.Id, cancellationToken: cancellationToken);
+           
             if (post == null)
                 return OperationResult.NotFound();
 
             var imageName = post.ImageName;
             var oldImage = post.ImageName;
             var slug = request.UrlTitle.ToSlug();
+
             //Save New Image
             if (request.ImageFile != null)
                 if (request.ImageFile.IsImage())

@@ -12,7 +12,7 @@
                 </a>
             </li>
            
-            <li class="treeview @(selected.Contains("Article") ? "active menu-open" : "")">
+            <li class="treeview @(selected.Contains("blog") ? "active menu-open" : "")">
                 <a href="javascript:void(0)">
                     <i class="fa fa-newspaper-o"></i> <span>بلاگ</span>
                     <span class="pull-left-container">
@@ -20,8 +20,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="@(selected == "blog" ? "active" : null)"><a href="/Admin/BlogManagement">لیست مقالات</a></li>
-                    <li class="@(selected == "BlogComments" ? "active" : null)"><a href="/Admin/Blog/Comments">نظرات کاربران</a></li>
+                    <li class="@(selected == "blogs" ? "active" : null)"><a href="/Admin/BlogManagement">لیست مقالات</a></li>
                     <li class="@(selected == "BlogGroups" ? "active" : null)"><a href="/Admin/BlogManagement/Groups">دسته بندی</a></li>
                 </ul>
             </li>

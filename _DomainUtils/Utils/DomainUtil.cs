@@ -30,15 +30,5 @@ namespace _DomainUtils.Utils
         {
             return value.Any(c => c > 255);
         }
-        public static string Domain_GenerateCode(int length)
-        {
-            var random = new Random();
-            var code = "";
-            for (int i = 0; i < length; i++)
-            {
-                code += random.Next(0, 9).ToString();
-            }
-            return code;
-        }
     }
 }

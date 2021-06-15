@@ -11,20 +11,20 @@ using System.Threading.Tasks;
 
 namespace Blog.Application.Services.Posts.Commands.ToggleStatus
 {
-    class ToggleBlogPostStatusCommandHandler : IBaseRequestHandler<ToggleBlogPostStatusCommand>
+    class TogglePostStatusCommandHandler : IBaseRequestHandler<TogglePostStatusCommand>
     {
         private readonly BlogContext _db;
 
-        public ToggleBlogPostStatusCommandHandler(BlogContext db)
+        public TogglePostStatusCommandHandler(BlogContext db)
         {
             _db = db;
         }
 
-        public ToggleBlogPostStatusCommandHandler()
+        public TogglePostStatusCommandHandler()
         {
 
         }
-        public async Task<OperationResult> Handle(ToggleBlogPostStatusCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult> Handle(TogglePostStatusCommand request, CancellationToken cancellationToken)
         {
             var post = await _db.BlogPosts.SingleOrDefaultAsync(p => p.Id == request.PostId, cancellationToken: cancellationToken);
             if (post == null)

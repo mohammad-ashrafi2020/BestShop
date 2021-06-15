@@ -4,7 +4,7 @@
 @model ServiceHost.Areas.Admin.Pages.BlogManagement.IndexModel
 @{
     ViewData["title"] = "بلاگ";
-    ViewData["selected"] = "blog";
+    ViewData["selected"] = "blogs";
 }
 <popupLink class="btn btn-success mb-2"
            title="پست جدید" url="/admin/BlogManagement/ShowAddPage">افزودن پست</popupLink>
@@ -58,6 +58,7 @@
                     <th>نویسنده</th>
                     <th>آخرین بروزرسانی</th>
                     <th>وضعیت</th>
+                    <th>پست ویژه</th>
                     <td></td>
                 </tr>
             </thead>
@@ -80,8 +81,33 @@
                             }
                         </td>
                         <td>
-                            <DeleteItem url="/admin/BlogManagement/ToggleStatus?id=@item.Id" class="btn btn-sm btn-danger no-margin"><i class="fa fa-trash"></i></DeleteItem>
-                            <popupLink url="/admin/BlogManagement/ShowEditPage?id=@item.Id" class="btn btn-sm btn-info no-margin"><i class="fa fa-edit"></i></popupLink>
+                            @if (item.IsSpecial)
+                            {
+                                <span class="label label-success">بله</span>
+                            }
+                            else
+                            {
+                                <span class="label label-danger">خیر</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.IsActive)
+                            {
+                                <DeleteItem url="/admin/BlogManagement/ToggleStatus?id=@item.Id" class="btn btn-sm btn-danger no-margin">
+                                    <i class="fa fa-trash"></i>
+                                </DeleteItem>
+
+                            }
+                            else
+                            {
+                                <Question url="/admin/BlogManagement/ToggleStatus?id=@item.Id" class="btn btn-sm btn-success no-margin">
+                                    فعال سازی
+                                </Question>
+
+                            }
+                            <popupLink title="ویرایش مقاله" url="/admin/BlogManagement/ShowEditPage?id=@item.Id" class="btn btn-sm btn-info no-margin">
+                                <i class="fa fa-edit"></i>
+                            </popupLink>
                         </td>
                     </tr>
                 }

@@ -10,17 +10,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Application.Services.PostGroups.Commands.CreateGroup
 {
-    public class CreateGroupCommandHandler : IBaseRequestHandler<CreateGroupCommand>
+    public class CreatePostGroupCommandHandler : IBaseRequestHandler<CreatePostGroupCommand>
     {
         private BlogContext Context { get; }
         private readonly IEnglishTitleUniquenessChecker _checker;
-        public CreateGroupCommandHandler(BlogContext context, IEnglishTitleUniquenessChecker checker)
+        public CreatePostGroupCommandHandler(BlogContext context, IEnglishTitleUniquenessChecker checker)
         {
             Context = context;
             _checker = checker;
         }
 
-        public async Task<OperationResult> Handle(CreateGroupCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult> Handle(CreatePostGroupCommand request, CancellationToken cancellationToken)
         {
             //Add Child
             if (request.ParentId is > 0)
