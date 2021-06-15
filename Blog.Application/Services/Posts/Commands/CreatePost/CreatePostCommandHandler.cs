@@ -27,6 +27,9 @@ namespace Blog.Application.Services.Posts.Commands.CreatePost
 
         public async Task<OperationResult> Handle(CreatePostCommand request, CancellationToken cancellationToken)
         {
+            if(request.ImageFile==null)
+                return OperationResult.Error("عکس را وارد کنید");
+
             if (!request.ImageFile.IsImage())
                 return OperationResult.Error("عکس نامعتبر است");
 

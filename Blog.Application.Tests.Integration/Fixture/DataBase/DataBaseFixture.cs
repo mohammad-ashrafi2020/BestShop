@@ -7,8 +7,8 @@ namespace Blog.Application.Tests.Integration.Fixture.DataBase
 {
     public class DataBaseFixture : IDisposable
     {
-        public BlogContext context;
-        private TransactionScope scope;
+        public readonly BlogContext context;
+        private readonly TransactionScope scope;
         public DataBaseFixture()
         {
             context = DbFactory.GetDataBase();
@@ -16,7 +16,14 @@ namespace Blog.Application.Tests.Integration.Fixture.DataBase
         }
         public void Dispose()
         {
-            scope.Dispose();
+            try
+            {
+                scope.Dispose();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
             context.Dispose();
         }
     }
