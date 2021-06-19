@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Blog.Application.Common.Validation
+namespace Common.Application.Validation
 {
     public class InvalidCommandException:Exception
     {

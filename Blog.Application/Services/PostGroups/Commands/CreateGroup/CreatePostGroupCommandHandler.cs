@@ -1,10 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Blog.Application.Common;
-using Blog.Domain.Entities;
 using Blog.Domain.Entities.BlogPostGroupAggregate;
 using Blog.Domain.Entities.BlogPostGroupAggregate.Rules;
 using Blog.Infrastructure.Persistent.EF.Context;
+using Common.Application;
 using framework;
 using Microsoft.EntityFrameworkCore;
 

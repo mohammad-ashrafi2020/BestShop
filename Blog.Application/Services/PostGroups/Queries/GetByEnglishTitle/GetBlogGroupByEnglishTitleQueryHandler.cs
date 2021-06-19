@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Blog.Application.Common;
 using Blog.Application.Services.PostGroups.Queries.DTOs;
 using Blog.Infrastructure.Persistent.EF.Context;
+using Common.Application;
 using framework.Utilities;
 using Microsoft.EntityFrameworkCore;
 

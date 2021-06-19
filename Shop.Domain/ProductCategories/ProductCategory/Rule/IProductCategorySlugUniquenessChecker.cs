@@ -1,4 +1,4 @@
-﻿namespace Shop.Domain.ProductCategoryAgg.Rule
+﻿namespace Shop.Domain.ProductCategories.ProductCategory.Rule
 {
     public interface IProductCategorySlugUniquenessChecker
     {

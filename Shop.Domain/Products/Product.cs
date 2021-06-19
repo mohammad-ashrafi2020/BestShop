@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using _DomainUtils.Domain;
-using _DomainUtils.Exceptions;
+using Common.Domain.Domain;
+using Common.Domain.Exceptions;
 using Shop.Domain.ValueObjects;
 
 namespace Shop.Domain.Products

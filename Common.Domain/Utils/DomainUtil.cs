@@ -1,9 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Linq;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace _DomainUtils.Utils
+namespace Common.Domain.Utils
 {
     public static class DomainUtil
     {

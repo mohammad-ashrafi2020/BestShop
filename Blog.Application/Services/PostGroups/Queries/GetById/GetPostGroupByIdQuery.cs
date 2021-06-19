@@ -1,5 +1,5 @@
-﻿using Blog.Application.Common;
-using Blog.Application.Services.PostGroups.Queries.DTOs;
+﻿using Blog.Application.Services.PostGroups.Queries.DTOs;
+using Common.Application;
 
 namespace Blog.Application.Services.PostGroups.Queries.GetById
 {

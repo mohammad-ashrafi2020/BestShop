@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using _DomainUtils.Domain;
-using _DomainUtils.Exceptions;
-using _DomainUtils.Utils;
+using Common.Domain.Domain;
+using Common.Domain.Exceptions;
+using Common.Domain.Utils;
+using Shop.Domain.ProductCategories.ProductCategory.Rule;
 using Shop.Domain.ProductCategories.ProductCategoryAttributes;
-using Shop.Domain.ProductCategoryAgg.Rule;
 using Shop.Domain.ValueObjects;
 
 namespace Shop.Domain.ProductCategories.ProductCategory

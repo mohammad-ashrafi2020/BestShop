@@ -1,13 +1,9 @@
-﻿using Blog.Application.Common;
-using Blog.Infrastructure.Persistent.EF.Context;
+﻿using Blog.Infrastructure.Persistent.EF.Context;
 using framework;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Common.Application;
 
 namespace Blog.Application.Services.Posts.Commands.ToggleStatus
 {

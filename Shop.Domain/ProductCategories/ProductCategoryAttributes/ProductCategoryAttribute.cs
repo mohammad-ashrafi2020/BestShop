@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using _DomainUtils.Domain;
-using _DomainUtils.Exceptions;
+using Common.Domain.Domain;
+using Common.Domain.Exceptions;
 
 namespace Shop.Domain.ProductCategories.ProductCategoryAttributes
 {

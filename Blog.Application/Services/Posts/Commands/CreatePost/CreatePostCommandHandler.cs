@@ -2,11 +2,11 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Blog.Application.Common;
 using Blog.Application.Utilities;
 using Blog.Domain.Entities.BlogPostAggregate;
 using Blog.Domain.Entities.BlogPostAggregate.Rules;
 using Blog.Infrastructure.Persistent.EF.Context;
+using Common.Application;
 using framework;
 using framework.DateUtil;
 using framework.FileUtil;

@@ -1,5 +1,5 @@
 ﻿using System;
-using Blog.Application.Common;
+using Common.Application;
 using framework.Utilities;
 using Microsoft.AspNetCore.Http;
 

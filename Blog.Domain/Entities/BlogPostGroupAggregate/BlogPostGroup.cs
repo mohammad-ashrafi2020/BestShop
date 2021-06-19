@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using _DomainUtils.Domain;
-using _DomainUtils.Exceptions;
-using _DomainUtils.Utils;
 using Blog.Domain.Entities.BlogPostAggregate;
 using Blog.Domain.Entities.BlogPostGroupAggregate.Rules;
+using Common.Domain.Domain;
+using Common.Domain.Exceptions;
+using Common.Domain.Utils;
 
 namespace Blog.Domain.Entities.BlogPostGroupAggregate
 {

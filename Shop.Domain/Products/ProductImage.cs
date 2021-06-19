@@ -1,13 +1,13 @@
 ﻿using System;
-using _DomainUtils.Domain;
+using Common.Domain.Domain;
 
 namespace Shop.Domain.Products
 {
-    public class ProductImage:BaseEntity
+    public class ProductImage : BaseEntity
     {
         public ProductImage()
         {
-            
+
         }
         public ProductImage(long productId, string imageName)
         {
@@ -17,7 +17,7 @@ namespace Shop.Domain.Products
 
         public void EditImage(string imageName)
         {
-            ModifyDate=DateTime.Now;
+            ModifyDate = DateTime.Now;
             ImageName = imageName;
         }
         public long ProductId { get; private set; }

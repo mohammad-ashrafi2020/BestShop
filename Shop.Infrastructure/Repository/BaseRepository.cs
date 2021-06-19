@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using _DomainUtils.Domain;
-using _DomainUtils.Domain.Repository;
+using Common.Domain.Domain;
+using Common.Domain.Domain.Repository;
 using Microsoft.EntityFrameworkCore;
 using Shop.Infrastructure.EF.Context;
 

@@ -1,7 +1,7 @@
 ﻿using System;
-using _DomainUtils.Exceptions;
 using Blog.Domain.Entities.BlogPostGroupAggregate;
 using Blog.Domain.Entities.BlogPostGroupAggregate.Rules;
+using Common.Domain.Exceptions;
 using FluentAssertions;
 using NSubstitute;
 using Xunit;

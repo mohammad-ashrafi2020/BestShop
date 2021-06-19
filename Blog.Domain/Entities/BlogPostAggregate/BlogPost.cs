@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using _DomainUtils.Domain;
-using _DomainUtils.Exceptions;
-using _DomainUtils.Utils;
 using Blog.Domain.Entities.BlogPostAggregate.Rules;
 using Blog.Domain.Entities.BlogPostGroupAggregate;
+using Common.Domain.Domain;
+using Common.Domain.Exceptions;
+using Common.Domain.Utils;
 
 namespace Blog.Domain.Entities.BlogPostAggregate
 {

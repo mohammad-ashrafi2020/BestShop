@@ -1,10 +1,10 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Blog.Application.Common;
 using Blog.Application.Services.Posts.Queries.GetById;
 using Blog.Application.Utilities;
 using Blog.Domain.Entities.BlogPostAggregate.Rules;
 using Blog.Infrastructure.Persistent.EF.Context;
+using Common.Application;
 using framework;
 using framework.DateUtil;
 using framework.FileUtil;

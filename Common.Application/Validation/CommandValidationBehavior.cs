@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using _DomainUtils.Exceptions;
+using Common.Domain.Exceptions;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Blog.Application.Common.Validation
+namespace Common.Application.Validation
 {
     public class CommandValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {

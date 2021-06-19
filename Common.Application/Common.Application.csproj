@@ -4,4 +4,14 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="10.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Domain\Common.Domain.csproj" />
+    <ProjectReference Include="..\Framwork\framework.csproj" />
+  </ItemGroup>
+
 </Project>

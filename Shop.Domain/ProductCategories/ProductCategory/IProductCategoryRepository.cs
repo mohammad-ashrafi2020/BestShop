@@ -1,4 +1,4 @@
-﻿using _DomainUtils.Domain.Repository;
+﻿using Common.Domain.Domain.Repository;
 
 namespace Shop.Domain.ProductCategories.ProductCategory
 {

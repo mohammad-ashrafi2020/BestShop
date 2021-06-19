@@ -1,4 +1,4 @@
-﻿using Blog.Application.Common;
+﻿using Common.Application;
 using Microsoft.AspNetCore.Http;
 
 namespace Blog.Application.Services.Posts.Commands.EditPost
