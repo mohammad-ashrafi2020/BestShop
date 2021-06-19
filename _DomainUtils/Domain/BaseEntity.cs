@@ -4,7 +4,6 @@ namespace _DomainUtils.Domain
 {
     public class BaseEntity<TKey>
     {
-      
         public TKey Id { get; set; }
         public DateTime CreationDate { get; }
         public bool IsDelete { get; protected set; }
@@ -19,7 +18,6 @@ namespace _DomainUtils.Domain
         public void Recovery()
         {
             IsDelete = false;
-            DeleteDate = DateTime.Now;
         }
         public BaseEntity()
         {
@@ -44,7 +42,6 @@ namespace _DomainUtils.Domain
         public void Recovery()
         {
             IsDelete = false;
-            DeleteDate = DateTime.Now;
         }
         public BaseEntity()
         {

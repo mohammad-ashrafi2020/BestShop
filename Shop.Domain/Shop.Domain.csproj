@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Order\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\_DomainUtils\_DomainUtils.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -5,18 +5,18 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using _DomainUtils.Exceptions;
-using Blog.Infrastructure.Persistent.EF.Context;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Application.Common.Validation
 {
     public class CommandValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {
         private readonly IList<IValidator<TRequest>> _validators;
-        private readonly BlogContext _db;
+        private readonly DbContext _db;
 
-        public CommandValidationBehavior(IList<IValidator<TRequest>> validators, BlogContext db)
+        public CommandValidationBehavior(IList<IValidator<TRequest>> validators, DbContext db)
         {
             _validators = validators;
             _db = db;

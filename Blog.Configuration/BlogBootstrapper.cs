@@ -1,5 +1,4 @@
 ﻿using Blog.Application;
-using Blog.Application.Common.Validation;
 using Blog.Application.Services.PostGroups.Commands.TogglePostGroupStatus;
 using Blog.Application.Services.PostGroups.DomainServices;
 using Blog.Application.Services.Posts.DomainServices;
@@ -18,7 +17,7 @@ namespace Blog.Configuration
         {
             service.AddTransient<IEnglishTitleUniquenessChecker,EnglishTitleUniquenessChecker>();
             service.AddMediatR(typeof(TogglePostGroupStatusCommand).Assembly);
-            service.AddTransient(typeof(IPipelineBehavior<,>), typeof(CommandValidationBehavior<,>));
+            //service.AddTransient(typeof(IPipelineBehavior<,>), typeof(CommandValidationBehavior<,>));
             service.AddTransient<IPostSlugUniquenessChecker,PostSlugUniquenessChecker>();
             service.AddDbContext<BlogContext>(option =>
             {
