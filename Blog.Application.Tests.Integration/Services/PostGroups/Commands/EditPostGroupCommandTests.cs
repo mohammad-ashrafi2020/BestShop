@@ -6,6 +6,7 @@ using Blog.Application.Tests.Integration.Fixture.DataBase;
 using Blog.Domain.Entities.BlogPostGroupAggregate;
 using Blog.Domain.Entities.BlogPostGroupAggregate.Rules;
 using Blog.Infrastructure.Persistent.EF.Context;
+using Common.Application;
 using Common.Domain.Exceptions;
 using FluentAssertions;
 using framework;

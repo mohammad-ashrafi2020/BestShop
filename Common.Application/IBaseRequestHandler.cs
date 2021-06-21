@@ -1,5 +1,4 @@
-﻿using framework;
-using MediatR;
+﻿using MediatR;
 
 namespace Common.Application
 {

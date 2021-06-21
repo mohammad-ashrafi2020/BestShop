@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Blog.Application.Services.PostGroups.Queries.DTOs;
 using Blog.Infrastructure.Persistent.EF.Context;
 using Common.Application;
-using framework.Utilities;
+using Common.Core.Utilities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Application.Services.PostGroups.Queries.GetById

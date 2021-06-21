@@ -1,6 +1,6 @@
 ﻿using System;
 using Common.Application;
-using framework.Utilities;
+using Common.Core.Utilities;
 using Microsoft.AspNetCore.Http;
 
 namespace Blog.Application.Services.Posts.Commands.CreatePost

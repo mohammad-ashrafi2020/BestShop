@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using Common.Core.Utilities;
 using Common.Domain.Domain;
 using Common.Domain.Exceptions;
 using Common.Domain.Utils;
@@ -33,7 +34,7 @@ namespace Shop.Domain.ProductCategories.ProductCategory
 
 
             CategoryTitle = categoryTitle;
-            Slug = slug.Domain_ToSlug();
+            Slug = slug.ToSlug();
             MetaValue = metaValue;
             ImageName = imageName;
             ShowInMenu = showInMenu;
@@ -47,7 +48,7 @@ namespace Shop.Domain.ProductCategories.ProductCategory
 
 
             CategoryTitle = categoryTitle;
-            Slug = slug.Domain_ToSlug();
+            Slug = slug.ToSlug();
             ImageName = imageName;
             MetaValue = metaValue;
             ModifyDate = DateTime.Now;
@@ -69,7 +70,7 @@ namespace Shop.Domain.ProductCategories.ProductCategory
             if (string.IsNullOrEmpty(slug))
                 throw new InvalidDomainDataException("slug Is Null");
 
-            if (slug.Domain_IsUniCode())
+            if (slug.IsUniCode())
                 throw new InvalidDomainDataException("Slug فقط قادر به ذخیره  حروف انگلیسی می باشد");
 
             if (_slugChecker.IsUniq(slug))

@@ -5,7 +5,7 @@ using Blog.Application.Mapper;
 using Blog.Application.Services.Posts.Queries.DTOs;
 using Blog.Infrastructure.Persistent.EF.Context;
 using Common.Application;
-using framework.Enums;
+using Common.Core.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Application.Services.Posts.Queries.GetAllByFilter

@@ -7,11 +7,10 @@ using Blog.Domain.Entities.BlogPostAggregate;
 using Blog.Domain.Entities.BlogPostAggregate.Rules;
 using Blog.Infrastructure.Persistent.EF.Context;
 using Common.Application;
-using framework;
-using framework.DateUtil;
-using framework.FileUtil;
-using framework.SecurityUtil;
-using framework.Utilities;
+using Common.Application.FileUtil;
+using Common.Application.SecurityUtil;
+using Common.Core.DateUtil;
+using Common.Core.Utilities;
 
 namespace Blog.Application.Services.Posts.Commands.CreatePost
 {

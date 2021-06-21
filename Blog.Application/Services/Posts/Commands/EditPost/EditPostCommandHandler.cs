@@ -5,11 +5,11 @@ using Blog.Application.Utilities;
 using Blog.Domain.Entities.BlogPostAggregate.Rules;
 using Blog.Infrastructure.Persistent.EF.Context;
 using Common.Application;
-using framework;
-using framework.DateUtil;
-using framework.FileUtil;
-using framework.SecurityUtil;
-using framework.Utilities;
+using Common.Application.FileUtil;
+using Common.Application.SecurityUtil;
+using Common.Core.DateUtil;
+using Common.Core.Utilities;
+using Common.Domain.Utils;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

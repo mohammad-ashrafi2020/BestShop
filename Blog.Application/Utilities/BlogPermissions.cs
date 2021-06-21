@@ -2,12 +2,12 @@
 {
     public enum BlogPermissions
     {
-        BlogAdminPage,
-        AddPost,
-        EditPost,
-        DeletePost,
-        AddGroup,
-        EditGroup,
-        DeleteGroup
+        BlogAdminPage = 0,
+        AddPost = 1,
+        EditPost = 2,
+        DeletePost = 3,
+        AddGroup = 4,
+        EditGroup = 5,
+        DeleteGroup = 6
     }
 }

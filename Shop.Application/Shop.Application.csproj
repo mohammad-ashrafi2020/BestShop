@@ -6,6 +6,19 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Common.Application\Common.Application.csproj" />
+    <ProjectReference Include="..\Common.Core\Common.Core.csproj" />
+    <ProjectReference Include="..\Shop.Domain\Shop.Domain.csproj" />
+    <ProjectReference Include="..\Shop.Infrastructure\Shop.Infrastructure.EF.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DTOs\" />
+    <Folder Include="Services\ProductCategories\ProductCategoryAttribute\Commands\" />
+    <Folder Include="Services\ProductCategories\ProductCategoryAttribute\Queries\" />
+    <Folder Include="Services\ProductCategories\ProductCategory\Commands\Create\" />
+    <Folder Include="Services\ProductCategories\ProductCategory\Commands\Edit\" />
+    <Folder Include="Services\ProductCategories\ProductCategory\Commands\ToggleStatus\" />
+    <Folder Include="Utilities\" />
   </ItemGroup>
 
 </Project>

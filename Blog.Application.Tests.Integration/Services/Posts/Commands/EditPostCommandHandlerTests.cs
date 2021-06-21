@@ -5,6 +5,7 @@ using Blog.Application.Tests.Integration.Fixture.DataBase;
 using Blog.Domain.Entities.BlogPostAggregate;
 using Blog.Domain.Entities.BlogPostAggregate.Rules;
 using Blog.Infrastructure.Persistent.EF.Context;
+using Common.Application;
 using FluentAssertions;
 using framework;
 using NSubstitute;

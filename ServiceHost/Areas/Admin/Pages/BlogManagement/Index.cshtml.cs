@@ -10,9 +10,8 @@ using Blog.Application.Services.Posts.Queries.DTOs;
 using Blog.Application.Services.Posts.Queries.GetAllByFilter;
 using Blog.Application.Services.Posts.Queries.GetById;
 using Blog.Application.ViewModels.Posts;
-using framework;
-using framework.DateUtil;
-using framework.Enums;
+using Common.Application;
+using Common.Core.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,8 +19,8 @@ namespace ServiceHost.Areas.Admin.Pages.BlogManagement
 {
     public class IndexModel : RazorBase
     {
-        private IMediator _mediator;
-        private IRenderViewToString _renderView;
+        private readonly IMediator _mediator;
+        private readonly IRenderViewToString _renderView;
         public IndexModel(IApplicationContext context, ILogger<IndexModel> logger, IMediator mediator, IRenderViewToString renderView) : base(context, logger)
         {
             _mediator = mediator;
