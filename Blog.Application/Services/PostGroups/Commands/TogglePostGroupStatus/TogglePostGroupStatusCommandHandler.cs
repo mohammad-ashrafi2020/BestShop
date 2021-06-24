@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Blog.Infrastructure.Persistent.EF.Context;
 using Common.Application;
-using framework;
 using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Application.Services.PostGroups.Commands.TogglePostGroupStatus

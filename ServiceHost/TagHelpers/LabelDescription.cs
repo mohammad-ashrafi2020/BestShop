@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Razor.TagHelpers;
 
-namespace ServiceHost.TagHelpers
+namespace AdminPanel.TagHelpers
 {
     [HtmlTargetElement("description", TagStructure = TagStructure.NormalOrSelfClosing)]
     public class LabelDescription : TagHelper

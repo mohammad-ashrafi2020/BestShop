@@ -1,14 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
+﻿using System.Linq;
+using System.Text.Encodings.Web;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Encodings.Web;
 
-namespace ServiceHost.TagHelpers
+namespace AdminPanel.TagHelpers
 {
     [HtmlTargetElement("breadcrumb", TagStructure = TagStructure.NormalOrSelfClosing)]
     public class AdminBreadcrumb : TagHelper

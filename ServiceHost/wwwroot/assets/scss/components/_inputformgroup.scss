@@ -1,0 +1,252 @@
+﻿.input-group {
+    width: 100%;
+    margin-bottom: 20px;
+
+    .form-line {
+        display: inline-block;
+        width: 100%;
+        border-bottom: 1px solid #ddd;
+        position: relative;
+
+        &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 100%;
+            bottom: -2px;
+            @include transform(scaleX(0));
+            @include transition(0.25s ease-in);
+            border-bottom: 2px solid #1f91f3;
+        }
+
+        + .input-group-addon {
+            padding-right: 0;
+            padding-left: 10px;
+            position: absolute;
+            right: 0;
+            top: 10px;
+        }
+    }
+
+    .help-info {
+        color: $grey-500;
+        float: right;
+        font-size: 12px;
+        margin-top: 5px;        
+    }
+    label.error {
+        font-weight: $font-weight-400;
+        font-size: 12px;
+        display: block;
+        margin-top: 5px;        
+        color: $danger;
+    }
+    .form-line.error {
+        &:after {
+            border-bottom: 2px solid $danger;
+        }
+    }
+    .form-line.success {
+        &:after {
+            border-bottom: 2px solid $success;
+        }
+    }
+    .form-line.warning {
+        &:after {
+            border-bottom: 2px solid $warning;
+        }
+    }
+    .form-line.focused {
+        &:after {
+            @include transform(scaleX(1));
+        }
+
+        .form-label {
+            bottom: 25px;
+            left: 0;
+            font-size: 12px;
+        }
+    }
+
+    .input-group-addon {
+        border: none;
+        background-color: transparent;
+        padding-left: 0;
+        font-weight: $font-weight-700;
+        position: absolute;
+        top: 10px;
+        z-index: 999;
+        + .form-line{
+            padding-left: 25px;
+        }
+
+        .material-icons {
+            font-size: 18px;
+            color: $grey-800;
+        }
+    }
+
+    input[type="text"],
+    .form-control {
+        @include box-shadow(none);
+        border: none;
+        padding-left: 0;
+        width: 100%;
+    }
+
+    .form-control {
+        &:focus {
+            @include box-shadow(none !important);
+        }
+    }
+}
+
+.input-group.input-group-sm {
+    .input-group-addon {
+        i {
+            font-size: 14px;
+        }
+    }
+
+    .form-control {
+        font-size: 12px;
+    }
+}
+.input-group.input-group-lg {
+
+    .input-group-addon {
+        i {
+            font-size: 26px;
+        }
+    }
+
+    .form-control {
+        font-size: 18px;
+    }
+}
+
+.form-control-label {
+    text-align: right;
+
+    label {
+        margin-top: 8px;
+    }
+}
+
+.form-horizontal {
+    .form-group {
+        margin-bottom: 0;
+    }
+}
+
+.form-group {
+    width: 100%;
+    margin-bottom: 25px;
+
+    .form-control {
+        @include border-radius(0);
+        width: 100%;
+        border: none;
+        box-shadow: none;        
+        padding-left: 0;
+    }
+    .help-info {
+        color: $grey-500;
+        float: right;
+        font-size: 12px;
+        margin-top: 5px;        
+    }
+    label.error {
+        font-weight: $font-weight-400;
+        color: $danger;
+        font-size: 12px;
+        display: block;
+        margin-top: 5px;
+    }
+    .form-line {
+        width: 100%;
+        position: relative;
+        border-bottom: 1px solid #ddd;
+
+        &:after {
+            @include transform(scaleX(0));
+            @include transition(0.25s ease-in);
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 0;
+            bottom: -1px;            
+            border-bottom: 2px solid #1f91f3;
+        }
+
+        .form-label {
+            @include transition(all .2s ease-in-out);
+            font-weight: $font-weight-400;
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            left: 0;
+            cursor: text;
+        }
+    }
+
+    .form-line.error {
+        &:after {
+            border-bottom: 2px solid $danger;
+        }
+    }
+    .form-line.success {
+        &:after {
+            border-bottom: 2px solid $success;
+        }
+    }
+    .form-line.warning {
+        &:after {
+            border-bottom: 2px solid $warning;
+        }
+    }
+    .form-line.focused {
+        &:after {
+            @include transform(scaleX(1));
+        }
+
+        .form-label {
+            top: -10px;
+            left: 0;
+            font-size: 12px;
+        }
+    }
+}
+
+.form-group-sm {
+    .form-label {
+        font-size: 12px;
+    }
+
+    .form-line.focused {
+        .form-label {
+            bottom: 20px;
+            font-size: 10px;
+        }
+    }
+}
+
+.form-group-lg {
+    .form-label {
+        font-size: 18px;
+    }
+
+    .form-line.focused {
+        .form-label {
+            bottom: 35px;
+            font-size: 12px;
+        }
+    }
+}
+
+.form-control[disabled],
+.form-control[readonly],
+fieldset[disabled] .form-control {
+    background-color: transparent;
+}

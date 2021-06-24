@@ -1,5 +1,4 @@
 ﻿using Blog.Infrastructure.Persistent.EF.Context;
-using framework;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;

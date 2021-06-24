@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Common.Core;
 
-namespace framework
+
+
+
+namespace Common.Core
 {
     public class BasePaging
     {
@@ -23,6 +28,4 @@ namespace framework
             StartPage = (currentPage - 4 <= 0) ? 1 : currentPage - 4;
         }
     }
-
-
 }

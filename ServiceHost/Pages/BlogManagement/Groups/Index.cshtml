@@ -1,0 +1,92 @@
+﻿@page "{handler?}"
+@model AdminPanel.Pages.BlogManagement.Groups.IndexModel
+@{
+    ViewData["title"] = "دسته بندی بلاگ";
+    ViewData["selected"] = "BlogGroups";
+}
+<popupLink class="btn btn-success mb-2"
+           title="گروه جدید" url="/admin/BlogManagement/groups/ShowInsertModal?parent=null">
+    افزودن گروه
+</popupLink>
+<div class="box box-primary">
+    <div class="box-body table-responsive no-padding" onclick="">
+        <table class="table table-bordered bg-white text-center">
+            <thead>
+                <tr>
+                    <th>عنوان</th>
+                    <th>زیر گروه</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Groups.Where(g => g.ParentId == null))
+                {
+                    <tr>
+                        <td>@item.GroupTitle (<small>@item.EnglishGroupTitle</small>)</td>
+                        <td>
+                            @if (Model.Groups.Any(g => g.ParentId == item.Id))
+                            {
+
+                                @foreach (var sub in Model.Groups.Where(g => g.ParentId == item.Id))
+                                {
+                                    <ul class=" table-bordered" style="box-shadow: 0 0 5px rgba(27, 27, 27, 0.12); padding-right: 5px;">
+                                        <li>
+                                            <div class="text-right" style="padding: 5px; margin: 5px">
+                                                @sub.GroupTitle (<small>@sub.EnglishGroupTitle</small>)
+                                                @if (sub.IsActive)
+                                                {
+                                                    <Question url="/Admin/BlogManagement/groups/ToggleStatus?id=@sub.Id" class="btn btn-sm no-margin btn-danger">
+                                                        حذف
+                                                    </Question>
+                                                }
+                                                else
+                                                {
+                                                    <Question url="/Admin/BlogManagement/groups/ToggleStatus?id=@sub.Id" class="btn btn-sm no-margin btn-primary">
+                                                        فعال سازی
+                                                    </Question>
+                                                }
+
+                                                <popupLink class="btn btn-primary btn-sm"
+                                                           title="ویرایش گروه" url="/admin/BlogManagement/groups/ShowEditModal?id=@sub.Id">
+                                                    ویرایش
+                                                </popupLink>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                }
+                            }
+                        <td>
+                            @if (item.IsActive)
+                            {
+                                <Question url="/Admin/BlogManagement/groups/ToggleStatus?id=@item.Id" class="btn btn-sm no-margin btn-danger">
+                                    حذف
+                                </Question>
+                            }
+                            else
+                            {
+                                <Question url="/Admin/BlogManagement/groups/ToggleStatus?id=@item.Id" class="btn btn-sm no-margin btn-primary">
+                                    فعال سازی
+                                </Question>
+                            }
+                            <popupLink class="btn btn-primary btn-sm" title="ویرایش گروه"
+                                       url="/admin/BlogManagement/groups/ShowEditModal?id=@item.Id">
+                                ویرایش
+                            </popupLink>
+
+                            <popupLink class="btn btn-success btn-sm"
+                                       title="افزودن زیر گروه به @item.GroupTitle"
+                                       url="/admin/BlogManagement/groups/ShowInsertModal?parent=@item.Id">
+                                افزودن زیر گروه
+                            </popupLink>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts
+{
+
+}

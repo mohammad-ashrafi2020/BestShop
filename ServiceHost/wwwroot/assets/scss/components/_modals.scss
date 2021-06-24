@@ -1,0 +1,28 @@
+﻿.modal {
+    
+}
+
+@each $key, $val in $colors {
+    .modal-col-#{$key} {
+        background-color: $val;
+
+        .modal-body,
+        .modal-title {
+            color: #fff !important;
+        }
+
+        .modal-footer {
+            background-color: rgba(0,0,0,0.12);
+
+            .btn-link {
+                color: #fff !important;
+
+                &:hover,
+                &:active,
+                &:focus {
+                    background-color: rgba(0,0,0,0.12);
+                }
+            }
+        }
+    }
+}

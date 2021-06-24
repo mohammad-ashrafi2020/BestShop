@@ -1,0 +1,139 @@
+﻿$white: #ffffff;
+$blue-grey-900: #263238 !default;
+$orange-300: #ffe700 !default;
+$orange-500: #ffc100 !default;
+
+
+.theme-orange .profile-page .profile-sub-header .box-list ul li a:hover,
+.theme-orange .menu > ul > li > ul.normal-sub > li a:hover,
+.theme-orange .menu > ul > li > ul > li > ul > li a:hover {
+  background-color: $orange-500;
+}
+
+.theme-orange{
+
+    .navbar-header{
+        background: $blue-grey-900;        
+    }
+
+    .navbar-brand {
+        color: $white;
+        font-weight: 700;
+
+        &:hover, &:active, &:focus {
+            color:$white;
+        }
+    }
+
+    .navbar{
+        background-color:$white;
+    }
+
+    .nav{
+        > li{
+            > a {
+                color:$blue-grey-900;
+
+                &:hover, &:focus {
+                    background-color: transparent;
+                }
+            }
+        }
+
+        .open{
+            > a {
+                background-color: transparent;
+
+                &:hover, &:focus {
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+
+    .bars {
+        color:$orange-500;
+    }
+
+    .sidebar{
+        .user-info{
+            background: linear-gradient(45deg, $orange-500, $orange-300);
+            
+            .info-container{
+                color: inherit;
+            }
+        }
+        .menu{
+            .list{
+                li.active {
+                    background-color: transparent;
+
+                    >:first-child{
+
+                        i, span{
+                            color:$orange-500;
+                        }
+                    }
+                }
+
+                .toggled, .ml-menu {
+                    background-color: #f6f6f6;
+                    border-left: 3px solid;
+                    border-bottom: none;
+                    border-top: none;               
+                    border-color: $orange-500;
+                }
+            }
+        }
+    }
+
+    .inbox-widget{
+        .inbox-inner{
+            &:hover{
+                .inbox-img{
+                    img {
+                        border: 2px solid $orange-500;
+                        transition: all 150ms linear;
+                    }
+                }
+            }
+        }
+    }    
+    .nav-tabs{
+        .nav-link.active {
+            border-bottom: 1px solid $orange-500 !important;
+            color:$orange-500 !important;
+			font-weight: 700;
+        }
+    }
+
+    .blog-page{
+        .single-blog-post{
+            .img-holder{
+                .date-box{
+                    background-color:$orange-500;
+                }
+            }
+        }
+    }
+
+    .notify{
+        .heartbit {
+            border-color:$orange-500;            
+        }
+        .point {
+            background-color:$orange-500;
+        }
+    }
+
+    .authentication{        
+        background: url(../images/orange_loginbg.jpg) no-repeat center center fixed;
+
+        .card{
+            .header{
+                background: linear-gradient(45deg, $orange-500, $orange-300);
+            }
+        }
+    }
+}
+

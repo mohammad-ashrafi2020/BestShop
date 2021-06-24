@@ -19,7 +19,7 @@ namespace Shop.Domain.ProductCategories.ProductCategory
         }
         public string CategoryTitle { get; private set; }
         public string Slug { get; private set; }
-        public MetaValue MetaValue { get; set; }
+        public MetaValue MetaValue { get; private set; }
         public string ImageName { get; private set; }
         public int? ParentId { get; private set; }
         public bool ShowInMenu { get; private set; }

@@ -4,7 +4,6 @@ using Blog.Domain.Entities.BlogPostGroupAggregate;
 using Blog.Domain.Entities.BlogPostGroupAggregate.Rules;
 using Blog.Infrastructure.Persistent.EF.Context;
 using Common.Application;
-using framework;
 using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Application.Services.PostGroups.Commands.CreateGroup

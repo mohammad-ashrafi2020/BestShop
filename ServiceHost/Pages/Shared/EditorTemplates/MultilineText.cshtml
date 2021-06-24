@@ -1,8 +1,8 @@
 ﻿@model string
 
-<div class="text-dark font-weight-bold">
-    <div class="form-element-row mb-0">
-        <textarea asp-for="@Model" class="input-element" rows="3"></textarea>
-    </div>
+<div class="form-input">
+    <label asp-for="@Model"></label>
+
+    <textarea asp-for="@Model" class="form-control" rows="3"></textarea>
     <span asp-validation-for="@Model" class="text-danger"></span>
 </div>

@@ -28,6 +28,16 @@ namespace Shop.Infrastructure.EF.Repository
             await Context.Set<T>().AddAsync(entity);
         }
 
+        public  void Update(T entity)
+        {
+            Context.Update(entity);
+        }
+
+        public async Task<int> Save()
+        {
+            return await Context.SaveChangesAsync();
+        }
+
         public async Task<bool> Exists(Expression<Func<T, bool>> expression)
         {
             return await Context.Set<T>().AnyAsync(expression);

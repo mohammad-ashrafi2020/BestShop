@@ -1,0 +1,58 @@
+﻿.nav-tabs {
+    //border-bottom: 2px solid #eee;
+
+    > li {
+        position: relative;
+        //top: 3px;
+        left:0px;
+
+        > a {
+            border: none !important;
+            color: #999 !important;
+            @include border-radius(0);
+
+            &:hover,
+            &:active,
+            &:focus {
+                background-color: transparent !important;
+            }
+            .material-icons {
+                position: relative;
+                top: 7px;
+                margin-bottom: 8px;
+            }
+        }
+    }
+
+    li.active {
+        a {
+            color: #222 !important;
+
+            &:hover,
+            &:active,
+            &:focus {
+                background-color: transparent !important;
+            }
+
+            &:before {
+                @include transform(scaleX(1));
+            }
+        }
+    }
+
+    + .tab-content {
+        padding: 15px 0;
+    }
+}
+
+@each $key, $val in $colors {
+    .nav-tabs.tab-col-#{$key} {
+        > li {
+            > a {
+                &:before {
+                    border-bottom: 2px solid $val;
+                }
+            }
+        }
+    }
+}

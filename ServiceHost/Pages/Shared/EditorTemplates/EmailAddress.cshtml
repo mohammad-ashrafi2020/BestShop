@@ -1,8 +1,7 @@
 ﻿@model string
+<div class="form-input">
+    <label asp-for="@Model"></label>
 
-<div class="text-dark font-weight-bold">
-    <div class="form-element-row mb-0">
-        <input type="email" class="input-element" asp-for="@Model">
-    </div>
+    <input type="email" class="input-element" asp-for="@Model">
     <span asp-validation-for="@Model" class="text-danger"></span>
 </div>

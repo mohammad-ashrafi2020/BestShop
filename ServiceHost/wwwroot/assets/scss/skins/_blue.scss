@@ -1,0 +1,108 @@
+﻿$white: #ffffff;
+$blue-500: #2196f3 !default;
+
+.theme-blue .profile-page .profile-sub-header .box-list ul li a:hover,
+.theme-blue .menu > ul > li > ul.normal-sub > li a:hover,
+.theme-blue .menu > ul > li > ul > li > ul > li a:hover {
+  background-color: $blue-500;
+}
+
+.theme-blue{
+
+    .navbar-brand {
+        color: $white;
+
+        &:hover, &:active, &:focus {
+            color: $white;
+        }
+    }
+
+    .navbar{
+        background-color:$blue-500;
+    }
+
+    .nav{
+        > li{
+            > a {
+                color:$white;
+
+                &:hover, &:focus {
+                    background-color: transparent;
+                }
+            }
+        }
+
+        .open{
+            > a {
+                background-color: transparent;
+
+                &:hover, &:focus {
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+
+    .bars {
+        color:$white;
+    }
+
+    .sidebar{
+        .menu{
+            .list{
+                li.active {
+                    background-color: transparent;
+
+                    >:first-child{
+
+                        i, span{
+                            color:$blue-500;
+                        }
+                    }
+                }
+                .toggled, .ml-menu {
+                    background-color: #f6f6f6;
+                    border-left: 3px solid;
+                    border-bottom: none;
+                    border-top: none;               
+                    border-color: $blue-500;
+                }
+            }
+        }
+    }
+
+    .inbox-widget{
+        .inbox-inner{
+            &:hover{
+                .inbox-img{
+                    img {
+                        border: 2px solid $blue-500;
+                        transition: all 150ms linear;
+                    }
+                }
+            }
+        }
+    }
+  
+
+    .nav-tabs{
+        .nav-link.active {
+            border-bottom: 1px solid $blue-500 !important;
+            color:$blue-500 !important;
+			font-weight: 700;
+        }
+    }
+
+    .blog-page{
+        .single-blog-post{
+            .img-holder{
+                .date-box{
+                    background-color:$blue-500;
+                }
+            }
+        }
+    }
+}
+
+
+

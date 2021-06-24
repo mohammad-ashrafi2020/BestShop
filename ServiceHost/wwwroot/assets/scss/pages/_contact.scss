@@ -1,0 +1,117 @@
+.contact{
+    ul.list-unstyled{
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .btn-group{
+        box-shadow: none;
+    }
+
+    .c_list{
+        background: $white;
+        padding: 10px 2px;
+        margin-bottom: 1px;
+        position: relative;
+
+        &:hover{
+            background: $orange-50;
+
+            .action_btn{
+                @extend .displayblock;                
+            }
+        }
+
+        .action_btn{
+            display: none;
+            position: absolute;
+            right: 50px;
+            top: 17px;
+            .btn{
+                box-shadow: none;
+            }
+        }
+
+        .control{
+            @extend .align-center;
+            float: left;            
+            width: 50px;            
+            .checkbox{
+                label{
+                    margin-bottom: 3px;
+                    margin-top: 4px;
+                }
+            }
+        }
+
+        .avatar{
+            @extend .m-r-20;
+            float: left;
+            img{
+                width: 45px;
+                margin-top: 4px;
+            }
+        }
+
+        .u_name{
+            float: left;
+
+            .c_name{
+                @extend .m-b-0;
+                @extend .font-17;
+                margin-top: 3px; 
+                font-weight: 600;
+            }            
+        }
+
+        .email{            
+            @extend .m-b-5;
+            @extend .m-t-0;
+            @extend .displayblock;
+            a{               
+               &:hover{
+                   text-decoration: none;
+               } 
+            }
+            i{
+                @extend .font-15;                
+                @extend .align-center;
+                width: 25px;
+            }
+        }
+
+        .phone{            
+            @extend .m-b-0;
+            margin-top: 7px;            
+            font-weight: normal;
+            color: $grey-600;
+
+            i{
+                width: 20px;
+                font-size: 15px;
+            }
+        }
+
+        address{
+            @extend .m-b-0;
+
+            i{                
+                @extend .font-15;
+                @extend .align-center;
+                width: 25px;
+            }
+        }
+
+        .header-dropdown{            
+            float: right;
+            margin-top: 8px;
+            margin-right: 10px;
+
+            .dropdown{
+                .dropdown-toggle{
+                    @extend .inlineblock;
+                    padding: 10px;                    
+                }
+            }
+        }
+    }
+}

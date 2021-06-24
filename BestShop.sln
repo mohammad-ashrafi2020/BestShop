@@ -21,9 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Domain.Tests.Unit", "B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Application.Tests.Integration", "Blog.Application.Tests.Integration\Blog.Application.Tests.Integration.csproj", "{253DBDD1-BF0B-40C9-A839-DF65A3C70CF7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EndPoints", "EndPoints", "{FD5981D8-6590-45CA-8F24-AE50E82EAC2B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_EndPoints", "_EndPoints", "{FD5981D8-6590-45CA-8F24-AE50E82EAC2B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceHost", "ServiceHost\ServiceHost.csproj", "{629A62CA-A02D-400B-AE20-65F0FBC189F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminPanel", "ServiceHost\AdminPanel.csproj", "{629A62CA-A02D-400B-AE20-65F0FBC189F5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShopManagement", "ShopManagement", "{463D7723-3C1D-4CCF-B779-B2348C47F5E6}"
 EndProject
@@ -35,7 +35,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Domain", "Shop.Domain\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Infrastructure.EF", "Shop.Infrastructure\Shop.Infrastructure.EF.csproj", "{BD4C66D3-DA54-429F-982C-ABF9F4AB666D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{0E9E22C6-DA0A-4D03-92BE-73AED501B774}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Common", "_Common", "{0E9E22C6-DA0A-4D03-92BE-73AED501B774}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Application", "Common.Application\Common.Application.csproj", "{529B227B-1022-4938-8D44-058E2467E58C}"
 EndProject
@@ -45,7 +45,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Application", "Shop.Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Query", "Shop.Query\Shop.Query.csproj", "{9F102CC5-A310-422F-9188-B3FD73D877AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Core", "Common.Core\Common.Core.csproj", "{03745DDD-2C7E-4E0C-B0B2-D3B859195F39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Core", "Common.Core\Common.Core.csproj", "{03745DDD-2C7E-4E0C-B0B2-D3B859195F39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Configuration", "Shop.Configuration\Shop.Configuration.csproj", "{A367353B-9EF1-4161-AD44-60A22C921E48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -109,6 +111,10 @@ Global
 		{03745DDD-2C7E-4E0C-B0B2-D3B859195F39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03745DDD-2C7E-4E0C-B0B2-D3B859195F39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03745DDD-2C7E-4E0C-B0B2-D3B859195F39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A367353B-9EF1-4161-AD44-60A22C921E48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A367353B-9EF1-4161-AD44-60A22C921E48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A367353B-9EF1-4161-AD44-60A22C921E48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A367353B-9EF1-4161-AD44-60A22C921E48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -132,6 +138,7 @@ Global
 		{8E901A80-1A51-4108-8E72-43FC20CD28AD} = {B63BD8C6-1808-4DD8-9132-0C53280AF08D}
 		{9F102CC5-A310-422F-9188-B3FD73D877AE} = {B63BD8C6-1808-4DD8-9132-0C53280AF08D}
 		{03745DDD-2C7E-4E0C-B0B2-D3B859195F39} = {0E9E22C6-DA0A-4D03-92BE-73AED501B774}
+		{A367353B-9EF1-4161-AD44-60A22C921E48} = {B63BD8C6-1808-4DD8-9132-0C53280AF08D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9FB5AF65-0DAC-411D-9428-4342FF29D157}

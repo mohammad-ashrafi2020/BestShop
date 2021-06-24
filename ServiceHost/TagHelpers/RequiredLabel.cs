@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Razor.TagHelpers;
 
-namespace ServiceHost.TagHelpers
+namespace AdminPanel.TagHelpers
 {
     [HtmlTargetElement("required", TagStructure = TagStructure.Unspecified)]
     public class RequiredLabel : TagHelper

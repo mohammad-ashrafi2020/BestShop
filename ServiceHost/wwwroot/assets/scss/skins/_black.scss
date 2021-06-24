@@ -1,0 +1,118 @@
+﻿$white: #ffffff;
+$black-900: #181a1b !default;
+$cyan-400: #26c6da !default;
+
+.theme-black .profile-page .profile-sub-header .box-list ul li a:hover,
+.theme-black .menu > ul > li > ul.normal-sub > li a:hover,
+.theme-black .menu > ul > li > ul > li > ul > li a:hover {
+  background-color: $black-900;
+}
+
+.theme-black{
+
+    .navbar-brand {
+        color: $white;
+
+        &:hover, &:active, &:focus {
+            color: $white;
+        }
+    }
+
+    .navbar{
+        background-color:$black-900;
+    }
+
+    .nav{
+        > li{
+            > a {
+                color:$white;
+
+                &:hover, &:focus {
+                    background-color: transparent;
+                }
+            }
+        }
+
+        .open{
+            > a {
+                background-color: transparent;
+
+                &:hover, &:focus {
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+
+    .bars {
+        color:$white;
+    }
+
+    .sidebar{
+        .menu{
+            .list{
+                li.active {
+                    background-color: transparent;
+
+                    >:first-child{
+
+                        i, span{
+                            color:$cyan-400;
+                        }
+                    }
+                }
+                .toggled, .ml-menu {
+                    background-color: #f6f6f6;
+                    border-left: 3px solid;
+                    border-bottom: none;
+                    border-top: none;               
+                    border-color: $cyan-400;
+                }
+            }
+        }
+
+        .user-info {
+            background: url(../../assets/images/black_profile_bg.jpg) no-repeat no-repeat;
+        }
+    }
+
+    .inbox-widget{
+        .inbox-inner{
+            &:hover{
+                .inbox-img{
+                    img {
+                        border: 2px solid $black-900;
+                        transition: all 150ms linear;
+                    }
+                }
+            }
+        }
+    }
+
+    .nav-tabs{
+        .nav-link.active {
+            border-bottom: 1px solid $black-900 !important;
+            color:$black-900 !important;
+			font-weight: 700;
+        }
+    }
+
+    .blog-page{
+        .single-blog-post{
+            .img-holder{
+                .date-box{
+                    background-color:$black-900;
+                }
+            }
+        }
+    }
+
+    .notify{
+        .heartbit {
+            border-color:$cyan-400;
+        }
+        .point {
+            background-color:$cyan-400;
+        }
+    }
+}

@@ -49,7 +49,6 @@ namespace Blog.Application.Services.Posts.Queries.GetAllByFilter
                 Search = request.Search,
                 Posts = await result.Skip(skip).Take(request.Take).ToListAsync(cancellationToken: cancellationToken)
             };
-            model.GeneratePaging(result, request.Take, request.PageId);
             return model;
         }
 

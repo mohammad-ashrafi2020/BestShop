@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Domain.Domain;
 using Common.Domain.Exceptions;
+using Shop.Domain.Products.ProductPictures;
 using Shop.Domain.ValueObjects;
 
 namespace Shop.Domain.Products
@@ -16,7 +17,7 @@ namespace Shop.Domain.Products
         public MetaValue MetaValue { get; private set; }
         public string ImageName { get; private set; }
         public string BitMapImageName { get; private set; }
-        public ICollection<ProductImage> ProductImages { get; set; }
+        public ICollection<ProductPicture> ProductImages { get; set; }
 
 
 
@@ -31,7 +32,6 @@ namespace Shop.Domain.Products
             MetaValue = metaValue;
             ImageName = imageName ?? "Default.png";
             BitMapImageName = bitMapImageName ?? "Default.png";
-            ProductImages = new List<ProductImage>();
         }
         public void Edit(string englishName, string persianName, string shortDescription, string fullDescription, MetaValue metaValue, string imageName, string bitMapImageName)
         {
@@ -55,17 +55,6 @@ namespace Shop.Domain.Products
             BitMapImageName = bitMapImageName;
             ModifyDate = DateTime.Now;
         }
-
-        public void DeleteGalleryImage(Guid imageId)
-        {
-            var image = ProductImages.First(i => i.Id == imageId);
-            image.Delete();
-        }
-        public void AddGalleryImage(string imageName)
-        {
-            ProductImages.Add(new ProductImage(Id,imageName));
-        }
-
 
         private static void Validate(string englishName, string persianName, string shortDescription, string fullDescription)
         {

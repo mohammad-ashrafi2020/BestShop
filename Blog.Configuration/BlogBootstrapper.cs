@@ -17,8 +17,9 @@ namespace Blog.Configuration
         {
             service.AddTransient<IEnglishTitleUniquenessChecker,EnglishTitleUniquenessChecker>();
             service.AddMediatR(typeof(TogglePostGroupStatusCommand).Assembly);
-            //service.AddTransient(typeof(IPipelineBehavior<,>), typeof(CommandValidationBehavior<,>));
             service.AddTransient<IPostSlugUniquenessChecker,PostSlugUniquenessChecker>();
+
+            service.AddTransient<DbContext, BlogContext>();
             service.AddDbContext<BlogContext>(option =>
             {
                 option.UseSqlServer(connectionString,

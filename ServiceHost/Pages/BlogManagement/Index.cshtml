@@ -1,0 +1,112 @@
+﻿@page "{handler?}"
+@using Common.Core.DateUtil
+@model AdminPanel.Pages.BlogManagement.IndexModel
+@{
+    ViewData["title"] = "بلاگ";
+    ViewData["selected"] = "blogs";
+}
+<popupLink class="btn btn-success waves-effect  mb-2"
+           title="پست جدید" url="/admin/BlogManagement/ShowAddPage">افزودن پست</popupLink>
+
+<div class="card shadow-lg">
+    <form id="filter" method="get">
+        <input type="hidden" name="pageId" id="pageId" value="" />
+        <div class="header">
+            <div class="float-left">
+                <a class="btn bg-red waves-effect ">
+                    حذف
+                </a>
+                <button type="submit" class="btn   waves-effect bg-light-blue ">
+                    فیلتر
+                </button>
+            </div>
+        </div>
+        <div class="body" style="">
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <input type="text" name="title" class="form-control" placeholder="عنوان پست" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-control show-tick" name="type" data-live-search="true">
+                        <option value="all">همه</option>
+                        <option value="articles">مقالات</option>
+                        <option value="news">اخبار</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<div class="card">
+    <div class="body table-responsive no-padding">
+        <table class="table table-bordered bg-white text-center">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>عنوان</th>
+                    <th>نویسنده</th>
+                    <th>آخرین بروزرسانی</th>
+                    <th>وضعیت</th>
+                    <th>پست ویژه</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.FilterDto.Posts)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Title</td>
+                        <td>@item.AuthorName</td>
+                        <td>@item.UpdateDate.ToPersianDateTime()</td>
+                        <td>
+                            @if (item.IsActive)
+                            {
+                                <span class="label label-success">فعال</span>
+                            }
+                            else
+                            {
+                                <span class="label label-danger">غیرفعال</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.IsSpecial)
+                            {
+                                <span class="label label-success">بله</span>
+                            }
+                            else
+                            {
+                                <span class="label label-danger">خیر</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.IsActive)
+                            {
+                                <DeleteItem url="/admin/BlogManagement/ToggleStatus?id=@item.Id" class="btn btn-sm btn-danger no-margin">
+                                    <i class="fa fa-trash"></i>
+                                </DeleteItem>
+
+                            }
+                            else
+                            {
+                                <Question url="/admin/BlogManagement/ToggleStatus?id=@item.Id" class="btn btn-sm btn-success no-margin">
+                                    فعال سازی
+                                </Question>
+
+                            }
+                            <popupLink title="ویرایش مقاله" url="/admin/BlogManagement/ShowEditPage?id=@item.Id" class="btn btn-sm btn-info no-margin">
+                                <i class="fa fa-edit"></i>
+                            </popupLink>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

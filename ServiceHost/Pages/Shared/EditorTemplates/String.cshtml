@@ -1,7 +1,7 @@
 ﻿@model string
-<div class="text-dark font-weight-bold">
-    <div class="form-element-row mb-0">
-        <input type="text" class="input-element" asp-for="@Model">
+<div class="form-group">
+    <div class="form-line">
+        <input asp-for="@Model" type="text" class="form-control" placeholder="@Model" />
     </div>
     <span asp-validation-for="@Model" class="text-danger"></span>
 </div>

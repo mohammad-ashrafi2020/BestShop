@@ -24,10 +24,9 @@ namespace Common.Application.FileUtil
                 Directory.CreateDirectory(folderName);
             }
             var path = Path.Combine(folderName, fileName);
-            using (var stream = new FileStream(path, FileMode.Create))
-            {
-                await inputTarget.CopyToAsync(stream);
-            }
+
+            using var stream = new FileStream(path, FileMode.Create);
+            await inputTarget.CopyToAsync(stream);
             return fileName;
         }
     }

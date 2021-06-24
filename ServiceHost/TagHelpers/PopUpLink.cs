@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.TagHelpers;
-using Microsoft.AspNetCore.Razor.TagHelpers;
-using System.Text.Encodings.Web;
+﻿using Microsoft.AspNetCore.Razor.TagHelpers;
 
-namespace ServiceHost.TagHelpers
+namespace AdminPanel.TagHelpers
 {
     [HtmlTargetElement("popupLink", TagStructure = TagStructure.NormalOrSelfClosing)]
     public class PopUpLink : TagHelper

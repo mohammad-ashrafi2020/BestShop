@@ -8,6 +8,8 @@ namespace Common.Domain.Domain.Repository
     {
         Task<T> Get(TKey id);
         Task Create(T entity);
+        void Update(T entity);
+        Task<int> Save();
         Task<bool> Exists(Expression<Func<T, bool>> expression);
     }
 }

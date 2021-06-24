@@ -7,7 +7,6 @@ using Blog.Domain.Entities.BlogPostGroupAggregate.Rules;
 using Blog.Infrastructure.Persistent.EF.Context;
 using Common.Application;
 using FluentAssertions;
-using framework;
 using MediatR;
 using NSubstitute;
 using Xunit;

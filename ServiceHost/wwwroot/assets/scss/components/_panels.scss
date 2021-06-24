@@ -1,0 +1,129 @@
+﻿.panel-group {
+    @each $key, $val in $colors {
+        .panel-col-#{$key} {
+            .panel-title {
+                background-color: $val !important;
+                color: $white;                
+            }
+            .panel-body {
+                border-top-color: transparent !important;
+            }
+        }
+    }
+
+    .panel {
+        @include border-radius(0);
+        margin-bottom: 5px;
+
+        .panel-title {
+            font-weight: normal;
+            font-size: 16px;
+
+            a{
+                color: inherit;
+            }
+            .material-icons {
+                float: left;
+                line-height: 16px;
+                margin-right: 8px;
+            }
+        }
+
+        .panel-heading {
+            padding: 0;
+            @include border-radius(0);
+
+            a {
+                display: block;
+                padding: 10px 15px;
+
+                &:hover,
+                &:focus,
+                &:active {
+                    text-decoration: none;
+                }
+            }
+        }
+
+        .panel-body {
+            color: $grey-800;            
+            background: $white;
+            padding: 20px;
+        }
+    }
+
+    .panel-primary {
+        .panel-title {
+            background-color: $white;
+			color: $grey-800;
+            font-weight: $font-weight-default;
+            font-size: 16px;
+            margin: 0;
+        }
+    }
+
+    .panel-success {
+        .panel-title {
+            background-color: $success;
+            color: $white;
+        }
+    }
+
+    .panel-warning {
+        .panel-title {
+            background-color: $warning;
+            color: $white;
+        }
+    }
+
+    .panel-danger {
+        .panel-title {
+            background-color: $danger;
+            color: $white;
+        }
+    }
+}
+
+.full-body {
+    @each $key, $val in $colors {
+        .panel-col-#{$key} {
+            .panel-body {
+                border-top-color: $white !important;
+                background-color: $val;
+                color: $white;
+            }
+        }
+    }
+
+    .panel-primary {
+        .panel-body {
+            border-top-color: $white !important;
+            background-color: $primary;
+            color: $white;
+        }
+    }
+
+    .panel-success {
+        .panel-body {
+            border-top-color: $white !important;
+            background-color: $success;
+            color: $white;
+        }
+    }
+
+    .panel-warning {
+        .panel-body {
+            border-top-color: $white !important;
+            background-color: $warning;
+            color: $white;
+        }
+    }
+
+    .panel-danger {
+        .panel-body {
+            border-top-color: $white !important;
+            background-color: $danger;
+            color: $white;
+        }
+    }
+}

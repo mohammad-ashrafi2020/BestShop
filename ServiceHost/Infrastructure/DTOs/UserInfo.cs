@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ServiceHost.Infrastructure.DTOs
+﻿namespace AdminPanel.Infrastructure.DTOs
 {
     public class UserInfo
     {

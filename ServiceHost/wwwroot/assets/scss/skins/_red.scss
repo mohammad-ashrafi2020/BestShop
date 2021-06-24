@@ -1,0 +1,122 @@
+﻿$white: #ffffff;
+$red-500: #f34167 !default;
+$red-two: #27213b !default;
+
+
+.theme-red .profile-page .profile-sub-header .box-list ul li a:hover,
+.theme-red .menu > ul > li > ul.normal-sub > li a:hover,
+.theme-red .menu > ul > li > ul > li > ul > li a:hover {
+  background-color: $red-500;
+}
+
+.theme-red{
+
+    .navbar-brand {
+        color: $white;
+
+        &:hover, &:active, &:focus {
+            color: $white;
+        }
+    }
+
+    .navbar{
+        background-color:$red-500;
+    }
+
+    .nav{
+        > li{
+            > a {
+                color:$white;
+
+                &:hover, &:focus {
+                    background-color: transparent;
+                }
+            }
+        }
+
+        .open{
+            > a {
+                background-color: transparent;
+
+                &:hover, &:focus {
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+
+    .bars {
+        color:$white;
+    }
+
+    .sidebar{
+        .menu{
+            .list{
+                li.active {
+                    background-color: transparent;
+
+                    >:first-child{
+
+                        i, span{
+                            color:$red-two;
+                        }
+                    }
+                }
+
+                .toggled, .ml-menu {
+                    background-color: #f6f6f6;
+                    border-left: 3px solid;
+                    border-bottom: none;
+                    border-top: none;               
+                    border-color: $red-two;
+                }
+                
+            }
+        }
+
+        .user-info {
+            background: url(../../assets/images/red_profile_bg.jpg) no-repeat no-repeat;            
+        }
+    }
+
+    .inbox-widget{
+        .inbox-inner{
+            &:hover{
+                .inbox-img{
+                    img {
+                        border: 2px solid $red-500;
+                        transition: all 150ms linear;
+                    }
+                }
+            }
+        }
+    }
+  
+
+    .nav-tabs{
+        .nav-link.active {
+            border-bottom: 1px solid $red-500 !important;
+            color:$red-500 !important;
+            font-weight: 700;
+        }
+    }
+
+    .blog-page{
+        .single-blog-post{
+            .img-holder{
+                .date-box{
+                    background-color:$red-500;
+                }
+            }
+        }
+    }
+
+    .notify{
+        .heartbit {
+            border-color:$red-two;            
+        }
+        .point {
+            background-color:$red-two;
+        }
+    }
+}

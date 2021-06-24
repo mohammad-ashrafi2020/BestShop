@@ -12,12 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\" />
-    <Folder Include="Services\ProductCategories\ProductCategoryAttribute\Commands\" />
-    <Folder Include="Services\ProductCategories\ProductCategoryAttribute\Queries\" />
-    <Folder Include="Services\ProductCategories\ProductCategory\Commands\Create\" />
-    <Folder Include="Services\ProductCategories\ProductCategory\Commands\Edit\" />
-    <Folder Include="Services\ProductCategories\ProductCategory\Commands\ToggleStatus\" />
+    <Folder Include="ProductCategories\ProductCategoryAttribute\Commands\" />
+    <Folder Include="ProductCategories\ProductCategoryAttribute\Queries\" />
     <Folder Include="Utilities\" />
   </ItemGroup>
 
