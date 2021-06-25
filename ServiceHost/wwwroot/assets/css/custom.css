@@ -69,6 +69,9 @@ body.rtl {
     direction: rtl;
     text-align: right;
 }
+.card-footer {
+    text-align: left;
+}
 .navbar {
     font-family: "IRANSans" !important;
 }
@@ -83,4 +86,42 @@ body.rtl {
 }
 .bootstrap-select.btn-group .dropdown-menu li a {
     text-align: right;
+}
+.table thead {
+    box-shadow: 0px 1px 12px 0px #00000029;
+    background: #f4f5fa;
+    border-top: 3px solid orange;
+}
+.row {
+    margin: 0;
+    padding: 0;
+}
+th {
+    text-align: center !important;
+}
+.datepicker-plot-area {
+    z-index: 100000;
+}
+.btn-success:not(:disabled):not(.disabled).active:focus, .btn-success:not(:disabled):not(.disabled):active:focus, .show > .btn-success.dropdown-toggle:focus {
+    box-shadow: none;
+}
+.btn-info:not(:disabled):not(.disabled).active:focus, .btn-info:not(:disabled):not(.disabled):active:focus, .show > .btn-info.dropdown-toggle:focus {
+    box-shadow: none;
+}
+.btn-danger:not(:disabled):not(.disabled).active:focus, .btn-danger:not(:disabled):not(.disabled):active:focus, .show > .btn-danger.dropdown-toggle:focus {
+    box-shadow: none;
+}
+.btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:not(:disabled):not(.disabled):active:focus, .show > .btn-primary.dropdown-toggle:focus {
+    box-shadow: none;
+}
+.page-item:last-child .page-link {
+    border-top-left-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+}
+.page-item:first-child .page-link {
+    margin-right: 0;
+    border-top-right-radius: .25rem !important;
+    border-bottom-right-radius: .25rem !important;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }

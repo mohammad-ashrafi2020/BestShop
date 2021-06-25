@@ -12,7 +12,7 @@ $.AdminNexa.options = {
         indigo: '#3F51B5',
         blue: '#457fca',
         lightBlue: '#03A9F4',
-        cyan: '#01b4ae',        
+        cyan: '#01b4ae',
         green: '#78b83e',
         lightGreen: '#8BC34A',
         yellow: '#ffe821',
@@ -48,7 +48,7 @@ $.AdminNexa.leftSideBar = {
         var $overlay = $('.overlay');
 
         //Close sidebar
-        $(window).on('click',function (e) {
+        $(window).on('click', function (e) {
             var $target = $(e.target);
             if (e.target.nodeName.toLowerCase() === 'i') { $target = $(e.target).parent(); }
 
@@ -158,7 +158,7 @@ $.AdminNexa.rightSideBar = {
         var $overlay = $('.overlay');
 
         //Close sidebar
-        $(window).on('click',function (e) {
+        $(window).on('click', function (e) {
             var $target = $(e.target);
             if (e.target.nodeName.toLowerCase() === 'i') { $target = $(e.target).parent(); }
 
@@ -256,7 +256,7 @@ $.AdminNexa.input = {
         $('.form-control').focus(function () {
             $(this).parent().addClass('focused');
         });
-
+      
         //On focusout event
         $('.form-control').focusout(function () {
             var $this = $(this);
@@ -267,7 +267,6 @@ $.AdminNexa.input = {
                 $this.parents('.form-line').removeClass('focused');
             }
         });
-
         //On label click
         $('body').on('click', '.form-float .form-line .form-label', function () {
             $(this).parent().find('input').focus();
@@ -356,7 +355,7 @@ $(function () {
     $.AdminNexa.browser.activate();
     $.AdminNexa.leftSideBar.activate();
     $.AdminNexa.rightSideBar.activate();
-    $.AdminNexa.navbar.activate();    
+    $.AdminNexa.navbar.activate();
     $.AdminNexa.input.activate();
     $.AdminNexa.select.activate();
     $.AdminNexa.search.activate();
@@ -365,7 +364,7 @@ $(function () {
 });
 
 //================
-$(".ls-toggle-btn").on('click',function(){
+$(".ls-toggle-btn").on('click', function () {
     $("body").toggleClass("ls-toggle-menu");
 });
 

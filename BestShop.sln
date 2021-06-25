@@ -47,7 +47,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Query", "Shop.Query\Sh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Core", "Common.Core\Common.Core.csproj", "{03745DDD-2C7E-4E0C-B0B2-D3B859195F39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Configuration", "Shop.Configuration\Shop.Configuration.csproj", "{A367353B-9EF1-4161-AD44-60A22C921E48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Configuration", "Shop.Configuration\Shop.Configuration.csproj", "{A367353B-9EF1-4161-AD44-60A22C921E48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

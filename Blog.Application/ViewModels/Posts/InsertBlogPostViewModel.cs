@@ -22,6 +22,7 @@ namespace Blog.Application.ViewModels.Posts
         [Display(Name = "Meta Description")]
         [Required(ErrorMessage = ValidationMessages.Required)]
         [DataType(DataType.MultilineText)]
+
         public string MetaDescription { get; set; }
 
         [Display(Name = "توضیحات")]

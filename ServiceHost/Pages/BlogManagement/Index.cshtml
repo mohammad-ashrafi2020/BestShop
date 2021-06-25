@@ -5,15 +5,22 @@
     ViewData["title"] = "بلاگ";
     ViewData["selected"] = "blogs";
 }
-<popupLink class="btn btn-success waves-effect  mb-2"
-           title="پست جدید" url="/admin/BlogManagement/ShowAddPage">افزودن پست</popupLink>
+@section breadcrumb
+{
+    <ul class="breadcrumb float-md-left">
+        <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Nexa</a></li>
+        <li class="breadcrumb-item"><a href="javascript:void(0);">Tables</a></li>
+        <li class="breadcrumb-item active">Normal Tables</li>
+    </ul>
+}
 
+<a class="btn btn-success waves-effect mb-2" asp-page="./Add">افزودن پست</a>
 <div class="card shadow-lg">
     <form id="filter" method="get">
-        <input type="hidden" name="pageId" id="pageId" value="" />
+        <input type="hidden" name="pageId" id="pageId" value="1" />
         <div class="header">
             <div class="float-left">
-                <a class="btn bg-red waves-effect ">
+                <a class="btn bg-red waves-effect" asp-page-handler="clear">
                     حذف
                 </a>
                 <button type="submit" class="btn   waves-effect bg-light-blue ">
@@ -21,21 +28,21 @@
                 </button>
             </div>
         </div>
-        <div class="body" style="">
-
+        <div class="body">
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
                         <div class="form-line">
-                            <input type="text" name="title" class="form-control" placeholder="عنوان پست" />
+                            <input type="text" asp-for="FilterDto.Search" name="search" class="form-control" />
+                            <label class="form-label">عنوان پست</label>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <select class="form-control show-tick" name="type" data-live-search="true">
+                    <select class="form-control show-tick" asp-for="FilterDto.SearchOn" name="searchOn">
                         <option value="all">همه</option>
-                        <option value="articles">مقالات</option>
-                        <option value="news">اخبار</option>
+                        <option value="Active">فقط پست های فعال</option>
+                        <option value="Deleted">فقط پست های غیرفعال</option>
                     </select>
                 </div>
             </div>
@@ -44,20 +51,26 @@
     </form>
 </div>
 <div class="card">
-    <div class="body table-responsive no-padding">
-        <table class="table table-bordered bg-white text-center">
+    <div class="body table-responsive">
+        <table class="table table-bordered text-center">
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th>id</th>
                     <th>عنوان</th>
                     <th>نویسنده</th>
                     <th>آخرین بروزرسانی</th>
                     <th>وضعیت</th>
                     <th>پست ویژه</th>
-                    <th></th>
+                    <th>اعملیات</th>
                 </tr>
             </thead>
             <tbody>
+                @if (Model.FilterDto.EntityCount == 0)
+                {
+                    <tr>
+                        <td colspan="7" class="text-center">موردی برای نمایش وجود ندارد</td>
+                    </tr>
+                }
                 @foreach (var item in Model.FilterDto.Posts)
                 {
                     <tr>
@@ -88,25 +101,26 @@
                         <td>
                             @if (item.IsActive)
                             {
-                                <DeleteItem url="/admin/BlogManagement/ToggleStatus?id=@item.Id" class="btn btn-sm btn-danger no-margin">
-                                    <i class="fa fa-trash"></i>
+                                <DeleteItem url="/BlogManagement/ToggleStatus?id=@item.Id" class="btn btn-sm btn-danger">
+                                    حذف
                                 </DeleteItem>
-
                             }
                             else
                             {
-                                <Question url="/admin/BlogManagement/ToggleStatus?id=@item.Id" class="btn btn-sm btn-success no-margin">
+                                <Question url="/BlogManagement/ToggleStatus?id=@item.Id" class="btn btn-sm btn-success">
                                     فعال سازی
                                 </Question>
-
                             }
-                            <popupLink title="ویرایش مقاله" url="/admin/BlogManagement/ShowEditPage?id=@item.Id" class="btn btn-sm btn-info no-margin">
-                                <i class="fa fa-edit"></i>
-                            </popupLink>
+                            <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary waves-effect">ویرایش</a>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
     </div>
+    <partial name="Shared/_Pagination" model="Model.FilterDto"/>
 </div>
+@section Scripts
+{
+  
+}

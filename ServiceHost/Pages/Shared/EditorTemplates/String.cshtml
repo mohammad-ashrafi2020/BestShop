@@ -1,7 +1,8 @@
 ﻿@model string
-<div class="form-group">
+<div class="form-group form-float">
     <div class="form-line">
-        <input asp-for="@Model" type="text" class="form-control" placeholder="@Model" />
+        <input autocomplete="off" type="text" asp-for="@Model" class="form-control">
+        <label class="form-label" asp-for="@Model"></label>
     </div>
     <span asp-validation-for="@Model" class="text-danger"></span>
 </div>

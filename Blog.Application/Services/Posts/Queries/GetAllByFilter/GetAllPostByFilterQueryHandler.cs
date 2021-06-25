@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Blog.Application.Mapper;
 using Blog.Application.Services.Posts.Queries.DTOs;
+using Blog.Domain.Entities.BlogPostAggregate;
 using Blog.Infrastructure.Persistent.EF.Context;
 using Common.Application;
 using Common.Core.Enums;
@@ -21,15 +22,14 @@ namespace Blog.Application.Services.Posts.Queries.GetAllByFilter
 
         public async Task<BlogPostFilterDto> Handle(GetAllPostByFilterQuery request, CancellationToken cancellationToken)
         {
-            var result = _context.BlogPosts
+            IQueryable<BlogPost> result = _context.BlogPosts
                 .Include(c=>c.Group)
-                .Include(c=>c.SubGroup)
-                .Select(s => BlogPostMapper.MapBlogPostToDto(s));
+                .Include(c=>c.SubGroup).OrderByDescending(d=>d.CreationDate);
 
             if (request.SearchOn == SearchOn.Active)
-                result = result.Where(r => r.IsActive);
+                result = result.Where(r => !r.IsDelete);
             else if (request.SearchOn == SearchOn.Deleted)
-                result = result.Where(r => !r.IsActive);
+                result = result.Where(r => r.IsDelete);
 
             if (!string.IsNullOrWhiteSpace(request.GroupName))
                 result = result.Where(g =>
@@ -47,8 +47,11 @@ namespace Blog.Application.Services.Posts.Queries.GetAllByFilter
                 SearchOn = request.SearchOn,
                 GroupName = request.GroupName,
                 Search = request.Search,
-                Posts = await result.Skip(skip).Take(request.Take).ToListAsync(cancellationToken: cancellationToken)
+                Posts = await result.Skip(skip).Take(request.Take)
+                    .Select(s => BlogPostMapper.MapBlogPostToDto(s))
+                    .ToListAsync(cancellationToken: cancellationToken)
             };
+            model.GeneratePaging(result,request.Take,request.PageId);
             return model;
         }
 

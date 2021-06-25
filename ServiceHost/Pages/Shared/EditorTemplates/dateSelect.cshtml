@@ -1,11 +1,8 @@
 ﻿@model string
-
-<label asp-for="@Model"></label>
-<div class="form-input input-group date ">
-    <div class="input-group-addon">
-        <i class="fa fa-calendar"></i>
+<div class="form-group form-float">
+    <div class="form-line">
+        <input type="text" autocomplete="off" asp-for="@Model" class="form-control dateSelect">
+        <label class="form-label" asp-for="@Model"></label>
     </div>
-    <input type="text" autocomplete="off" asp-for="@Model" class="form-control dateSelect pull-right" style="border-radius: 6px 0px 0px 6px !important;">
     <span asp-validation-for="@Model" class="text-danger"></span>
 </div>
-

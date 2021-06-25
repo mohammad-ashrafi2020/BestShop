@@ -5,6 +5,7 @@ using Blog.Application.Services.Posts.DomainServices;
 using Blog.Domain.Entities.BlogPostAggregate.Rules;
 using Blog.Domain.Entities.BlogPostGroupAggregate.Rules;
 using Blog.Infrastructure.Persistent.EF.Context;
+using Common.Application.Validation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +20,6 @@ namespace Blog.Configuration
             service.AddMediatR(typeof(TogglePostGroupStatusCommand).Assembly);
             service.AddTransient<IPostSlugUniquenessChecker,PostSlugUniquenessChecker>();
 
-            service.AddTransient<DbContext, BlogContext>();
             service.AddDbContext<BlogContext>(option =>
             {
                 option.UseSqlServer(connectionString,

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Razor.TagHelpers;
+﻿using System.Text.Encodings.Web;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace AdminPanel.TagHelpers
 {
@@ -16,6 +18,7 @@ namespace AdminPanel.TagHelpers
             output.TagName = "button";
             output.Attributes.Add("class", Class);
             output.Attributes.Add("onclick",$"Question('{Url}','{Title}','{Description}','{SuccessMessage}','{CallBackFunction}')");
+            output.AddClass("waves-effect", HtmlEncoder.Default);
         }
     }
 }

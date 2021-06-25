@@ -1,6 +1,6 @@
 ﻿
 <!doctype html>
-<html  lang="en">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -10,12 +10,15 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/plugins/morrisjs/morris.css" />
-    <link rel="stylesheet" href="assets/plugins/bootstrap-select/css/bootstrap-select.css">
+    <link rel="stylesheet" href="/assets/plugins/bootstrap-select/css/bootstrap-select.css">
+    <link rel="stylesheet" href="/assets/css/persian-datepicker-0.4.5.min.css">
 
     <link rel="stylesheet" href="/assets/css/main.css">
     <link href="/assets/css/rtl.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/color_skins.css">
     <link rel="stylesheet" href="/assets/css/custom.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 <body class="theme-green rtl">
     <div class="page-loader-wrapper">
@@ -40,7 +43,7 @@
     <section class="content home">
         <div class="block-header">
             <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="col-lg-7 col-md-6 col-sm-12">
                     <h2>
                         @ViewData["Title"]
                         @{
@@ -53,10 +56,34 @@
                         }
                     </h2>
                 </div>
+                <div class="col-lg-5 col-md-6 col-sm-12">
+                    @await RenderSectionAsync("breadcrumb", false)
+                </div>
             </div>
         </div>
         @RenderBody()
     </section>
+
+    <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="largeModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">انصراف</button>
+                    <button type="submit" class="btn btn-link waves-effect">ثبت اطلاعات</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <script src="/assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
     <script src="/assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
@@ -64,17 +91,27 @@
     <script src="/assets/bundles/morrisscripts.bundle.js"></script><!-- Morris Plugin Js -->
     <script src="/assets/plugins/chartjs/Chart.bundle.min.js"></script> <!-- Chart Plugins Js -->
     <script src="/assets/bundles/sparkline.bundle.js"></script> <!-- Sparkline Plugin Js -->
-
     <script src="/assets/bundles/mainscripts.bundle.js"></script>
     <script src="/assets/js/pages/charts/sparkline.js"></script>
+    <script src="/assets/plugins/autosize/autosize.js"></script>
+    <script src="/assets/js/pages/forms/basic-form-elements.js"></script>
+    <script src="/assets/js/persian-date-0.1.8.min.js"></script>
+    <script src="/assets/js/persian-datepicker-0.4.5.min.js"></script>
+
     <partial name="_ValidationScriptsPartial" />
 
-    <script src="/global/sweetalert.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/global/customValidation.js"></script>
     <script src="/global/global.js"></script>
     <partial name="HandleMessage/_RequestResult" />
+    <script src="~/assets/js/custom.js"></script>
 
+    <script>
+        $(".modal-footer button[type=submit]").click(function () {
+            $("#defaultModal form").submit();
+        });
+    </script>
     @await RenderSectionAsync("Scripts", false)
-   
+
 </body>
 </html>

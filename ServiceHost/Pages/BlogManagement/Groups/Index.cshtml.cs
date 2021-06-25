@@ -20,8 +20,8 @@ namespace AdminPanel.Pages.BlogManagement.Groups
     [ValidateAntiForgeryToken]
     public class IndexModel : RazorBase
     {
-        private IRenderViewToString _renderView;
-        private IMediator _mediator;
+        private readonly IRenderViewToString _renderView;
+        private readonly IMediator _mediator;
 
         public IndexModel(IApplicationContext context, ILogger<IndexModel> logger
            , IRenderViewToString renderView, IMediator mediator) : base(context, logger)
