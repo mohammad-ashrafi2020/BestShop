@@ -1,6 +1,6 @@
-﻿using Blog.Application.Common;
-using Blog.Application.Services.Posts.Queries.DTOs;
-using framework.Enums;
+﻿using Blog.Application.Services.Posts.Queries.DTOs;
+using Common.Application;
+using Common.Core.Enums;
 
 namespace Blog.Application.Services.Posts.Queries.GetAllByFilter
 {

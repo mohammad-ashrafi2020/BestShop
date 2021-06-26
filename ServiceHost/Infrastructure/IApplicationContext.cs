@@ -1,6 +1,6 @@
-﻿using ServiceHost.Infrastructure.DTOs;
+﻿using AdminPanel.Infrastructure.DTOs;
 
-namespace ServiceHost.Infrastructure
+namespace AdminPanel.Infrastructure
 {
     public interface IApplicationContext
     {

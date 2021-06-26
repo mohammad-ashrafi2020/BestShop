@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc.TagHelpers;
+﻿using System.Text.Encodings.Web;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.AspNetCore.Razor.TagHelpers;
-using System.Text.Encodings.Web;
 
-namespace ServiceHost.TagHelpers
+namespace AdminPanel.TagHelpers
 {
     [HtmlTargetElement("popupLink", TagStructure = TagStructure.NormalOrSelfClosing)]
     public class PopUpLink : TagHelper
@@ -17,6 +17,7 @@ namespace ServiceHost.TagHelpers
             output.TagName = "button";
             output.Attributes.Add("class", Class);
             output.Attributes.Add("onclick", $"OpenModal('{Url}','{ModalTarget}','{Title}','{Size}',null)");
+            output.AddClass("waves-effect",HtmlEncoder.Default);
             base.Process(context, output);
         }
     }

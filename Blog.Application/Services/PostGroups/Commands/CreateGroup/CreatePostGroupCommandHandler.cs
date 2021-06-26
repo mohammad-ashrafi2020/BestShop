@@ -1,22 +1,20 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Blog.Application.Common;
-using Blog.Domain.Entities;
 using Blog.Domain.Entities.BlogPostGroupAggregate;
 using Blog.Domain.Entities.BlogPostGroupAggregate.Rules;
 using Blog.Infrastructure.Persistent.EF.Context;
-using framework;
+using Common.Application;
 using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Application.Services.PostGroups.Commands.CreateGroup
 {
     public class CreatePostGroupCommandHandler : IBaseRequestHandler<CreatePostGroupCommand>
     {
-        private BlogContext Context { get; }
+        private readonly BlogContext _context;
         private readonly IEnglishTitleUniquenessChecker _checker;
         public CreatePostGroupCommandHandler(BlogContext context, IEnglishTitleUniquenessChecker checker)
         {
-            Context = context;
+            _context = context;
             _checker = checker;
         }
 
@@ -25,17 +23,17 @@ namespace Blog.Application.Services.PostGroups.Commands.CreateGroup
             //Add Child
             if (request.ParentId is > 0)
             {
-                var parent = await Context.BlogPostGroups.FirstOrDefaultAsync(d => d.Id == request.ParentId,cancellationToken);
+                var parent = await _context.BlogPostGroups.FirstOrDefaultAsync(d => d.Id == request.ParentId,cancellationToken);
                 if (parent == null)
                     return OperationResult.NotFound();
 
                 parent.AddChild(request.EnglishGroupTitle, request.GroupTitle, request.MetaDescription,_checker);
-                Context.BlogPostGroups.AddRange(parent.Groups);
+                _context.BlogPostGroups.AddRange(parent.Groups);
                 return OperationResult.Success();
             }
             //Create New Group
             var group = new BlogPostGroup(request.EnglishGroupTitle, request.GroupTitle, request.MetaDescription, _checker);
-            await Context.AddAsync(group, cancellationToken);
+            await _context.AddAsync(group, cancellationToken);
             return OperationResult.Success();
         }
     }

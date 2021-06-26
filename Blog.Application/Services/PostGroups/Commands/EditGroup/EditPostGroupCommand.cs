@@ -1,4 +1,4 @@
-﻿using Blog.Application.Common;
+﻿using Common.Application;
 
 namespace Blog.Application.Services.PostGroups.Commands.EditGroup
 {

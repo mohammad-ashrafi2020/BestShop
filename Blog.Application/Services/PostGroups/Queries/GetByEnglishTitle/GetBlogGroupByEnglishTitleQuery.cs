@@ -1,6 +1,5 @@
-﻿using Blog.Application.Common;
-using Blog.Application.Services.PostGroups.Queries.DTOs;
-using framework.Utilities;
+﻿using Blog.Application.Services.PostGroups.Queries.DTOs;
+using Common.Application;
 
 namespace Blog.Application.Services.PostGroups.Queries.GetByEnglishTitle
 {

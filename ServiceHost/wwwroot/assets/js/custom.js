@@ -1,50 +1,52 @@
-﻿////$("form").submit(
-////    function () {
-////        var isOk = $(".input-validation-error");
-////        if (isOk.length == 0) {
-////            $(".loading").fadeIn();
-////            $("form button[type=submit]").attr("disabled", "true");
-////            setTimeout(function () {
-////                var s = $(".input-validation-error");
-////                console.log(s.length);
-////                if (s.length > 0) {
-////                    $(".loading").fadeOut();
-////                    $("form button[type=submit]").removeAttr("disabled");
-////                }
-////            }, 100, 1);
-////        } else {
-////        }
-////    });
-function changePage(id) {
-    $("#pageId").val(id);
-    $("#filter").submit();
-}
-function AddFooterRow() {
-    var count = $("#rowCount").val();
+﻿function LoadBlogChildrenGroups(wraperId, thisId) {
+    var groupId = $(`#${thisId}`).val();
+    $.ajax({
+        url: "/BlogManagement/Groups/LoadChildGroups?parentId=" + groupId,
+        type: "get"
+    }).done(function (data) {
+        $(`#${wraperId}`).html('');
 
-    for (var i = 0; i < count; i++) {
-        $("#table-body").append(
-            "<tr>" +
-            "<td><input type='text' autocomplete='off' name='title' class='form-control'/></td>" +
-            "<td><input type='text' autocomplete='off' name='url' class='form-control'/></td></tr>"
-        );
-    }
-}
-function AddRow() {
-    var count = $("#rowCount").val();
+        $(`#${wraperId}`).append('<option>انتخاب کنید</option>');
+        for (var item in data) {
 
-    for (var i = 0; i < count; i++) {
-        $("#table-body").append(
-            "<tr>" +
-            "<td><input type='text' autocomplete='off' name='ProductModel.Keys' class='form-control'/></td>" +
-            "<td><input type='text' autocomplete='off' name='ProductModel.Values' class='form-control'/></td></tr>"
-        );
-    }
+            var group = data[item].value;
+            console.log(group);
+
+            $(`#${wraperId}`).append(`<option value='${group.value}'>${group.title}</option>`);
+            $(`#${wraperId}`).selectpicker('refresh');
+        }
+    });
 }
-$("#RegisterDto_IsAcceptRules").change(function () {
-    if (this.checked) {
-        $(".btn-submit").prop("disabled", false);;
-    } else {
-        $(".btn-submit").prop("disabled", true);;
+$(document).ready(function () {
+    var inputs = $(".form-control");
+    for (var i = 0; i <= inputs.length - 1; i++) {
+        var current = inputs[i].value;
+        var cureentid = inputs[i].getAttribute("id");
+        if (current) {
+            $(`#${cureentid}`).parent().addClass('focused');
+        }
     }
 });
+function changePage(pageId) {
+    var url = new URL(window.location.href);
+    var search_params = url.searchParams;
+
+    // Change PageId
+    search_params.set('pageId', pageId);
+    url.search = search_params.toString();
+
+    // the new url string
+    var new_url = url.toString();
+
+    window.location.replace(new_url);
+}
+function updateQueryStringParameter(uri, key, value) {
+    var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+    var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+    if (uri.match(re)) {
+        return uri.replace(re, '$1' + key + "=" + value + '$2');
+    }
+    else {
+        return uri + separator + key + "=" + value;
+    }
+}

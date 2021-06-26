@@ -1,15 +1,15 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Blog.Application.Common;
 using Blog.Application.Services.Posts.Queries.GetById;
 using Blog.Application.Utilities;
 using Blog.Domain.Entities.BlogPostAggregate.Rules;
 using Blog.Infrastructure.Persistent.EF.Context;
-using framework;
-using framework.DateUtil;
-using framework.FileUtil;
-using framework.SecurityUtil;
-using framework.Utilities;
+using Common.Application;
+using Common.Application.FileUtil;
+using Common.Application.SecurityUtil;
+using Common.Core.DateUtil;
+using Common.Core.Utilities;
+using Common.Domain.Utils;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

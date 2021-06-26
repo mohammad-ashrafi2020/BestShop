@@ -1,0 +1,125 @@
+﻿@page "{handler?}"
+@using Common.Core.DateUtil
+@model AdminPanel.Pages.BlogManagement.IndexModel
+@{
+    ViewData["title"] = "بلاگ";
+    ViewData["selected"] = "blogPosts";
+}
+@section breadcrumb
+{
+    <ul class="breadcrumb float-md-left">
+        <li class="breadcrumb-item"><a href="/"> پنل ادمین </a></li>
+        <li class="breadcrumb-item active"> پست ها </li>
+    </ul>
+}
+
+<a class="btn btn-success waves-effect mb-2" asp-page="./Add">افزودن پست</a>
+<div class="card shadow-lg">
+    <form id="filter" method="get">
+        <input type="hidden" name="pageId" id="pageId" value="1" />
+        <div class="header">
+            <div class="float-left">
+                <a class="btn bg-red waves-effect" asp-page-handler="clear">
+                    حذف
+                </a>
+                <button type="submit" class="btn   waves-effect bg-light-blue ">
+                    فیلتر
+                </button>
+            </div>
+        </div>
+        <div class="body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <input type="text" asp-for="FilterDto.Search" name="search" class="form-control" />
+                            <label class="form-label">عنوان پست</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-control show-tick" asp-for="FilterDto.SearchOn" name="searchOn">
+                        <option value="all">همه</option>
+                        <option value="Active">فقط پست های فعال</option>
+                        <option value="Deleted">فقط پست های غیرفعال</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<div class="card">
+    <div class="body table-responsive">
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>عنوان</th>
+                    <th>نویسنده</th>
+                    <th>آخرین بروزرسانی</th>
+                    <th>وضعیت</th>
+                    <th>پست ویژه</th>
+                    <th>اعملیات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.FilterDto.EntityCount == 0)
+                {
+                    <tr>
+                        <td colspan="7" class="text-center">موردی برای نمایش وجود ندارد</td>
+                    </tr>
+                }
+                @foreach (var item in Model.FilterDto.Posts)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Title</td>
+                        <td>@item.AuthorName</td>
+                        <td>@item.UpdateDate.ToPersianDateTime()</td>
+                        <td>
+                            @if (item.IsActive)
+                            {
+                                <span class="label label-success">فعال</span>
+                            }
+                            else
+                            {
+                                <span class="label label-danger">غیرفعال</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.IsSpecial)
+                            {
+                                <span class="label label-success">بله</span>
+                            }
+                            else
+                            {
+                                <span class="label label-danger">خیر</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.IsActive)
+                            {
+                                <DeleteItem url="/BlogManagement/ToggleStatus?id=@item.Id" class="btn btn-sm btn-danger">
+                                    حذف
+                                </DeleteItem>
+                            }
+                            else
+                            {
+                                <Question url="/BlogManagement/ToggleStatus?id=@item.Id" class="btn btn-sm btn-success">
+                                    فعال سازی
+                                </Question>
+                            }
+                            <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary waves-effect">ویرایش</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <partial name="Shared/_Pagination" model="Model.FilterDto"/>
+</div>
+@section Scripts
+{
+  
+}

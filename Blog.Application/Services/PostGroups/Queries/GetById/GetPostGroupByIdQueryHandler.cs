@@ -1,17 +1,17 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Blog.Application.Common;
 using Blog.Application.Services.PostGroups.Queries.DTOs;
 using Blog.Infrastructure.Persistent.EF.Context;
-using framework.Utilities;
+using Common.Application;
+using Common.Core.Utilities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Application.Services.PostGroups.Queries.GetById
 {
     public class GetPostGroupByIdQueryHandler : IBaseRequestHandler<GetPostGroupByIdQuery, BlogPostGroupDto>
     {
-        private BlogContext _context;
+        private readonly BlogContext _context;
 
         public GetPostGroupByIdQueryHandler(BlogContext context)
         {

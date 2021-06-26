@@ -1,0 +1,70 @@
+﻿
+
+.authentication {    
+    height: 100vh;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    text-align: center;
+    
+    .card {
+        max-width: 350px;
+        margin-top: 200px;
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.2), 0 1px 5px 0 rgba(0,0,0,0.12);
+        display: inline-block;
+
+        .header{           
+            margin-top: -70px;
+            color: #16191a;
+            margin-bottom: 20px;
+            box-shadow: 0 16px 38px -12px rgba(0,0,0,0.56), 0 4px 25px 0px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.2);
+            h1{
+                font-size: 22px;
+                margin-bottom: 20px;
+                margin-top: 10px;
+            }
+        }
+
+        .title {
+            margin:0;    
+        }
+
+        .msg {
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: none;
+        }
+    }
+
+    .l-social {
+       margin: 0;
+    
+        li {
+            display: inline-block;
+    
+            a {
+                text-align: center;
+                padding:5px 10px;
+                color: #666;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1024px) {
+    .authentication{       
+        .card{
+            margin-top: 100px;
+        }
+    }
+    
+}
+
+@media only screen and (max-width: 767px) {
+    .authentication{       
+        .card{
+            margin-top: 100px;
+        }
+    }
+}

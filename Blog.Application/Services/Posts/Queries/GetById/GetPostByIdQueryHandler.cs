@@ -1,11 +1,9 @@
-﻿using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
-using Blog.Application.Common;
 using Blog.Application.Mapper;
 using Blog.Application.Services.Posts.Queries.DTOs;
-using Blog.Domain.Entities.BlogPostGroupAggregate;
 using Blog.Infrastructure.Persistent.EF.Context;
+using Common.Application;
 using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Application.Services.Posts.Queries.GetById

@@ -1,0 +1,80 @@
+﻿@page
+@using MediatR
+@using Blog.Application.Services.PostGroups.Queries.GetAll
+@model AdminPanel.Pages.BlogManagement.AddModel
+@inject IMediator _mediator
+@{
+    var groups = _mediator.Send(new GetAllPostGroupQuery()).Result;
+    ViewData["Selected"] = "blogPosts";
+    ViewData["Title"] = "افزودن پست";
+
+}
+<div class="card">
+    <form method="post"  enctype="multipart/form-data">
+        <div class="body row">
+            <div class="col-md-6">
+                @Html.EditorFor(m => m.InsertModel.Title)
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(m => m.InsertModel.UrlTitle)
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(m => m.InsertModel.DateRelease)
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(m => m.InsertModel.Tags)
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(m => m.InsertModel.TimeRequiredToStudy)
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(m => m.InsertModel.MetaDescription)
+            </div>
+            <div class="col-md-12 mb-3">
+                @Html.EditorFor(m => m.InsertModel.Description)
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="InsertModel.GroupId"></label>
+                    <select class="form-control show-tick" data-live-search="true" asp-for="InsertModel.GroupId" onchange="LoadBlogChildrenGroups('parentGroups', 'postGroup')" id="postGroup">
+                        <option value="0">انتخاب کنید</option>
+                        @foreach (var item in groups.Where(g => g.ParentId == null))
+                        {
+                            <option value="@item.Id">@item.GroupTitle</option>
+                        }
+                    </select>
+                    <span asp-validation-for="InsertModel.GroupId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="InsertModel.SubGroupId"></label>
+                    <select class="form-control show-tick" data-live-search="true" asp-for="InsertModel.SubGroupId" id="parentGroups"></select>
+                    <span asp-validation-for="InsertModel.SubGroupId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="InsertModel.ImageFile"></label>
+                    <div class="form-line">
+                        <input asp-for="InsertModel.ImageFile" type="file" class="form-control" />
+                    </div>
+                    <span asp-validation-for="InsertModel.ImageFile" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(m => m.InsertModel.ImageAlt)
+            </div>
+            <div class="col-md-6 mt-3 mb-3">
+                @Html.EditorFor(m => m.InsertModel.IsActive)
+                @Html.EditorFor(m => m.InsertModel.IsSpecial)
+            </div>
+
+        </div>
+        <div class="card-footer">
+            <cancel back-url="/blogManagement"></cancel>
+
+            <submit />
+        </div>
+    </form>
+</div>

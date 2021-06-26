@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Blog.Application.Common;
 using Blog.Application.Services.PostGroups.Queries.DTOs;
+using Common.Application;
 
 namespace Blog.Application.Services.PostGroups.Queries.GetAll
 {

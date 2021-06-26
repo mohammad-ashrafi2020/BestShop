@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using framework;
-using framework.Enums;
+using Common.Core;
+using Common.Core.Enums;
 
 namespace Blog.Application.Services.Posts.Queries.DTOs
 {

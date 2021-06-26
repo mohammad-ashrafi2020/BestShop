@@ -1,0 +1,197 @@
+.profile-page{
+    
+   .profile-header{
+        background: rgba(0, 0, 0, 0) url("../images/profilebg.jpg") repeat scroll center center / cover ;              
+        @extend .p-b-30;
+        @extend .p-t-30;
+        position: relative;
+               
+        .profile_info{
+            @extend .margin-0;
+            
+            .profile-image{
+                img{
+                    border-radius:50%;
+                    width:180px;
+                    border:3px solid $white;
+                    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+                }
+            }
+            
+            .job_post{
+                @extend .displayblock;
+                @extend .m-b-10;
+            }
+            .social-icon{
+                a{
+                    margin:0 5px;
+                }
+            }
+        }        
+   }
+
+   .profile-sub-header{
+        min-height: 60px;
+        width: 100%;
+        .box-list{
+            
+            ul {
+                display: inline-table;                
+                padding: 0;
+                 @extend .margin-0;
+                table-layout: fixed;
+                width: 100%;                
+                
+                li{
+                    border-left: 1px solid #dedede;                    
+                    display: table-cell;
+                    list-style: outside none none;
+                    
+                    &:first-child{
+                        border-left:none;
+                    }
+
+                    a{
+                        @extend .displayblock;
+                        padding:15px 0;
+                        color:$grey-800;
+                        
+                        &:hover{
+                            text-decoration:none;
+                            color:$white;
+                        }
+                        
+                        i{
+                            font-size:20px;
+                        }   
+                        
+                        p{
+                             @extend .margin-0;
+                        }
+                    }                 
+                }
+            }
+        }
+    }
+    
+    #mypost{
+
+        .mypost-form{
+            @extend .m-b-15;
+        
+            .form-group{
+                 @extend .margin-0;
+
+                .form-control{
+                    height: auto;
+                }
+            }
+        }
+        .post-box{
+            position: relative;
+
+            .date{
+                background: $black;
+                padding: 5px 10px;
+                color: $white;
+                position: absolute;
+                top: 20px;
+                border-radius: 0 3px 3px 0;
+            }
+        
+            .post-img{
+                @extend .m-b-15;
+                overflow:hidden;
+            }
+        }
+    }
+
+    #timeline{
+
+        .timeline{
+            border-left: 1px solid #dedede;
+            font-size: 14px;
+            position: relative;
+            
+            .border-info {
+                border-color:$brand-info;
+            }
+            .border-warning {
+                border-color:$brand-warning;
+            }
+            .border-danger {
+                border-color:$brand-danger;
+            }
+            
+            .timeline-item{
+                @extend .m-b-20;
+                padding-bottom: 1px;
+                position: relative;                
+                
+                &:after{
+                    background-color: $white;
+                    border-color: inherit;
+                    border-radius: 50%;
+                    border-style: solid;
+                    border-width: 2px;                  
+                    content: "";
+                    height: 11px;
+                    left: 0;
+                    margin-left: -6px;
+                    position: absolute;
+                    width: 11px;
+                    bottom: auto;
+                    clear: both;
+                    top:4px;
+
+                }
+                
+                .item-content{
+                    margin-left: 24px;
+                    @extend .m-t-0;
+                    
+                    p{
+                        font-weight:400;
+                        color:$grey-800;
+                    }
+                }
+            }
+         }
+    }
+    
+    #usersettings{
+        .form-group{
+            @extend .m-b-0;
+        }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .profile-page{
+        .profile-header{           
+            text-align: center;
+        }
+    }
+}
+
+@media only screen and (max-width: 414px) {
+    .profile-page{
+        .profile-sub-header{
+            .box-list{
+                li{
+                    a{
+                        padding: 20px 0 !important;
+                    }
+                    
+                    p{
+                        display:none;
+                    }                  
+                }
+            }
+        }
+    }
+}
+
+
+
+

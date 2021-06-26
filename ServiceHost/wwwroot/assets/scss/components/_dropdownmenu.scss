@@ -1,0 +1,143 @@
+﻿.dropdown-menu {
+    @include border-radius(8px);
+    box-shadow: 0 2px 30px rgba(0, 0, 0, .1);
+    border: none;
+    right: 0;
+    left: auto;
+    padding: 0;
+    .divider {
+        margin: 1px 0;
+        border-bottom: 1px solid #eaeaea;
+    }
+    .header {
+        font-size: $fontsize - 1px;
+        font-weight: $font-weight-bold;
+        min-width: 270px;
+        border-bottom: 1px solid $grey-200;
+        text-align: left;
+        padding: 10px 15px;
+        ;
+    }
+    ul.menu {
+        padding-left: 0;
+        &.tasks {
+            h4 {
+                color: #333;
+                font-size: 15px;
+                margin: 0 0 8px 0;
+                font-weight: $font-weight-medium;
+                small {
+                    float: right;
+                    margin-top: 3px;
+                }
+            }
+            .progress {
+                height: 5px;
+                margin-bottom: 7px;
+            }
+        }
+        .icon-circle {
+            width: 36px;
+            height: 36px;
+            @include border-radius(50%);
+            color: $white;
+            @extend .align-center;
+            @extend .inlineblock;
+            vertical-align: top;
+            i {
+                font-size: 18px;
+                line-height: 36px;
+            }
+        }
+        li {
+            border-bottom: 1px solid $white;
+            &:last-child {
+                border-bottom: none;
+            }
+            a {
+                padding: 10px 15px;
+                text-decoration: none;
+                @include transition(.5s);
+                @extend .displayblock;
+                &:hover {
+                    background-color: #e9e9e9;
+                }
+            }
+        }
+        .menu-info {
+            @extend .inlineblock;
+            position: relative;
+            top: 0px;
+            left: 5px;
+            h4 {
+                @extend .margin-0;
+                font-size: 15px;
+                color: #333;
+                font-weight: 500;
+            }
+            p {
+                @extend .margin-0;
+                font-size: 11px;
+                color: #aaa;
+                i {
+                    font-size: $fontsize - 1px;
+                    color: #aaa;
+                    position: relative;
+                    top: 1px;
+                    vertical-align: top;
+                }
+            }
+        }
+    }
+    .footer {
+
+        a {
+            @extend .align-center;
+            border-top: 1px solid $grey-200;            
+            font-size: $fontsize - 1px;
+            @extend .displayblock;
+            &:hover {
+                background-color: transparent;
+            }
+        }
+    }
+    >li {
+
+        >a {
+
+            padding: 7px 18px;
+            color: #666;
+            @include transition(all .5s);
+            @extend .displayblock;
+            font-size: 14px;
+            line-height: 25px;
+
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.1);
+                text-decoration: none;
+                color: #24241e;
+            }
+            i.material-icons {
+                float: left;
+                margin-right: 7px;
+                margin-top: 2px;
+                font-size: 20px;
+            }
+        }
+    }
+}
+
+.dropdown {
+    .dropdown-toggle {
+        &:after {
+            display: none;
+        }
+    }
+}
+
+.dropdown-animated {
+    -webkit-animation-duration: .3s !important;
+    -moz-animation-duration: .3s !important;
+    -o-animation-duration: .3s !important;
+    animation-duration: .3s !important;
+}

@@ -1,13 +1,13 @@
-﻿using framework;
-using framework.Utilities;
+﻿using System;
+using System.Threading.Tasks;
+using Common.Application;
+using Common.Core.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System;
-using System.Threading.Tasks;
 
-namespace ServiceHost.Infrastructure.RazorUtils
+namespace AdminPanel.Infrastructure.RazorUtils
 {
     public class RazorBase : PageModel
     {

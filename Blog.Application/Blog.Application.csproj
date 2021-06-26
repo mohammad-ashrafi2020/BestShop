@@ -5,10 +5,8 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
-
   <ItemGroup>
-    <PackageReference Include="FluentValidation.AspNetCore" Version="10.2.2" />
-    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="10.2.3" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>
@@ -20,7 +18,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Blog.Infrastructure\Blog.Infrastructure.csproj" />
-    <ProjectReference Include="..\Framwork\framework.csproj" />
+    <ProjectReference Include="..\Common.Application\Common.Application.csproj" />
+    <ProjectReference Include="..\Common.Core\Common.Core.csproj" />
   </ItemGroup>
 
 </Project>

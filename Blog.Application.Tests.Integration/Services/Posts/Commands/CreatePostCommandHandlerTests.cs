@@ -2,14 +2,13 @@
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using _DomainUtils.Exceptions;
 using Blog.Application.Services.Posts.Commands.CreatePost;
 using Blog.Application.Tests.Integration.Fixture.DataBase;
 using Blog.Domain.Entities.BlogPostAggregate.Rules;
 using Blog.Infrastructure.Persistent.EF.Context;
+using Common.Application;
+using Common.Domain.Exceptions;
 using FluentAssertions;
-using framework;
-using framework.SecurityUtil;
 using Microsoft.AspNetCore.Http;
 using NSubstitute;
 using Xunit;

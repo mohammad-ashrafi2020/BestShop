@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Razor.TagHelpers;
+﻿using System.Text.Encodings.Web;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
-namespace ServiceHost.TagHelpers
+namespace AdminPanel.TagHelpers
 {
     [HtmlTargetElement("Question", TagStructure = TagStructure.NormalOrSelfClosing)]
     public class QuestionButton : TagHelper
@@ -16,6 +18,7 @@ namespace ServiceHost.TagHelpers
             output.TagName = "button";
             output.Attributes.Add("class", Class);
             output.Attributes.Add("onclick",$"Question('{Url}','{Title}','{Description}','{SuccessMessage}','{CallBackFunction}')");
+            output.AddClass("waves-effect", HtmlEncoder.Default);
         }
     }
 }

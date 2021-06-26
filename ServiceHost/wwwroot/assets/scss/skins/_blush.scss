@@ -1,0 +1,148 @@
+﻿$white: #ffffff;
+$blue-grey-900: #263238 !default;
+$blush-300: #f7bb97 !default;
+$blush-500: #dd5e89 !default;
+
+.theme-blush .profile-page .profile-sub-header .box-list ul li a:hover,
+.theme-blush .menu > ul > li > ul.normal-sub > li a:hover,
+.theme-blush .menu > ul > li > ul > li > ul > li a:hover {
+  background-color: $blush-500;
+}
+
+.theme-blush{
+    
+    .navbar-header{
+        background: $blue-grey-900;        
+    }
+    .navbar-brand {
+        color: $white;
+        font-weight: 700;
+
+        &:hover, &:active, &:focus {
+            color:$white;
+        }
+    }
+
+    .navbar{
+        background-color:$white;
+    }
+
+    .nav{
+        > li{
+            > a {
+                color:$blue-grey-900;
+
+                &:hover, &:focus {
+                    background-color: transparent;
+                }
+            }
+        }
+
+        .open{
+            > a {
+                background-color: transparent;
+
+                &:hover, &:focus {
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+
+    .bars {
+        color:$blush-500;
+    }
+
+    .sidebar{
+        .user-info{
+            background: linear-gradient(45deg, $blush-500, $blush-300);            
+        }
+
+        .menu{
+
+            .list{
+
+                li.active {
+                    background-color: transparent;
+
+                    >:first-child{
+
+                        i, span{
+                            color:$blush-500;
+                        }
+                    }
+                }
+                .toggled, .ml-menu {
+                    background-color: #f6f6f6;
+                    border-left: 3px solid;
+                    border-bottom: none;
+                    border-top: none;               
+                    border-color: $blush-500;
+                }
+            }
+        }
+    }
+
+    .inbox-widget{
+
+        .inbox-inner{
+
+            &:hover{
+
+                .inbox-img{
+
+                    img {
+                        border: 2px solid $blush-500;
+                        transition: all 150ms linear;
+                    }
+                }
+            }
+        }
+    }
+   
+    .nav-tabs{
+
+        .nav-link.active {
+            border-bottom: 1px solid $blush-500 !important;
+            color:$blush-500 !important;
+			font-weight: 700;
+        }
+    }
+
+    .blog-page{
+
+        .single-blog-post{
+
+            .img-holder{
+
+                .date-box{
+                    background-color:$blush-500;
+                }
+            }
+        }
+    }
+
+    .notify{
+
+        .heartbit {
+            border-color:$blush-500;            
+        }
+
+        .point {
+            background-color:$blush-500;
+        }
+    }
+
+    .authentication{        
+        background: url(../images/blush_loginbg.jpg) no-repeat center center fixed;
+        
+        .card{
+            .header{
+                background: linear-gradient(45deg, $blush-500, $blush-300);
+            }
+        }
+    }
+}
+
+
+

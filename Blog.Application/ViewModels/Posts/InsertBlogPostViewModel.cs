@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using framework.SecurityUtil.CustomValidation.IFormFile;
+using Common.Application.SecurityUtil.CustomValidation.IFormFile;
+using Common.Application.Validation;
 using Microsoft.AspNetCore.Http;
 
 namespace Blog.Application.ViewModels.Posts
@@ -19,8 +20,9 @@ namespace Blog.Application.ViewModels.Posts
         public string UrlTitle { get; set; }
 
         [Display(Name = "Meta Description")]
-        [Required(ErrorMessage = framework.ValidationMessages.Required)]
+        [Required(ErrorMessage = ValidationMessages.Required)]
         [DataType(DataType.MultilineText)]
+
         public string MetaDescription { get; set; }
 
         [Display(Name = "توضیحات")]
@@ -36,11 +38,11 @@ namespace Blog.Application.ViewModels.Posts
 
 
         [Display(Name = "متن جایگزین عکس (برای Seo) = Alt")]
-        [Required(ErrorMessage = framework.ValidationMessages.Required)]
+        [Required(ErrorMessage = ValidationMessages.Required)]
         public string ImageAlt { get; set; }
 
         [Display(Name = "کلمات کلیدی")]
-        [Required(ErrorMessage = framework.ValidationMessages.Required)]
+        [Required(ErrorMessage = ValidationMessages.Required)]
         public string Tags { get; set; }
 
 

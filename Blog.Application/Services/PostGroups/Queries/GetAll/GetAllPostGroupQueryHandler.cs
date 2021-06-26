@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Blog.Application.Common;
 using Blog.Application.Services.PostGroups.Queries.DTOs;
 using Blog.Infrastructure.Persistent.EF.Context;
-using framework.Utilities;
+using Common.Application;
+using Common.Core.Utilities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Application.Services.PostGroups.Queries.GetAll

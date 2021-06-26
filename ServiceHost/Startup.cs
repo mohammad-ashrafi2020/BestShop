@@ -1,18 +1,17 @@
+using AdminPanel.Infrastructure;
+using AdminPanel.Infrastructure.RazorUtils;
+using Blog.Configuration;
+using Blog.Infrastructure.Persistent.EF.Context;
+using Common.Application;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Blog.Configuration;
-using ServiceHost.Infrastructure;
-using ServiceHost.Infrastructure.RazorUtils;
+using Shop.Configuration;
 
-namespace ServiceHost
+namespace AdminPanel
 {
     public class Startup
     {
@@ -28,10 +27,17 @@ namespace ServiceHost
         {
             var sqlConnection = Configuration.GetConnectionString("DefaultConnection");
             services.AddRazorPages();
+
+            services.AddScoped<DbContext>(a => a.GetRequiredService<BlogContext>());
+
+            CommonBootstrapper.Init(services);
             BlogBootstrapper.Init(services, sqlConnection);
+            ShopBootstrapper.Init(services, sqlConnection);
+
+
             services.AddHttpContextAccessor();
             services.AddTransient<IRenderViewToString, RenderViewToString>();
-            services.AddScoped<IApplicationContext,ApplicationContext>();
+            services.AddScoped<IApplicationContext, ApplicationContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

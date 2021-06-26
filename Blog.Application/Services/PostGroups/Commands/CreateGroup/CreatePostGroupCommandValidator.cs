@@ -1,4 +1,6 @@
-﻿using FluentValidation;
+﻿using Common.Application.Validation;
+using Common.Core;
+using FluentValidation;
 
 namespace Blog.Application.Services.PostGroups.Commands.CreateGroup
 {
@@ -7,10 +9,10 @@ namespace Blog.Application.Services.PostGroups.Commands.CreateGroup
         public CreatePostGroupCommandValidator()
         {
             RuleFor(r => r.EnglishGroupTitle)
-                .NotEmpty().WithMessage(framework.ValidationMessages.required("عنوان انگلیسی"));
+                .NotEmpty().WithMessage(ValidationMessages.required("عنوان انگلیسی"));
 
             RuleFor(r => r.GroupTitle)
-                .NotEmpty().WithMessage(framework.ValidationMessages.required("عنوان گروه"));
+                .NotEmpty().WithMessage(ValidationMessages.required("عنوان گروه"));
 
             RuleFor(r => r.MetaDescription)
                 .NotEmpty().WithMessage("Meta Description is Required");

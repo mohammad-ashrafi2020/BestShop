@@ -1,17 +1,14 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Principal;
+using System.Text;
+using AdminPanel.Infrastructure.DTOs;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
-using ServiceHost.Infrastructure.DTOs;
-using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Net;
-using System.Security.Principal;
-using System.Text;
-using System.Text.Json.Serialization;
 
-namespace ServiceHost.Infrastructure
+namespace AdminPanel.Infrastructure
 {
     public class ApplicationContext : IApplicationContext
     {

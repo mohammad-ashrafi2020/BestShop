@@ -2,16 +2,15 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Blog.Application.Common;
 using Blog.Application.Utilities;
 using Blog.Domain.Entities.BlogPostAggregate;
 using Blog.Domain.Entities.BlogPostAggregate.Rules;
 using Blog.Infrastructure.Persistent.EF.Context;
-using framework;
-using framework.DateUtil;
-using framework.FileUtil;
-using framework.SecurityUtil;
-using framework.Utilities;
+using Common.Application;
+using Common.Application.FileUtil;
+using Common.Application.SecurityUtil;
+using Common.Core.DateUtil;
+using Common.Core.Utilities;
 
 namespace Blog.Application.Services.Posts.Commands.CreatePost
 {

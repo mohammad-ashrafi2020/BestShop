@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using AdminPanel.Infrastructure.DTOs;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using ServiceHost.Infrastructure.DTOs;
-using System;
 
-namespace ServiceHost.Infrastructure.Cookies
+namespace AdminPanel.Infrastructure.Cookies
 {
     public static class CookieUtils
     {
