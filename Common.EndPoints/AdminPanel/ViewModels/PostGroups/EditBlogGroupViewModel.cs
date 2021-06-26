@@ -1,13 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Common.Application.Validation;
 
-namespace Blog.Application.ViewModels.PostGroups
+namespace Common.EndPoints.AdminPanel.ViewModels.PostGroups
 {
-    public class InsertBlogGroupViewModel
+    public class EditBlogGroupViewModel
     {
+        public long Id { get; set; }
+
         [Display(Name = "عنوان گروه")]
-        [Required(ErrorMessage = ValidationMessages.Required)]
-        [MaxLength(400,ErrorMessage = ValidationMessages.MaxLength)]
+        [Required(ErrorMessage = "عنوان گروه را وارد کیند")]
+        [MaxLength(400, ErrorMessage = ValidationMessages.MaxLength)]
         public string GroupTitle { get; set; }
 
         [Display(Name = "عنوان انگلیسی")]

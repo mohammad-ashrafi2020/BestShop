@@ -1,14 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AdminPanel.Infrastructure;
 using AdminPanel.Infrastructure.RazorUtils;
 using Blog.Application.Services.Posts.Commands.CreatePost;
-using Blog.Application.ViewModels.Posts;
+using Common.EndPoints.AdminPanel.ViewModels.Posts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
 namespace AdminPanel.Pages.BlogManagement

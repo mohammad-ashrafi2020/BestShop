@@ -1,10 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Common.Application.SecurityUtil.CustomValidation.IFormFile;
-using Common.Application.Validation;
+using Common.EndPoints.CustomValidation.IFormFile;
 using Microsoft.AspNetCore.Http;
 
-namespace Blog.Application.ViewModels.Posts
+namespace Common.EndPoints.AdminPanel.ViewModels.Posts
 {
     public class EditBlogPostViewModel
     {
