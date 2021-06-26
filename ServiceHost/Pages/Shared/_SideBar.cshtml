@@ -1,13 +1,16 @@
-﻿<aside id="leftsidebar" class="sidebar">
+﻿@{
+    var selected = ViewData["Selected"]?.ToString();
+}
+<aside id="leftsidebar" class="sidebar">
     <div class="menu">
         <ul class="list">
             <li class="header">MAIN NAVIGATION</li>
 
-            <li><a href="/"><i class="zmdi zmdi-home"></i><span>داشبورد</span> </a></li>
-            <li><a href="mail-inbox.html"><i class="zmdi zmdi-email"></i><span>Inbox</span> </a></li>
-            <li><a href="blog-dashboard.html"><i class="zmdi zmdi-blogger"></i><span>Blogger</span> </a></li>
+            <li class="@(selected=="index"?"active":null)"><a class="@(selected=="index"?"toggled":null)" href="/"><i class="zmdi zmdi-home"></i><span>داشبورد</span> </a></li>
             <li>
-                <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-shopping-cart"></i><span>Ecommerce</span></a>
+                <a href="javascript:void(0);" class="menu-toggle">
+                    <i class="zmdi zmdi-shopping-cart"></i><span>Ecommerce</span>
+                </a>
                 <ul class="ml-menu">
                     <li><a href="ec-dashboard.html">Dashboard</a></li>
                     <li><a href="ec-product.html">Product</a></li>
@@ -16,12 +19,20 @@
                 </ul>
             </li>
             <li class="header">وبلاگ</li>
-            <li><a href="/blogManagement/groups"><i class="zmdi zmdi-group"></i><span>دسته بندی ها</span> </a></li>
-            <li><a href="/blogManagement"><i class="zmdi zmdi-blogger"></i><span>پست ها</span> </a></li>
+            <li class="@(selected=="blogGroups"?"active":null)">
+                <a class="@(selected=="blogGroups"?"toggled":null)" href="/blogManagement/groups">
+                    <i class="zmdi zmdi-group"></i><span>دسته بندی ها</span>
+                </a>
+            </li>
+            <li class="@(selected=="blogPosts"?"active":null)">
+                <a class="@(selected=="blogPosts"?"toggled":null)" href="/blogManagement">
+                    <i class="zmdi zmdi-blogger"></i><span>پست ها</span>
+                </a>
+            </li>
 
 
             <li class="header">LABELS</li>
-            
+
         </ul>
     </div>
     <!-- #Menu -->

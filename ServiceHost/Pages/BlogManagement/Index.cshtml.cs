@@ -20,18 +20,16 @@ namespace AdminPanel.Pages.BlogManagement
     public class IndexModel : RazorBase
     {
         private readonly IMediator _mediator;
-        private readonly IRenderViewToString _renderView;
-        public IndexModel(IApplicationContext context, ILogger<IndexModel> logger, IMediator mediator, IRenderViewToString renderView) : base(context, logger)
+        public IndexModel(IApplicationContext context, ILogger<IndexModel> logger, IMediator mediator) : base(context, logger)
         {
             _mediator = mediator;
-            _renderView = renderView;
         }
 
         public BlogPostFilterDto FilterDto { get; set; }
         public async Task OnGet(int pageId = 1, string search = "",
             SearchOn searchOn = SearchOn.All, string category = "")
         {
-            FilterDto = await _mediator.Send(new GetAllPostByFilterQuery(searchOn, category, search, 1, pageId));
+            FilterDto = await _mediator.Send(new GetAllPostByFilterQuery(searchOn, category, search, 20, pageId));
         }
 
         public async Task<IActionResult> OnGetToggleStatus(long id)
