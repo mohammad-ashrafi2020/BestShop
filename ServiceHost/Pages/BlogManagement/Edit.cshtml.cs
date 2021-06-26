@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 using AdminPanel.Infrastructure;
 using AdminPanel.Infrastructure.RazorUtils;
+using AdminPanel.ViewModels.Posts;
 using Blog.Application.Services.Posts.Commands.EditPost;
 using Blog.Application.Services.Posts.Queries.GetById;
-using Common.EndPoints.AdminPanel.ViewModels.Posts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -12,17 +12,15 @@ namespace AdminPanel.Pages.BlogManagement
 {
     public class EditModel : RazorBase
     {
-        private readonly IMediator _mediator;
-
-        public EditModel(IApplicationContext context, ILogger<EditModel> logger, IMediator mediator) : base(context, logger)
+        public EditModel(IApplicationContext context, ILogger logger, IMediator mediator) : base(context, logger, mediator)
         {
-            _mediator = mediator;
         }
+
         [BindProperty]
         public EditBlogPostViewModel Edit { get; set; }
         public async Task<IActionResult> OnGet(long id)
         {
-            var model = await _mediator.Send(new GetPostByIdQuery(id));
+            var model = await Mediator.Send(new GetPostByIdQuery(id));
             if (model == null)
                 return RedirectToPage("Index");
 
@@ -48,7 +46,7 @@ namespace AdminPanel.Pages.BlogManagement
         }
         public async Task<IActionResult> OnPost(long id)
         {
-            return await TryCatch(async () => await _mediator.Send(new
+            return await TryCatch(async () => await Mediator.Send(new
                     EditPostCommand(
                         Edit.Title,
                         Edit.UrlTitle,
@@ -66,6 +64,7 @@ namespace AdminPanel.Pages.BlogManagement
                         Edit.Id)),
                 "/blogManagement");
         }
+
 
     }
 }

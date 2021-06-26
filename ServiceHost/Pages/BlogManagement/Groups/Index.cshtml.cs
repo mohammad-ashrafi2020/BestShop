@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AdminPanel.Infrastructure;
 using AdminPanel.Infrastructure.RazorUtils;
+using AdminPanel.ViewModels.PostGroups;
 using Blog.Application.Services.PostGroups.Commands.CreateGroup;
 using Blog.Application.Services.PostGroups.Commands.EditGroup;
 using Blog.Application.Services.PostGroups.Commands.TogglePostGroupStatus;
@@ -10,7 +11,6 @@ using Blog.Application.Services.PostGroups.Queries.GetAll;
 using Blog.Application.Services.PostGroups.Queries.GetById;
 using Blog.Application.Services.PostGroups.Queries.GetChildGroups;
 using Common.Application;
-using Common.EndPoints.AdminPanel.ViewModels.PostGroups;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -21,33 +21,31 @@ namespace AdminPanel.Pages.BlogManagement.Groups
     public class IndexModel : RazorBase
     {
         private readonly IRenderViewToString _renderView;
-        private readonly IMediator _mediator;
 
         public IndexModel(IApplicationContext context, ILogger<IndexModel> logger
-           , IRenderViewToString renderView, IMediator mediator) : base(context, logger)
+           , IRenderViewToString renderView, IMediator mediator) : base(context, logger, mediator)
         {
             _renderView = renderView;
-            _mediator = mediator;
         }
 
         public List<BlogPostGroupDto> Groups { get; set; }
         public async Task OnGet()
         {
-            Groups = await _mediator.Send(new GetAllPostGroupQuery());
+            Groups = await Mediator.Send(new GetAllPostGroupQuery());
         }
 
         #region PostHandlers
         public async Task<IActionResult> OnPostInsertGroup(InsertBlogGroupViewModel model)
         {
             return await AjaxTryCatch(async () =>
-                await _mediator.Send(
+                await Mediator.Send(
                     new CreatePostGroupCommand(model.GroupTitle, model.EnglishGroupTitle, model.MetaDescription, model.ParentId))
                 , isSuccessReloadPage: true);
         }
         public async Task<IActionResult> OnPostEditGroup(EditBlogGroupViewModel model)
         {
             return await AjaxTryCatch(async () =>
-                await _mediator.Send(new EditPostGroupCommand(model.Id, model.MetaDescription, model.EnglishGroupTitle, model.GroupTitle)), isSuccessReloadPage: true);
+                await Mediator.Send(new EditPostGroupCommand(model.Id, model.MetaDescription, model.EnglishGroupTitle, model.GroupTitle)), isSuccessReloadPage: true);
         }
 
         #endregion
@@ -56,7 +54,7 @@ namespace AdminPanel.Pages.BlogManagement.Groups
         public async Task<IActionResult> OnGetToggleStatus(long id)
         {
             return await AjaxTryCatch(async () =>
-                await _mediator.Send(new TogglePostGroupStatusCommand(id)), true);
+                await Mediator.Send(new TogglePostGroupStatusCommand(id)), true);
         }
         public async Task<IActionResult> OnGetShowInsertModal(long? parent)
         {
@@ -85,7 +83,7 @@ namespace AdminPanel.Pages.BlogManagement.Groups
             return await AjaxTryCatch(async () =>
             {
 
-                var group = await _mediator.Send(new GetPostGroupByIdQuery(id));
+                var group = await Mediator.Send(new GetPostGroupByIdQuery(id));
                 if (group == null)
                     return OperationResult<string>.NotFound();
 
@@ -114,7 +112,7 @@ namespace AdminPanel.Pages.BlogManagement.Groups
 
         public async Task<IActionResult> OnGetLoadChildGroups(long parentId)
         {
-            var group = await _mediator.Send(new GetBlogChildGroupsQuery(parentId));
+            var group = await Mediator.Send(new GetBlogChildGroupsQuery(parentId));
             List<ObjectResult> values = new List<ObjectResult>();
 
             foreach (var item in group)

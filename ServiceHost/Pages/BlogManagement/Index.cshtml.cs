@@ -14,23 +14,21 @@ namespace AdminPanel.Pages.BlogManagement
 {
     public class IndexModel : RazorBase
     {
-        private readonly IMediator _mediator;
-        public IndexModel(IApplicationContext context, ILogger<IndexModel> logger, IMediator mediator) : base(context, logger)
+        public IndexModel(IApplicationContext context, ILogger<IndexModel> logger, IMediator mediator) : base(context, logger, mediator)
         {
-            _mediator = mediator;
         }
 
         public BlogPostFilterDto FilterDto { get; set; }
         public async Task OnGet(int pageId = 1, string search = "",
             SearchOn searchOn = SearchOn.All, string category = "")
         {
-            FilterDto = await _mediator.Send(new GetAllPostByFilterQuery(searchOn, category, search, 20, pageId));
+            FilterDto = await Mediator.Send(new GetAllPostByFilterQuery(searchOn, category, search, 20, pageId));
         }
 
         public async Task<IActionResult> OnGetToggleStatus(long id)
         {
             return await AjaxTryCatch(async () =>
-                await _mediator.Send(new TogglePostStatusCommand(id)), true);
+                await Mediator.Send(new TogglePostStatusCommand(id)), true);
         }
     }
 }

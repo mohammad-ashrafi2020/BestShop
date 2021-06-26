@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Blog.Configuration\Blog.Configuration.csproj" />
-    <ProjectReference Include="..\Common.EndPoints\Common.EndPoints.csproj" />
     <ProjectReference Include="..\Shop.Configuration\Shop.Configuration.csproj" />
   </ItemGroup>
 

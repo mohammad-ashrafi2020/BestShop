@@ -1,13 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Common.Application.Validation;
 using Common.EndPoints.CustomValidation.IFormFile;
 using Microsoft.AspNetCore.Http;
 
-namespace Common.EndPoints.AdminPanel.ViewModels.Posts
+namespace AdminPanel.ViewModels.Posts
 {
-    public class EditBlogPostViewModel
+    public class InsertBlogPostViewModel
     {
-        public long Id { get; set; }
         public Guid AuthorId { get; set; }
 
         [Display(Name = "عنوان مقاله")]
@@ -22,6 +22,7 @@ namespace Common.EndPoints.AdminPanel.ViewModels.Posts
         [Display(Name = "Meta Description")]
         [Required(ErrorMessage = ValidationMessages.Required)]
         [DataType(DataType.MultilineText)]
+
         public string MetaDescription { get; set; }
 
         [Display(Name = "توضیحات")]
@@ -30,6 +31,7 @@ namespace Common.EndPoints.AdminPanel.ViewModels.Posts
         public string Description { get; set; }
 
         [Display(Name = "عکس")]
+        [Required(ErrorMessage = "عکس پست را انتخاب کنید")]
         [FileImage(ErrorMessage = "شما فقط قادر به وارد کردن عکس می باشید")]
         [DataType(DataType.Upload)]
         public IFormFile ImageFile { get; set; }
@@ -64,7 +66,5 @@ namespace Common.EndPoints.AdminPanel.ViewModels.Posts
 
         [Display(Name = "وضعیت : فعال")]
         public bool IsActive { get; set; }
-
-        public string ImageName { get; set; }
     }
 }

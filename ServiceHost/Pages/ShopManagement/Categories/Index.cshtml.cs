@@ -1,16 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using AdminPanel.Infrastructure;
+using AdminPanel.Infrastructure.RazorUtils;
+using MediatR;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
 
 namespace AdminPanel.Pages.ShopManagement.Categories
 {
-    public class IndexModel : PageModel
+    public class IndexModel : RazorBase
     {
-        public void OnGet()
+        public IndexModel(IApplicationContext context, ILogger logger, IMediator mediator) : base(context, logger, mediator)
         {
         }
+        public async Task OnGet()
+        {
+
+        }
+
+
     }
 }

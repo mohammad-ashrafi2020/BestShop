@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Common.Application;
+using Common.Application.Validation;
 using Common.Core.Utilities;
+using Common.Domain.Exceptions;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -13,10 +16,12 @@ namespace AdminPanel.Infrastructure.RazorUtils
     {
         protected IApplicationContext Context { get; private set; }
         protected ILogger Logger { get; private set; }
-        public RazorBase(IApplicationContext context, ILogger logger)
+        protected IMediator Mediator;
+        public RazorBase(IApplicationContext context, ILogger logger, IMediator mediator)
         {
             Logger = logger;
             Context = context;
+            Mediator = mediator;
         }
         public async Task<IActionResult> TryCatch(Func<Task<OperationResult>> func,
             string successReturn = null,
@@ -269,6 +274,7 @@ namespace AdminPanel.Infrastructure.RazorUtils
             }
         }
 
+      
         public class AjaxResult
         {
             public string Message { get; set; }
