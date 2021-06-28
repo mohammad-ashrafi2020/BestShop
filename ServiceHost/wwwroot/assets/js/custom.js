@@ -5,16 +5,29 @@
         type: "get"
     }).done(function (data) {
         $(`#${wraperId}`).html('');
-
         $(`#${wraperId}`).append('<option>انتخاب کنید</option>');
         for (var item in data) {
-
             var group = data[item].value;
-            console.log(group);
 
             $(`#${wraperId}`).append(`<option value='${group.value}'>${group.title}</option>`);
-            $(`#${wraperId}`).selectpicker('refresh');
         }
+        $(`#${wraperId}`).selectpicker('refresh');
+    });
+}
+function LoadShopChildrenGroups(destinationId, thisId) {
+    var categoryId = $(`#${thisId}`).val();
+    $.ajax({
+        url: "/shopManagement/Categories/LoadChildCategories?parentId=" + categoryId,
+        type: "get"
+    }).done(function (data) {
+        $(`#${destinationId}`).html('');
+        $(`#${destinationId}`).append('<option>انتخاب کنید</option>');
+        for (var item in data) {
+            var group = data[item].value;
+
+            $(`#${destinationId}`).append(`<option value='${group.value}'>${group.title}</option>`);
+        }
+        $(`#${destinationId}`).selectpicker('refresh');
     });
 }
 $(document).ready(function () {

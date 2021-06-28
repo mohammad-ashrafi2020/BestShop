@@ -1,15 +1,15 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Common.Application;
-using Shop.Domain.ProductCategories.ProductCategoryAttributes;
+using Shop.Domain.Categories.CategoryAttributes;
 
 namespace Shop.Application.ProductCategories.ProductCategoryAttribute.Edit
 {
     public class EditProductCategoryAttributeCommandHandler : IBaseRequestHandler<EditProductCategoryAttributeCommand>
     {
-        private readonly IProductCategoryAttributeRepository _repository;
+        private readonly ICategoryAttributeRepository _repository;
 
-        public EditProductCategoryAttributeCommandHandler(IProductCategoryAttributeRepository repository)
+        public EditProductCategoryAttributeCommandHandler(ICategoryAttributeRepository repository)
         {
             _repository = repository;
         }

@@ -19,7 +19,41 @@ namespace Shop.Infrastructure.EF.Migrations
                 .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Shop.Domain.ProductCategories.ProductCategory.ProductCategory", b =>
+            modelBuilder.Entity("Shop.Domain.Brands.Brand", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("DeleteDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Logo")
+                        .HasMaxLength(110)
+                        .HasColumnType("nvarchar(110)");
+
+                    b.Property<string>("MainImage")
+                        .HasMaxLength(110)
+                        .HasColumnType("nvarchar(110)");
+
+                    b.Property<DateTime?>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Brands", "dbo");
+                });
+
+            modelBuilder.Entity("Shop.Domain.Categories.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -62,10 +96,10 @@ namespace Shop.Infrastructure.EF.Migrations
 
                     b.HasIndex("Slug");
 
-                    b.ToTable("ProductCategories", "dbo");
+                    b.ToTable("Categories", "dbo");
                 });
 
-            modelBuilder.Entity("Shop.Domain.ProductCategories.ProductCategoryAttributes.ProductCategoryAttribute", b =>
+            modelBuilder.Entity("Shop.Domain.Categories.CategoryAttributes.CategoryAttribute", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -98,13 +132,16 @@ namespace Shop.Infrastructure.EF.Migrations
                     b.Property<long?>("ParentId")
                         .HasColumnType("bigint");
 
+                    b.Property<bool>("ShowInLandingPage")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("ProductCategoryAttributes", "dbo");
+                    b.ToTable("CategoryAttributes", "dbo");
                 });
 
             modelBuilder.Entity("Shop.Domain.Products.Product", b =>
@@ -118,6 +155,9 @@ namespace Shop.Infrastructure.EF.Migrations
                         .IsRequired()
                         .HasMaxLength(110)
                         .HasColumnType("nvarchar(110)");
+
+                    b.Property<int>("BrandId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("DeleteDate")
                         .HasColumnType("datetime2");
@@ -151,6 +191,8 @@ namespace Shop.Infrastructure.EF.Migrations
                         .HasColumnType("nvarchar(500)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BrandId");
 
                     b.ToTable("Products", "dbo");
                 });
@@ -187,15 +229,15 @@ namespace Shop.Infrastructure.EF.Migrations
                     b.ToTable("ProductPicture");
                 });
 
-            modelBuilder.Entity("Shop.Domain.ProductCategories.ProductCategory.ProductCategory", b =>
+            modelBuilder.Entity("Shop.Domain.Categories.Category", b =>
                 {
-                    b.HasOne("Shop.Domain.ProductCategories.ProductCategory.ProductCategory", null)
+                    b.HasOne("Shop.Domain.Categories.Category", null)
                         .WithMany("SubCategories")
                         .HasForeignKey("ParentId");
 
                     b.OwnsOne("Shop.Domain.ValueObjects.MetaValue", "MetaValue", b1 =>
                         {
-                            b1.Property<int>("ProductCategoryId")
+                            b1.Property<int>("CategoryId")
                                 .ValueGeneratedOnAdd()
                                 .HasColumnType("int")
                                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -212,34 +254,40 @@ namespace Shop.Infrastructure.EF.Migrations
                                 .HasMaxLength(300)
                                 .HasColumnType("nvarchar(300)");
 
-                            b1.HasKey("ProductCategoryId");
+                            b1.HasKey("CategoryId");
 
-                            b1.ToTable("ProductCategories");
+                            b1.ToTable("Categories");
 
                             b1.WithOwner()
-                                .HasForeignKey("ProductCategoryId");
+                                .HasForeignKey("CategoryId");
                         });
 
                     b.Navigation("MetaValue");
                 });
 
-            modelBuilder.Entity("Shop.Domain.ProductCategories.ProductCategoryAttributes.ProductCategoryAttribute", b =>
+            modelBuilder.Entity("Shop.Domain.Categories.CategoryAttributes.CategoryAttribute", b =>
                 {
-                    b.HasOne("Shop.Domain.ProductCategories.ProductCategory.ProductCategory", "ProductCategory")
+                    b.HasOne("Shop.Domain.Categories.Category", "Category")
                         .WithMany("Attributes")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Shop.Domain.ProductCategories.ProductCategoryAttributes.ProductCategoryAttribute", null)
+                    b.HasOne("Shop.Domain.Categories.CategoryAttributes.CategoryAttribute", null)
                         .WithMany("Children")
                         .HasForeignKey("ParentId");
 
-                    b.Navigation("ProductCategory");
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("Shop.Domain.Products.Product", b =>
                 {
+                    b.HasOne("Shop.Domain.Brands.Brand", "Brand")
+                        .WithMany()
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.OwnsOne("Shop.Domain.ValueObjects.MetaValue", "MetaValue", b1 =>
                         {
                             b1.Property<long>("ProductId")
@@ -267,6 +315,8 @@ namespace Shop.Infrastructure.EF.Migrations
                                 .HasForeignKey("ProductId");
                         });
 
+                    b.Navigation("Brand");
+
                     b.Navigation("MetaValue");
                 });
 
@@ -279,14 +329,14 @@ namespace Shop.Infrastructure.EF.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Domain.ProductCategories.ProductCategory.ProductCategory", b =>
+            modelBuilder.Entity("Shop.Domain.Categories.Category", b =>
                 {
                     b.Navigation("Attributes");
 
                     b.Navigation("SubCategories");
                 });
 
-            modelBuilder.Entity("Shop.Domain.ProductCategories.ProductCategoryAttributes.ProductCategoryAttribute", b =>
+            modelBuilder.Entity("Shop.Domain.Categories.CategoryAttributes.CategoryAttribute", b =>
                 {
                     b.Navigation("Children");
                 });

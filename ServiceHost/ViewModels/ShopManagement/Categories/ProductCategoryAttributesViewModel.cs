@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Shop.Query.ProductCategories.ProductCategory.GetById;
 
 namespace AdminPanel.ViewModels.ShopManagement.Categories
 {
@@ -17,6 +16,9 @@ namespace AdminPanel.ViewModels.ShopManagement.Categories
         public int DisplayOrder { get; set; }
         public int CategoryId { get; set; }
         public long? ParentId { get; set; }
+
+        [Display(Name = "نمایش در صفحه محصول")]
+        public bool ShowInLandingPage { get; set; }
 
 
     }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Shop.Domain.ProductCategories.ProductCategory;
-using Shop.Domain.ProductCategories.ProductCategoryAttributes;
+using Shop.Domain.Brands;
+using Shop.Domain.Categories;
+using Shop.Domain.Categories.CategoryAttributes;
 using Shop.Domain.Products;
 
 namespace Shop.Infrastructure.EF.Context
@@ -12,8 +13,9 @@ namespace Shop.Infrastructure.EF.Context
             
         }
 
-        public DbSet<ProductCategory> ProductCategories { get; set; }
-        public DbSet<ProductCategoryAttribute> ProductCategoryAttributes { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<CategoryAttribute> CategoryAttributes { get; set; }
         public DbSet<Product> Products { get; set; }
 
 

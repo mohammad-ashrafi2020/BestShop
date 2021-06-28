@@ -3,14 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Application.DomainServices;
 using Shop.Application.ProductCategories.ProductCategory.Create;
-using Shop.Domain.ProductCategories.ProductCategory;
-using Shop.Domain.ProductCategories.ProductCategory.Rule;
-using Shop.Domain.ProductCategories.ProductCategoryAttributes;
+using Shop.Domain.Categories;
+using Shop.Domain.Categories.CategoryAttributes;
+using Shop.Domain.Categories.Rule;
 using Shop.Domain.Products;
 using Shop.Infrastructure.EF.Context;
 using Shop.Infrastructure.EF.Repository.ProductCategories;
 using Shop.Infrastructure.EF.Repository.Products;
-using Shop.Query.ProductCategories.ProductCategory.GetById;
+using Shop.Query.Categories.Category.GetById;
 
 namespace Shop.Configuration
 {
@@ -21,12 +21,12 @@ namespace Shop.Configuration
 
             #region Repositories
             service.AddScoped<IProductRepository, ProductRepository>();
-            service.AddScoped<IProductCategoryAttributeRepository, ProductCategoryAttributeRepository>();
-            service.AddTransient<IProductCategoryRepository, ProductCategoryRepository>();
+            service.AddScoped<ICategoryAttributeRepository, CategoryAttributeRepository>();
+            service.AddTransient<ICategoryRepository, CategoryRepository>();
             #endregion
 
             #region DomainServices
-            service.AddTransient<IProductCategorySlugUniquenessChecker, ProductCategorySlugUniquenessChecker>();
+            service.AddTransient<ICategorySlugUniquenessChecker, CategorySlugUniquenessChecker>();
             #endregion
 
 

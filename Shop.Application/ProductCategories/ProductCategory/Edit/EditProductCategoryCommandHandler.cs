@@ -4,16 +4,16 @@ using Common.Application;
 using Common.Application.FileUtil;
 using Common.Application.SecurityUtil;
 using Shop.Application.Utilities;
-using Shop.Domain.ProductCategories.ProductCategory;
-using Shop.Domain.ProductCategories.ProductCategory.Rule;
+using Shop.Domain.Categories;
+using Shop.Domain.Categories.Rule;
 
 namespace Shop.Application.ProductCategories.ProductCategory.Edit
 {
     public class EditProductCategoryCommandHandler : IBaseRequestHandler<EditProductCategoryCommand>
     {
-        private readonly IProductCategoryRepository _repository;
-        private readonly IProductCategorySlugUniquenessChecker _slugChecker;
-        public EditProductCategoryCommandHandler(IProductCategoryRepository repository, IProductCategorySlugUniquenessChecker slugChecker)
+        private readonly ICategoryRepository _repository;
+        private readonly ICategorySlugUniquenessChecker _slugChecker;
+        public EditProductCategoryCommandHandler(ICategoryRepository repository, ICategorySlugUniquenessChecker slugChecker)
         {
             _repository = repository;
             _slugChecker = slugChecker;

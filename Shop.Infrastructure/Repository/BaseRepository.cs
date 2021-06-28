@@ -40,6 +40,16 @@ namespace Shop.Infrastructure.EF.Repository
             await Context.Set<T>().AddRangeAsync(entities);
         }
 
+        public async Task ToggleStatus(TKey id)
+        {
+            var entity =await GetTracking(id);
+            if (entity.IsDelete)
+                entity.Recovery();
+            else
+                entity.Delete();
+            Update(entity);
+        }
+
         public  void Update(T entity)
         {
             Context.Update(entity);

@@ -1,31 +1,22 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Common.Application;
-using Shop.Domain.ProductCategories.ProductCategoryAttributes;
+using Shop.Domain.Categories.CategoryAttributes;
 
 namespace Shop.Application.ProductCategories.ProductCategoryAttribute.ToggleStatus
 {
     public class ToggleProductCategoryAttributeStatusCommandHandler : IBaseRequestHandler<ToggleProductCategoryAttributeStatusCommand>
     {
-        private readonly IProductCategoryAttributeRepository _repository;
+        private readonly ICategoryAttributeRepository _repository;
 
-        public ToggleProductCategoryAttributeStatusCommandHandler(IProductCategoryAttributeRepository repository)
+        public ToggleProductCategoryAttributeStatusCommandHandler(ICategoryAttributeRepository repository)
         {
             _repository = repository;
         }
 
         public async Task<OperationResult> Handle(ToggleProductCategoryAttributeStatusCommand request, CancellationToken cancellationToken)
         {
-            var model = await _repository.GetTracking(request.Id);
-            if (model == null)
-                return OperationResult.NotFound();
-
-            if (model.IsDelete)
-                model.Recovery();
-            else
-                model.Delete();
-
-            _repository.Update(model);
+            await _repository.ToggleStatus(request.Id);
             await _repository.Save();
             return OperationResult.Success();
         }

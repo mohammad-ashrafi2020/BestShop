@@ -14,8 +14,6 @@
   <ItemGroup>
     <Folder Include="Utils\" />
     <Folder Include="Utils\Specifications\" />
-    <Folder Include="ProductCategories\ProductCategoryAttributes\GetById\" />
-    <Folder Include="ProductCategories\ProductCategory\GetBySlug\" />
   </ItemGroup>
 
 </Project>

@@ -6,6 +6,7 @@ using AdminPanel.Infrastructure;
 using AdminPanel.Infrastructure.RazorUtils;
 using AdminPanel.ViewModels.ShopManagement.Categories;
 using Common.Application;
+using Common.Core.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,10 +15,10 @@ using Microsoft.Extensions.Logging;
 using Shop.Application.ProductCategories.ProductCategoryAttribute.Create;
 using Shop.Application.ProductCategories.ProductCategoryAttribute.Edit;
 using Shop.Application.ProductCategories.ProductCategoryAttribute.ToggleStatus;
+using Shop.Query.Categories.Category.GetByFilter;
+using Shop.Query.Categories.CategoryAttributes.GetByFilter;
+using Shop.Query.Categories.CategoryAttributes.GetById;
 using Shop.Query.DTOs.ProductCategories;
-using Shop.Query.ProductCategories.ProductCategory.GetByFilter;
-using Shop.Query.ProductCategories.ProductCategory.GetById;
-using Shop.Query.ProductCategories.ProductCategoryAttributes.GetByFilter;
 using Shop.Query.ProductCategories.ProductCategoryAttributes.GetById;
 
 namespace AdminPanel.Pages.ShopManagement.Categories.Attributes
@@ -31,25 +32,47 @@ namespace AdminPanel.Pages.ShopManagement.Categories.Attributes
             _renderView = renderView;
         }
 
-        public List<ProductCategoryAttributeDto> Entities { get; set; }
-        public List<SelectListItem> Categories { get; set; }
+        public List<CategoryAttributeDto> Entities { get; set; }
+        public List<SelectListItem> MainCategories { get; set; }
+        public List<SelectListItem> SubCategories { get; set; }
         public int CategoryId { get; set; }
         public async Task OnGet(int categoryId = 0)
         {
             CategoryId = categoryId;
-            var categories = await Mediator.Send(new GetProductCategoriesByFilterQuery(1, 500, null, null));
-            Categories = categories.Categories.Select(s => new SelectListItem()
+            var categories = await Mediator.Send(new GetCategoriesByFilterQuery(1, 500, null, null) { SearchOn = SearchOn.Active });
+            var currentCategory = categories.Categories.FirstOrDefault(c => c.Id == categoryId);
+            var main = categories.Categories.Where(c => c.ParentId == null);
+
+            MainCategories = main.Select(s => new SelectListItem()
             {
                 Text = s.CategoryTitle,
                 Value = s.Id.ToString(),
-                Selected = categoryId == s.Id
+                Selected = currentCategory?.ParentId == s.Id
             }).ToList();
-            Entities = await Mediator.Send(new GetProductCategoryAttributeByFilter(categoryId));
+
+            if (currentCategory != null)
+            {
+                if (currentCategory.ParentId == null)
+                {
+                    CategoryId = 0;
+                    return;
+                }
+
+                var sub = categories.Categories.Where(c => c.ParentId == currentCategory.ParentId);
+                SubCategories = sub.Select(s => new SelectListItem()
+                {
+                    Text = s.CategoryTitle,
+                    Value = s.Id.ToString(),
+                    Selected = categoryId == s.Id
+                }).ToList();
+
+                Entities = await Mediator.Send(new GetCategoryAttributeByFilter(categoryId));
+            }
         }
 
         public async Task<IActionResult> OnGetToggleStatus(long id)
         {
-            return await AjaxTryCatch(async () => 
+            return await AjaxTryCatch(async () =>
                await Mediator.Send(new ToggleProductCategoryAttributeStatusCommand(id)), true);
         }
         #region Insert
@@ -58,10 +81,10 @@ namespace AdminPanel.Pages.ShopManagement.Categories.Attributes
         {
             return await AjaxTryCatch(async ()
                     => await Mediator.Send(new CreateProductCategoryAttributeCommand
-                        (model.Key, model.Hint, model.DisplayOrder, model.CategoryId,model.ParentId))
+                        (model.Key, model.Hint, model.DisplayOrder, model.CategoryId, model.ShowInLandingPage, model.ParentId))
                 , true);
         }
-        public async Task<IActionResult> OnGetShowInsertPage(int categoryId,long parentId)
+        public async Task<IActionResult> OnGetShowInsertPage(int categoryId, long parentId)
         {
             return await AjaxTryCatch(async () =>
             {
@@ -82,15 +105,15 @@ namespace AdminPanel.Pages.ShopManagement.Categories.Attributes
         {
             return await AjaxTryCatch(async ()
                     => await Mediator.Send(new EditProductCategoryAttributeCommand
-                        (model.Id,model.Key, model.Hint, model.DisplayOrder))
+                        (model.Id, model.Key, model.Hint, model.DisplayOrder))
                 , true);
         }
         public async Task<IActionResult> OnGetShowEditPage(long id)
         {
             return await AjaxTryCatch(async () =>
             {
-                var model =await Mediator.Send(new GetProductCategoryAttributeById(id));
-                if(model==null)
+                var model = await Mediator.Send(new GetCategoryAttributeById(id));
+                if (model == null)
                     return OperationResult<string>.NotFound();
 
                 var view = await _renderView.RenderToStringAsync("_Edit", new EditProductCategoryAttributeViewModel()
@@ -100,7 +123,8 @@ namespace AdminPanel.Pages.ShopManagement.Categories.Attributes
                     Hint = model.Hint,
                     Id = model.Id,
                     Key = model.Key,
-                    ParentId = model.ParentId
+                    ParentId = model.ParentId,
+                    ShowInLandingPage = model.ShowInLandingPage
                 }, PageContext);
                 return OperationResult<string>.Success(data: view);
             });

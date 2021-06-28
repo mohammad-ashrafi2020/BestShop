@@ -17,9 +17,14 @@
         <div class="body">
             <div class="row">
                 <div class="col-md-3">
-                    <label>دسته بندی</label>
-                    <select class="form-control show-tick" asp-items="Model.Categories" name="categoryId">
+                    <label>دسته بندی اصلی</label>
+                    <select class="form-control show-tick" id="mainGroups" asp-items="Model.MainCategories" onchange="LoadShopChildrenGroups('subGroups','mainGroups')">
                         <option>انتخاب کنید</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label>زیر دسته بندی</label>
+                    <select class="form-control show-tick" asp-items="Model.SubCategories"  name="categoryId" id="subGroups">
                     </select>
                 </div>
             </div>

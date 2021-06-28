@@ -14,19 +14,21 @@
             </li>
         
             <li class="header">فروشگاه</li>
-            <li class="@(selected.Contains("Shop")?"active open":null)">
-                <a href="javascript:void(0);" class="menu-toggle">
-                    <i class="zmdi zmdi-shopping-cart"></i><span>دسته بندی ها</span>
+           
+            <li class="@(selected == "ShopCategoryAttributes" ? "active" : null)">
+                <a class="@(selected == "ShopCategoryAttributes" ? "toggled" : null)" href="/shopManagement/Categories/Attributes">
+                    <i class="zmdi zmdi-collection-item-9"></i><span>Attributes</span>
                 </a>
-                <ul class="ml-menu">
-                    <li class="@(selected == "ShopCategories" ? "active" : null)">
-                        <a class="@(selected == "index" ? "toggled" : null)" href="/shopManagement/Categories">لیست دسته بندی ها</a>
-                    </li>
-                    <li class="@(selected == "ShopCategoryAttributes" ? "active" : null)">
-                        <a class="@(selected == "ShopCategoryAttributes" ? "toggled" : null)" href="/shopManagement/Categories/Attributes">Attributes</a>
-                    </li>
-                   
-                </ul>
+            </li>
+            <li class="@(selected == "ShopCategories" ? "active" : null)">
+                <a class="@(selected == "ShopCategories" ? "toggled" : null)" href="/shopManagement/Categories">
+                    <i class="zmdi zmdi-group-work"></i><span> دسته بندی ها</span>
+                </a>
+            </li>
+            <li class="@(selected=="products"?"active":null)">
+                <a class="@(selected=="products"?"toggled":null)" href="/shopManagement/products">
+                    <i class="zmdi zmdi-collection-item"></i><span>محصولات</span>
+                </a>
             </li>
             <li class="header">وبلاگ</li>
             <li class="@(selected=="blogGroups"?"active":null)">

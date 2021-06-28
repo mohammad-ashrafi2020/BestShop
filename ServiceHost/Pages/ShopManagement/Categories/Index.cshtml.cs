@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AdminPanel.Infrastructure;
 using AdminPanel.Infrastructure.RazorUtils;
 using AdminPanel.ViewModels.ShopManagement.Categories;
 using Common.Application;
+using Common.Core.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,9 +13,10 @@ using Shop.Application.ProductCategories.ProductCategory.Create;
 using Shop.Application.ProductCategories.ProductCategory.Edit;
 using Shop.Application.ProductCategories.ProductCategory.ToggleStatus;
 using Shop.Domain.ValueObjects;
+using Shop.Query.Categories.Category.GetByFilter;
+using Shop.Query.Categories.Category.GetById;
+using Shop.Query.Categories.Category.GetByParentId;
 using Shop.Query.DTOs.ProductCategories.Filters;
-using Shop.Query.ProductCategories.ProductCategory.GetByFilter;
-using Shop.Query.ProductCategories.ProductCategory.GetById;
 
 namespace AdminPanel.Pages.ShopManagement.Categories
 {
@@ -26,11 +29,11 @@ namespace AdminPanel.Pages.ShopManagement.Categories
             _renderView = renderView;
         }
 
-        public ProductCategoriesFilterDto FilterDto { get; set; }
+        public CategoriesFilterDto FilterDto { get; set; }
 
         public async Task OnGet(int pageId = 1, string title = null)
         {
-            FilterDto = await Mediator.Send(new GetProductCategoriesByFilterQuery(pageId, 15, title));
+            FilterDto = await Mediator.Send(new GetCategoriesByFilterQuery(pageId, 15, title));
         }
 
         #region PostHandlers
@@ -88,7 +91,7 @@ namespace AdminPanel.Pages.ShopManagement.Categories
                     Id = id,
                     ParentId = model.ParentId,
                     MetaDescription = model.MetaValue.Description,
-                    MetaKeyWords = model.MetaValue.KeyWords?.Replace(",","-"),
+                    MetaKeyWords = model.MetaValue.KeyWords?.Replace(",", "-"),
                     MetaTitle = model.MetaValue.Title,
                     ShowInMenu = model.ShowInMenu,
                     Slug = model.Slug,
@@ -100,5 +103,18 @@ namespace AdminPanel.Pages.ShopManagement.Categories
             });
         }
         #endregion
+
+        public async Task<JsonResult> OnGetLoadChildCategories(int parentId)
+        {
+            var group = await Mediator.Send(new GetCategoriesByParentId(parentId) { SearchOn = SearchOn.Active });
+            List<ObjectResult> values = new List<ObjectResult>();
+
+            foreach (var item in group)
+            {
+                values.Add(new ObjectResult(new { value = item.Id, title = item.CategoryTitle }));
+            }
+
+            return new JsonResult(values);
+        }
     }
 }

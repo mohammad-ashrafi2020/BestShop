@@ -11,6 +11,7 @@ namespace Common.Domain.Repository
         Task<T> GetTracking(TKey id);
         Task Create(T entity);
         Task AddRange(ICollection<T> entities);
+        Task ToggleStatus(TKey id);
         void Update(T entity);
         Task<int> Save();
         Task<bool> Exists(Expression<Func<T, bool>> expression);

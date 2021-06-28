@@ -15,8 +15,9 @@
     <ProjectReference Include="..\Shop.Domain\Shop.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Mapping\Brands\" />
     <Folder Include="Mapping\Products\" />
-    <Folder Include="Repository\ProductCategories\" />
+    <Folder Include="Repository\Brands\" />
     <Folder Include="Repository\Products\" />
   </ItemGroup>
 

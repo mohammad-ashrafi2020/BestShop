@@ -1,15 +1,15 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Common.Application;
-using Shop.Domain.ProductCategories.ProductCategoryAttributes;
+using Shop.Domain.Categories.CategoryAttributes;
 
 namespace Shop.Application.ProductCategories.ProductCategoryAttribute.Create
 {
     public class CreateProductCategoryAttributeCommandHandler : IBaseRequestHandler<CreateProductCategoryAttributeCommand>
     {
-        private readonly IProductCategoryAttributeRepository _repository;
+        private readonly ICategoryAttributeRepository _repository;
 
-        public CreateProductCategoryAttributeCommandHandler(IProductCategoryAttributeRepository repository)
+        public CreateProductCategoryAttributeCommandHandler(ICategoryAttributeRepository repository)
         {
             _repository = repository;
         }
@@ -21,14 +21,13 @@ namespace Shop.Application.ProductCategories.ProductCategoryAttribute.Create
                 var parent = await _repository.GetTracking((long)request.ParentId);
                 if (parent == null)
                     return OperationResult.NotFound();
-                parent.AddChild(request.Key, request.Hint, request.DisplayOrder);
+                parent.AddChild(request.Key, request.Hint, request.DisplayOrder,request.ShowInLandingPage);
                 _repository.Update(parent);
                 await _repository.Save();
                 return OperationResult.Success();
             }
 
-            var model = new Domain.ProductCategories.ProductCategoryAttributes
-                .ProductCategoryAttribute(request.Key, request.CategoryId, request.Hint, request.DisplayOrder);
+            var model = new CategoryAttribute(request.Key, request.CategoryId, request.Hint, request.DisplayOrder);
             await _repository.Create(model);
             await _repository.Save();
             return OperationResult.Success();

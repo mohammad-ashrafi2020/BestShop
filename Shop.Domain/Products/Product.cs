@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Domain;
 using Common.Domain.Exceptions;
+using Shop.Domain.Brands;
 using Shop.Domain.Products.ProductPictures;
 using Shop.Domain.ValueObjects;
 
@@ -10,6 +11,7 @@ namespace Shop.Domain.Products
 {
     public class Product : BaseEntity<long>
     {
+        public int BrandId { get; set; }
         public string EnglishName { get; private set; }
         public string PersianName { get; private set; }
         public string ShortDescription { get; private set; }
@@ -17,6 +19,8 @@ namespace Shop.Domain.Products
         public MetaValue MetaValue { get; private set; }
         public string ImageName { get; private set; }
         public string BitMapImageName { get; private set; }
+
+        public Brand Brand { get; set; }
         public ICollection<ProductPicture> ProductImages { get; set; }
 
 

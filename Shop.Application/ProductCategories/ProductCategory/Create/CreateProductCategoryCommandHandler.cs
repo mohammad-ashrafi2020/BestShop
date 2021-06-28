@@ -5,16 +5,16 @@ using Common.Application;
 using Common.Application.FileUtil;
 using Common.Application.SecurityUtil;
 using Shop.Application.Utilities;
-using Shop.Domain.ProductCategories.ProductCategory;
-using Shop.Domain.ProductCategories.ProductCategory.Rule;
+using Shop.Domain.Categories;
+using Shop.Domain.Categories.Rule;
 
 namespace Shop.Application.ProductCategories.ProductCategory.Create
 {
     public class CreateProductCategoryCommandHandler : IBaseRequestHandler<CreateProductCategoryCommand>
     {
-        private readonly IProductCategoryRepository _categoryRepository;
-        private readonly IProductCategorySlugUniquenessChecker _slugChecker;
-        public CreateProductCategoryCommandHandler(IProductCategoryRepository categoryRepository, IProductCategorySlugUniquenessChecker slugChecker)
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly ICategorySlugUniquenessChecker _slugChecker;
+        public CreateProductCategoryCommandHandler(ICategoryRepository categoryRepository, ICategorySlugUniquenessChecker slugChecker)
         {
             _categoryRepository = categoryRepository;
             _slugChecker = slugChecker;
@@ -38,7 +38,7 @@ namespace Shop.Application.ProductCategories.ProductCategory.Create
             }
             else
             {
-                Domain.ProductCategories.ProductCategory.ProductCategory category =
+                Category category =
                     new(request.Title, request.Slug, request.MetaValue, imageName, request.ShowInMenu, _slugChecker);
                 await _categoryRepository.Create(category);
             }

@@ -8,7 +8,7 @@
            url="/shopManagement/Categories/ShowAddPage?parent=null">گروه جدید</popupLink>
 <div class="card">
     <div class="table-responsive">
-        <table class="table table-bordered table-hover">
+        <table class="table table-bordered ">
             <thead>
                 <tr>
                     <td>عنوان</td>
@@ -70,6 +70,36 @@
                                                 </popupLink>
                                             </div>
                                         </li>
+                                        @if (Model.FilterDto.Categories.Any(g => g.ParentId == sub.Id))
+                                        {
+                                            foreach (var group in Model.FilterDto.Categories.Where(g=>g.ParentId==sub.Id))
+                                            {
+                                                <li style="margin-right: 15px; list-style: circle">
+                                                    <div class="text-right" style="padding: 5px;margin: 5px">
+                                                        @group.CategoryTitle (<small>@group.Slug</small>)
+                                                        @if (sub.IsActive)
+                                                        {
+                                                            <DeleteItem url="/ShopManagement/Categories/ToggleStatus?id=@group.Id" class="btn btn-link">
+                                                                <i class="zmdi zmdi-delete"></i>
+
+                                                            </DeleteItem>
+                                                        }
+                                                        else
+                                                        {
+                                                            <Question url="/ShopManagement/Categories/ToggleStatus?id=@group.Id" class="btn btn-sm  btn-info">
+                                                                فعال سازی
+                                                            </Question>
+                                                        }
+                           
+                                                        <popupLink url="/ShopManagement/Categories/ShowEditPage?id=@group.Id"
+                                                                   class="btn btn-link"
+                                                                   title="ویرایش گروه">
+                                                            <i class="zmdi zmdi-edit"></i>
+                                                        </popupLink>
+                                                    </div>
+                                                </li>
+                                            }
+                                        }
                                     </ul>
 
                                 }

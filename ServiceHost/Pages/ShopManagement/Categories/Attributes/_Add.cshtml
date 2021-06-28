@@ -6,4 +6,8 @@
     <div class="col-md-6">@Html.EditorFor(m => m.Key)</div>
     <div class="col-md-6">@Html.EditorFor(m => m.DisplayOrder)</div>
     <div class="col-md-12">@Html.EditorFor(m => m.Hint)</div>
+    @if (Model.ParentId is > 0)
+    {
+        <div class="col-md-12">@Html.EditorFor(m => m.ShowInLandingPage)</div>
+    }
 </form>
