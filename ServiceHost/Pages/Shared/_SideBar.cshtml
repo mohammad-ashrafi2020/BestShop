@@ -12,9 +12,13 @@
                     <i class="zmdi zmdi-home"></i><span>داشبورد</span>
                 </a>
             </li>
-        
+
             <li class="header">فروشگاه</li>
-           
+            <li class="@(selected == "brands" ? "active" : null)">
+                <a class="@(selected == "brands" ? "toggled" : null)" href="/shopManagement/brands">
+                    <i class="zmdi zmdi-border-all"></i><span>برند ها</span>
+                </a>
+            </li>
             <li class="@(selected == "ShopCategoryAttributes" ? "active" : null)">
                 <a class="@(selected == "ShopCategoryAttributes" ? "toggled" : null)" href="/shopManagement/Categories/Attributes">
                     <i class="zmdi zmdi-collection-item-9"></i><span>Attributes</span>

@@ -3,11 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Application.DomainServices;
 using Shop.Application.ProductCategories.ProductCategory.Create;
+using Shop.Domain.Brands;
 using Shop.Domain.Categories;
 using Shop.Domain.Categories.CategoryAttributes;
 using Shop.Domain.Categories.Rule;
 using Shop.Domain.Products;
 using Shop.Infrastructure.EF.Context;
+using Shop.Infrastructure.EF.Repository.Brands;
 using Shop.Infrastructure.EF.Repository.ProductCategories;
 using Shop.Infrastructure.EF.Repository.Products;
 using Shop.Query.Categories.Category.GetById;
@@ -22,7 +24,8 @@ namespace Shop.Configuration
             #region Repositories
             service.AddScoped<IProductRepository, ProductRepository>();
             service.AddScoped<ICategoryAttributeRepository, CategoryAttributeRepository>();
-            service.AddTransient<ICategoryRepository, CategoryRepository>();
+            service.AddScoped<ICategoryRepository, CategoryRepository>();
+            service.AddScoped<IBrandRepository, BrandRepository>();
             #endregion
 
             #region DomainServices

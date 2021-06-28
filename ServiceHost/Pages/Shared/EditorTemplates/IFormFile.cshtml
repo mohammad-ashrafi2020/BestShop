@@ -13,13 +13,15 @@
         background: white;
         position: relative;
         z-index: 1;
+        min-width: 101px;
+        text-align: center;
     }
 </style>
 <div class="form-group">
     <div class="form-line" style="position: relative">
-        <label for="file-upload" class="custom-file-upload" asp-for="@Model">
+        <label  class="custom-file-upload" asp-for="@Model">
         </label>
-        <input id="file-upload" asp-for="@Model" type="file"/>
+        <input  asp-for="@Model" type="file"/>
     </div>
     <span asp-validation-for="@Model" class="text-danger"></span>
 </div>

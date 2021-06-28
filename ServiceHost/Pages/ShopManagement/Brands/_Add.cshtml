@@ -1,0 +1,12 @@
+﻿@model AdminPanel.ViewModels.ShopManagement.Brands.AddBrandViewModel
+<form data-ajax="true" asp-page="Index" asp-page-handler="Insert" class="row">
+    <div class="col-12">
+        @Html.EditorFor(m=>m.Name)
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(m=>m.LogoFile)
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(m=>m.ImageFile)
+    </div>
+</form>

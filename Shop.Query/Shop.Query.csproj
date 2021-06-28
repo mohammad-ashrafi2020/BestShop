@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Brands\BetById\" />
     <Folder Include="Utils\" />
     <Folder Include="Utils\Specifications\" />
   </ItemGroup>

@@ -8,5 +8,6 @@ namespace Shop.Application.Utilities
         public static string Brands(string brandName) => $"wwwroot/images/brands/{brandName.ToSlug()}";
 
         public static string GetProductCategory(string imageName) => $"{ProductCategories.Replace("wwwroot", "")}/{imageName}";
+        public static string GetBrand(string brandName,string imageName) => $"{Brands(brandName).Replace("wwwroot", "")}/{imageName}";
     }
 }

@@ -1,0 +1,57 @@
+﻿@page "{handler?}"
+@using Shop.Application.Utilities
+@model AdminPanel.Pages.ShopManagement.Brands.IndexModel
+@{
+    ViewData["Title"] = "برند ها";
+    ViewData["Selected"] = "brands";
+}
+<popupLink title="برند جدید" class="btn btn-success  mb-3"
+           url="@Url.Page("Index", "ShowInsertPage")">
+    برند جدید
+</popupLink>
+<div class="card">
+    <div class="body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>لگو</td>
+                        <td>عنوان</td>
+                        <td>عملیات</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Brands)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>
+                                <img src="@ShopDirectories.GetBrand(item.Name, item.LogoName)" style="width: 100px; height: 100px; border-radius: 10px" />
+                            </td>
+                            <td>@item.Name</td>
+                            <td>
+                                <popupLink title="ویرایش" class="btn btn-primary btn-sm"
+                                           url="@Url.Page("Index", "ShowEditPage", new {id= item.Id})">
+                                    ویرایش
+                                </popupLink>
+                                @if (item.IsActive)
+                                {
+                                    <DeleteItem url="/ShopManagement/Brands/ToggleStatus?id=@item.Id" class="btn btn-danger btn-sm">
+                                        حذف
+                                    </DeleteItem>
+                                }
+                                else
+                                {
+                                    <Question url="/ShopManagement/Brands/ToggleStatus?id=@item.Id" class="btn btn-sm  btn-info">
+                                        فعال سازی
+                                    </Question>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

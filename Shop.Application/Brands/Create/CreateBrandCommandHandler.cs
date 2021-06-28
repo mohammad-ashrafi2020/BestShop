@@ -24,11 +24,11 @@ namespace Shop.Application.Brands.Create
             string image = null;
             if (request.LogoFile != null)
                 if (request.LogoFile.IsImage())
-                    logo = await request.LogoFile.SaveFile(ShopDirectories.Brands(request.Name.ToSlug()));
+                    logo = await request.LogoFile.SaveFile(ShopDirectories.Brands(request.Name));
 
             if (request.ImageFile != null)
                 if (request.ImageFile.IsImage())
-                    image = await request.ImageFile.SaveFile(ShopDirectories.Brands(request.Name.ToSlug()));
+                    image = await request.ImageFile.SaveFile(ShopDirectories.Brands(request.Name));
 
             var model = new Brand(request.Name, logo, image);
             await _repository.Create(model);

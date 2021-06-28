@@ -1,0 +1,20 @@
+﻿@using Shop.Application.Utilities
+@model AdminPanel.ViewModels.ShopManagement.Brands.EditBrandViewModel
+<form data-ajax="true" asp-page="Index" asp-page-handler="Edit" class="row">
+    @Html.HiddenFor(m => m.Id)
+    <div class="col-12">
+        @Html.EditorFor(m => m.Name)
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.LogoFile)
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.ImageFile)
+    </div>
+    <div class="col-12 text-center mb-2">
+        <label>Logo :</label>
+        <img style="width: 170px; height: 170px; border-radius: 50%; box-shadow: 0 0 5px 0 grey; margin: 5px" src="@ShopDirectories.GetBrand(Model.Name, Model.LogoName)" />
+        <label>Image :</label>
+        <img style="width: 170px; height: 170px; border-radius: 50%; box-shadow: 0 0 5px 0 grey; margin: 5px" src="@ShopDirectories.GetBrand(Model.Name, Model.ImageName)" />
+    </div>
+</form>

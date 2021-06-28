@@ -1,4 +1,6 @@
-﻿using System.Threading;
+﻿using System;
+using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using Common.Application;
 using Common.Application.FileUtil;
@@ -25,6 +27,7 @@ namespace Shop.Application.Brands.Edit
 
             var oldLogo = model.Logo;
             var oldImage = model.MainImage;
+            var oldName = model.Name;
             string logo = null;
             string image = null;
 
@@ -37,12 +40,16 @@ namespace Shop.Application.Brands.Edit
                 if (request.ImageFile.IsImage())
                     image = await request.ImageFile.SaveFile(ShopDirectories.Brands(request.Name));
 
+           
 
-
-
-            model.Edit(request.Name, logo, image);
+            model.Edit(request.Name, image, logo);
+            _repository.Update(model);
             await _repository.Save();
 
+            if (request.Name != oldName)
+            {
+                RenameDirectory.Rename(ShopDirectories.Brands(oldName), ShopDirectories.Brands(request.Name));
+            }
             if (request.LogoFile != null)
                 if (request.LogoFile.IsImage())
                     DeleteFileFromServer.DeleteFile(oldLogo, ShopDirectories.Brands(request.Name));
