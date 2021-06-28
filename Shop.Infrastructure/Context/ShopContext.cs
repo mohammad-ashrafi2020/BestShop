@@ -16,6 +16,12 @@ namespace Shop.Infrastructure.EF.Context
         public DbSet<ProductCategoryAttribute> ProductCategoryAttributes { get; set; }
         public DbSet<Product> Products { get; set; }
 
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+            base.OnConfiguring(optionsBuilder);
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             var assembly = typeof(ShopContext).Assembly;

@@ -9,23 +9,24 @@ namespace Blog.Application.Services.PostGroups.Commands.EditGroup
 {
     public class EditPostGroupCommandHandler : IBaseRequestHandler<EditPostGroupCommand>
     {
-        private BlogContext Context { get; }
+        private readonly BlogContext _context;
         private readonly IEnglishTitleUniquenessChecker _checker;
 
         public EditPostGroupCommandHandler(BlogContext context, IEnglishTitleUniquenessChecker checker)
         {
-            Context = context;
+            _context = context;
             _checker = checker;
         }
 
 
         public async Task<OperationResult> Handle(EditPostGroupCommand request, CancellationToken cancellationToken)
         {
-            var group = await Context.BlogPostGroups
+            var group = await _context.BlogPostGroups
                 .AsTracking().SingleOrDefaultAsync(d => d.Id == request.Id, cancellationToken: cancellationToken);
 
             group.Edit(request.EnglishGroupTitle, request.GroupTitle, request.MetaDescription,_checker);
-            Context.Update(group);
+            _context.Update(group);
+            await _context.SaveChangesAsync(cancellationToken);
 
             return OperationResult.Success();
         }

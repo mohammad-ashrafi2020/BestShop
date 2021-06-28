@@ -92,6 +92,12 @@ body.rtl {
     background: #f4f5fa;
     border-top: 3px solid orange;
 }
+.table tbody {
+    text-align: center !important;
+}
+.table {
+    margin: 0;
+}
 .row {
     margin: 0;
     padding: 0;
@@ -124,4 +130,7 @@ th {
     border-bottom-right-radius: .25rem !important;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+}
+.rtl .table thead tr th, .rtl .table thead tr td {
+    text-align: center !important; 
 }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Blog.Domain.Entities.BlogPostAggregate;
 using Blog.Domain.Entities.BlogPostGroupAggregate.Rules;
 using Common.Core.Utilities;
-using Common.Domain.Domain;
+using Common.Domain;
 using Common.Domain.Exceptions;
 using Common.Domain.Utils;
 

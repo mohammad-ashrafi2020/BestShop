@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Blog.Application.Services.Posts.Commands.CreatePost
 {
-    public class CreatePostCommand : IBaseRequest, ICommitTableRequest
+    public class CreatePostCommand : IBaseRequest
     {
         public CreatePostCommand(Guid authorId, string title, string slug, string metaDescription, string description, string imageAlt, string tags, int timeRequiredToStudy, long groupId, long? subGroupId, string dateRelease, bool isSpecial, bool isActive, IFormFile imageFile)
         {

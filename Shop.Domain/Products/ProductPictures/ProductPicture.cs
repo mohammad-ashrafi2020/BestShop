@@ -1,5 +1,5 @@
 ﻿using System;
-using Common.Domain.Domain;
+using Common.Domain;
 
 namespace Shop.Domain.Products.ProductPictures
 {

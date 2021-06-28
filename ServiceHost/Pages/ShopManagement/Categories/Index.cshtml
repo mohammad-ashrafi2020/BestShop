@@ -1,24 +1,111 @@
-﻿@page
+﻿@page "{handler?}"
 @model AdminPanel.Pages.ShopManagement.Categories.IndexModel
 @{
     ViewData["Title"] = "دسته بندی های فروشگاه";
     ViewData["Selected"] = "ShopCategories";
 }
+<popupLink title="افرودن گروه" class="btn btn-success m-3"
+           url="/shopManagement/Categories/ShowAddPage?parent=null">گروه جدید</popupLink>
 <div class="card">
-    <div class="body">
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover">
-                <thead>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <td>عنوان</td>
+                    <td>نمایش در منو</td>
+                    <td>زیر گروه</td>
+                    <td>عملیات</td>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.FilterDto.EntityCount == 0)
+                {
                     <tr>
-                        <td>#</td>
-                        <td>عنوان</td>
-                        <td>زیر گروه</td>
-                        <td></td>
+                        <td colspan="4" class="text-center">موردی برای نمایش وجود ندارد</td>
                     </tr>
-                </thead>
-            </table>
-        </div>
+                }
+                @foreach (var item in Model.FilterDto.Categories.Where(c=>c.ParentId==null))
+                {
+                    <tr>
+                        <td>@item.CategoryTitle</td>
+                        <td>
+                            @if (item.ShowInMenu)
+                            {
+                                <label class="label label-success">بله</label>
+                            }
+                            else
+                            {
+                                <label class="label label-danger">خیر</label>
+                            }
+                        </td>
+                        <td>
+                            @if (Model.FilterDto.Categories.Any(g => g.ParentId == item.Id))
+                            {
+                                @foreach (var sub in Model.FilterDto.Categories.Where(g => g.ParentId == item.Id))
+                                {
+                                    <ul class="table-bordered" style="box-shadow: 0 0 5px rgba(27, 27, 27, 0.12); padding-right: 5px;">
+                                        <li>
+                                            <div class="text-right" style="padding: 5px; margin: 5px">
+                                                @sub.CategoryTitle (<small>@sub.Slug</small>)
+                                                @if (sub.IsActive)
+                                                {
+                                                    <DeleteItem url="/ShopManagement/Categories/ToggleStatus?id=@sub.Id" class="btn btn-link">
+                                                        <i class="zmdi zmdi-delete"></i>
+
+                                                    </DeleteItem>
+                                                }
+                                                else
+                                                {
+                                                    <Question url="/ShopManagement/Categories/ToggleStatus?id=@sub.Id" class="btn btn-sm  btn-info">
+                                                        فعال سازی
+                                                    </Question>
+                                                }
+                                                <popupLink title="افرودن گروه" class="btn btn-link"
+                                                           url="/shopManagement/Categories/ShowAddPage?parentId=@sub.Id"><i class="zmdi zmdi-plus"></i></popupLink>
+                           
+                                                <popupLink url="/ShopManagement/Categories/ShowEditPage?id=@sub.Id"
+                                                           class="btn btn-link"
+                                                           title="ویرایش گروه">
+                                                    <i class="zmdi zmdi-edit"></i>
+                                                </popupLink>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                }
+                            }
+                        </td>
+
+                        <td>
+                            @if (item.IsActive)
+                            {
+                                <DeleteItem url="/ShopManagement/Categories/ToggleStatus?id=@item.Id" class="btn btn-link">
+                                    <i class="zmdi zmdi-delete"></i>
+
+                                </DeleteItem>
+                            }
+                            else
+                            {
+                                <Question url="/ShopManagement/Categories/ToggleStatus?id=@item.Id" class="btn btn-sm  btn-info">
+                                    فعال سازی
+                                </Question>
+                            }
+                            <popupLink title="افرودن گروه" class="btn btn-link"
+                                       url="/shopManagement/Categories/ShowAddPage?parentId=@item.Id"><i class="zmdi zmdi-plus"></i></popupLink>
+                           
+                            <popupLink url="/ShopManagement/Categories/ShowEditPage?id=@item.Id"
+                                       class="btn btn-link"
+                                       title="ویرایش گروه">
+                                <i class="zmdi zmdi-edit"></i>
+                            </popupLink>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
     </div>
     <div class="card-footer">
+        <partial name="Shared/_Pagination" model="Model.FilterDto" />
     </div>
 </div>

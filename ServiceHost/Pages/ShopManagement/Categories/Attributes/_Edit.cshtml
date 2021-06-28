@@ -1,0 +1,10 @@
+﻿@model AdminPanel.ViewModels.ShopManagement.Categories.EditProductCategoryAttributeViewModel
+
+<form data-ajax="true" asp-page="Index" asp-page-handler="Edit" method="post" class="row">
+    @Html.HiddenFor(m => m.CategoryId)
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.ParentId)
+    <div class="col-md-6">@Html.EditorFor(m => m.Key)</div>
+    <div class="col-md-6">@Html.EditorFor(m => m.DisplayOrder)</div>
+    <div class="col-md-12">@Html.EditorFor(m => m.Hint)</div>
+</form>

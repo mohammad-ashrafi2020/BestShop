@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Common.Domain.Domain;
-using Common.Domain.Domain.Repository;
+using Common.Domain;
+using Common.Domain.Repository;
 using Microsoft.EntityFrameworkCore;
 using Shop.Infrastructure.EF.Context;
 
@@ -23,9 +24,20 @@ namespace Shop.Infrastructure.EF.Repository
             return await Context.Set<T>().FirstOrDefaultAsync(t => t.Id.Equals(id)); ;
         }
 
+        public async Task<T> GetTracking(TKey id)
+        {
+            return await Context.Set<T>().AsTracking().FirstOrDefaultAsync(t => t.Id.Equals(id)); ;
+
+        }
+
         public async Task Create(T entity)
         {
             await Context.Set<T>().AddAsync(entity);
+        }
+
+        public async Task AddRange(ICollection<T> entities)
+        {
+            await Context.Set<T>().AddRangeAsync(entities);
         }
 
         public  void Update(T entity)

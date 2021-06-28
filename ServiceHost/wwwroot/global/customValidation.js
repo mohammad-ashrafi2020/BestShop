@@ -16,7 +16,6 @@ jQuery.validator.addMethod("fileSize",
     });
 jQuery.validator.addMethod("fileImage",
     function (value, element, params) {
-        console.log(value);
         var fileType = getExtension(value.toLowerCase());
         if (fileType === "png" || fileType === "jpg" || fileType === "jpeg" ||
             fileType === "bmp" || fileType === "svg" || fileType === "gif" ||

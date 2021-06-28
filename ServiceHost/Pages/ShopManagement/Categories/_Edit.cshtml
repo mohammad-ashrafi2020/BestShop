@@ -1,0 +1,32 @@
+﻿@using Shop.Application.Utilities
+@model AdminPanel.ViewModels.ShopManagement.Categories.EditShopCategoryViewModel
+<form data-ajax="true" method="post" asp-page="Index" asp-page-handler="EditCategory" class="row">
+  
+    @Html.HiddenFor(m => m.ParentId)
+    @Html.HiddenFor(m => m.Id)
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.Title)
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.Slug)
+    </div>
+
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.MetaTitle)
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.MetaKeyWords)
+    </div>
+    <div class="col-md-12">
+        @Html.EditorFor(m => m.MetaDescription)
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.ImageFile)
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.ShowInMenu)
+    </div>
+    <div class="col-12 text-center mb-2">
+        <img style="width: 170px; height: 170px; border-radius: 50%; box-shadow: 0 0 5px 0 grey;" src="@ShopDirectories.GetProductCategory(Model.ImageName)"/>
+    </div>
+</form>

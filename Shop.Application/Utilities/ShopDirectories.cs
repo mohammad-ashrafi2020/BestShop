@@ -3,5 +3,6 @@
     public static class ShopDirectories
     {
         public static string ProductCategories = "wwwroot/images/productCategories";
+        public static string GetProductCategory(string imageName) => $"{ProductCategories.Replace("wwwroot", "")}/{imageName}";
     }
 }

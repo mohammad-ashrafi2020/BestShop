@@ -1,0 +1,125 @@
+﻿@page "{handler?}"
+@model AdminPanel.Pages.ShopManagement.Categories.Attributes.IndexModel
+@{
+    ViewData["Title"] = "Attributes";
+    ViewData["Selected"] = "ShopCategoryAttributes";
+}
+<div class="card shadow-lg">
+    <form id="filter" method="get">
+        <div class="header">
+            <div class="float-left">
+
+                <button type="submit" class="btn   waves-effect bg-light-blue ">
+                    جستوجو
+                </button>
+            </div>
+        </div>
+        <div class="body">
+            <div class="row">
+                <div class="col-md-3">
+                    <label>دسته بندی</label>
+                    <select class="form-control show-tick" asp-items="Model.Categories" name="categoryId">
+                        <option>انتخاب کنید</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+@if (Model.CategoryId is > 0)
+{
+    <popupLink url="@Url.Page("index","ShowInsertPage",new {categoryId=Model.CategoryId})"
+               title="افزودن"
+               class="btn btn-success m-3">افزودن</popupLink>
+
+    @if (Model.Entities.Count == 0)
+    {
+        <p class="alert alert-warning text-center"> موردی برای نمایش وحود ندارد</p>
+    }
+    else
+    {
+        <div class="card">
+            <div class="body table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <td>ترتیب نمایش</td>
+                            <td>عنوان</td>
+                            <td>فرزندان</td>
+                            <td>اعملیات</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Entities.Where(g => g.ParentId == null).OrderBy(d => d.DisplayOrder))
+                        {
+                            <tr>
+                                <td>@item.DisplayOrder</td>
+                                <td>@item.Key</td>
+                                <td>
+                                    @if (Model.Entities.Any(g => g.ParentId == item.Id))
+                                    {
+                                        @foreach (var sub in Model.Entities.Where(g => g.ParentId == item.Id))
+                                        {
+                                            <ul class="table-bordered" style="box-shadow: 0 0 5px rgba(27, 27, 27, 0.12); padding-right: 5px;">
+                                                <li>
+                                                    <div class="text-right" style="padding: 5px; margin: 5px">
+                                                        @sub.Key (<small>@sub.DisplayOrder</small>)
+                                                        @if (sub.IsActive)
+                                                        {
+                                                            <DeleteItem url="@Url.Page("index", "ToggleStatus", new {id = sub.Id})" class="btn btn-link">
+                                                                <i class="zmdi zmdi-delete"></i>
+                                                            </DeleteItem>
+                                                        }
+                                                        else
+                                                        {
+                                                            <Question url="@Url.Page("index", "ToggleStatus", new {id = sub.Id})" class="btn btn-sm  bg-light-green">
+                                                                فعال سازی
+                                                            </Question>
+                                                        }
+
+                                                        <popupLink url="@Url.Page("index", "ShowEditPage", new {id = sub.Id})"
+                                                                   title="ویرایش"
+                                                                   class="btn btn-link">
+                                                            <i class="zmdi zmdi-edit"></i>
+                                                        </popupLink>
+                                                    </div>
+                                                </li>
+                                            </ul>
+
+                                        }
+                                    }
+                                </td>
+                                <td>
+
+                                    <popupLink title="افرودن فرزند به @item.Key" class="btn btn-link"
+                                               url="@Url.Page("index", "ShowInsertPage", new {categoryid = Model.CategoryId, parentId = item.Id})">
+                                        <i class="zmdi zmdi-plus"></i>
+                                    </popupLink>
+                                    <popupLink url="@Url.Page("index", "ShowEditPage", new {id = item.Id})"
+                                               title="ویرایش"
+                                               class="btn btn-link">
+                                        <i class="zmdi zmdi-edit"></i>
+                                    </popupLink>
+                                    @if (item.IsActive)
+                                    {
+                                        <DeleteItem url="@Url.Page("index", "ToggleStatus", new {id = item.Id})" class="btn btn-link">
+                                            <i class="zmdi zmdi-delete"></i>
+                                        </DeleteItem>
+                                    }
+                                    else
+                                    {
+                                        <Question url="@Url.Page("index", "ToggleStatus", new {id = item.Id})" class="btn btn-sm  btn-info">
+                                            فعال سازی
+                                        </Question>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+
+}

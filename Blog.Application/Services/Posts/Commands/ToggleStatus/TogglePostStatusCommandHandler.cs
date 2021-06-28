@@ -31,6 +31,8 @@ namespace Blog.Application.Services.Posts.Commands.ToggleStatus
                 post.Recovery();
 
             _db.Update(post);
+            await _db.SaveChangesAsync(cancellationToken);
+
             return OperationResult.Success();
         }
     }

@@ -55,6 +55,7 @@ namespace Blog.Application.Services.Posts.Commands.CreatePost
                     request.SubGroupId,
                     request.DateRelease.ToMiladi(),
                     request.IsSpecial, _slgChecker), cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
 
             return OperationResult.Success();
         }

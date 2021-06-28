@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Common.Application.Validation;
-using Common.EndPoints.CustomValidation.IFormFile;
+using Common.Application.Validation.CustomValidation.IFormFile;
 using Microsoft.AspNetCore.Http;
 
 namespace AdminPanel.ViewModels.Posts

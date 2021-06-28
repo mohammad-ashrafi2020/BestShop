@@ -2,7 +2,7 @@
 using Blog.Domain.Entities.BlogPostAggregate.Rules;
 using Blog.Domain.Entities.BlogPostGroupAggregate;
 using Common.Core.Utilities;
-using Common.Domain.Domain;
+using Common.Domain;
 using Common.Domain.Exceptions;
 using Common.Domain.Utils;
 

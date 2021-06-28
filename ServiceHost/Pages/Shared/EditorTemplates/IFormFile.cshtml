@@ -1,0 +1,25 @@
+﻿@model Microsoft.AspNetCore.Http.IFormFile
+<style>
+    input[type="file"] {
+        position: absolute;
+        z-index: 0;
+        right: 10px;
+    }
+    .custom-file-upload {
+        border: 1px solid #ccc;
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+        background: white;
+        position: relative;
+        z-index: 1;
+    }
+</style>
+<div class="form-group">
+    <div class="form-line" style="position: relative">
+        <label for="file-upload" class="custom-file-upload" asp-for="@Model">
+        </label>
+        <input id="file-upload" asp-for="@Model" type="file"/>
+    </div>
+    <span asp-validation-for="@Model" class="text-danger"></span>
+</div>

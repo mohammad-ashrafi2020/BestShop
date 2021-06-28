@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Common.Domain.Domain;
+using Common.Domain;
 using Common.Domain.Exceptions;
 using Shop.Domain.Products.ProductPictures;
 using Shop.Domain.ValueObjects;
@@ -20,7 +20,10 @@ namespace Shop.Domain.Products
         public ICollection<ProductPicture> ProductImages { get; set; }
 
 
-
+        public Product()
+        {
+            
+        }
         public Product(string englishName, string persianName, string shortDescription, string fullDescription, MetaValue metaValue, string imageName, string bitMapImageName)
         {
             Validate(englishName, persianName, shortDescription, fullDescription);

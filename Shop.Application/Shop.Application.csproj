@@ -12,8 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ProductCategories\ProductCategoryAttribute\Commands\" />
-    <Folder Include="ProductCategories\ProductCategoryAttribute\Queries\" />
+    <Folder Include="ProductCategories\ProductCategoryAttribute\Create\" />
+    <Folder Include="ProductCategories\ProductCategoryAttribute\Edit\" />
+    <Folder Include="ProductCategories\ProductCategoryAttribute\ToggleStatus\" />
     <Folder Include="Utilities\" />
   </ItemGroup>
 

@@ -1,16 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using Common.Domain.Domain;
+using Common.Domain;
 using Common.Domain.Exceptions;
 
 namespace Shop.Domain.ProductCategories.ProductCategoryAttributes
 {
     public class ProductCategoryAttribute : BaseEntity<long>
     {
-        private ProductCategoryAttribute()
-        {
-        }
-        
         public string Key { get; private set; }
         public int CategoryId { get; private set; }
         public string Hint { get; private set; }
@@ -21,6 +17,11 @@ namespace Shop.Domain.ProductCategories.ProductCategoryAttributes
         public ICollection<ProductCategoryAttribute> Children { get; set; }
         public ProductCategory.ProductCategory ProductCategory { get; set; }
 
+
+        private ProductCategoryAttribute()
+        {
+            Children = new List<ProductCategoryAttribute>();
+        }
         public ProductCategoryAttribute(string key, int categoryId, string hint, int displayOrder)
         {
             Validate(key);

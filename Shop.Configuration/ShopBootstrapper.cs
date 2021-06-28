@@ -1,15 +1,16 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Shop.Application.ProductCategories.ProductCategory.Commands.Create;
-using Shop.Application.ProductCategories.ProductCategory.DomainServices;
+using Shop.Application.DomainServices;
+using Shop.Application.ProductCategories.ProductCategory.Create;
 using Shop.Domain.ProductCategories.ProductCategory;
 using Shop.Domain.ProductCategories.ProductCategory.Rule;
+using Shop.Domain.ProductCategories.ProductCategoryAttributes;
 using Shop.Domain.Products;
 using Shop.Infrastructure.EF.Context;
 using Shop.Infrastructure.EF.Repository.ProductCategories;
 using Shop.Infrastructure.EF.Repository.Products;
-using Shop.Query.Services.ProductCategories.ProductCategory.GetById;
+using Shop.Query.ProductCategories.ProductCategory.GetById;
 
 namespace Shop.Configuration
 {
@@ -20,6 +21,7 @@ namespace Shop.Configuration
 
             #region Repositories
             service.AddScoped<IProductRepository, ProductRepository>();
+            service.AddScoped<IProductCategoryAttributeRepository, ProductCategoryAttributeRepository>();
             service.AddTransient<IProductCategoryRepository, ProductCategoryRepository>();
             #endregion
 
@@ -36,11 +38,7 @@ namespace Shop.Configuration
 
             service.AddDbContext<ShopContext>(option =>
             {
-                option.UseSqlServer(connectionString,
-                    builder =>
-                    {
-                        builder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
-                    });
+                option.UseSqlServer(connectionString);
             });
         }
     }

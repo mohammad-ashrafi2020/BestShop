@@ -8,7 +8,7 @@ namespace Blog.Application.Services.PostGroups.Commands.TogglePostGroupStatus
 {
     public class TogglePostGroupStatusCommandHandler : IBaseRequestHandler<TogglePostGroupStatusCommand>
     {
-        private BlogContext _db;
+        private readonly BlogContext _db;
 
         public TogglePostGroupStatusCommandHandler(BlogContext db)
         {
@@ -29,6 +29,8 @@ namespace Blog.Application.Services.PostGroups.Commands.TogglePostGroupStatus
                 group.Delete();
 
             _db.Update(group);
+            await _db.SaveChangesAsync(cancellationToken);
+
             return OperationResult.Success();
         }
     }

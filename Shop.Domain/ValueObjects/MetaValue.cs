@@ -6,7 +6,7 @@
         {
             Title = title;
             Description = description;
-            KeyWords = keyWords;
+            KeyWords = keyWords?.Replace("-",",");
         }
 
         public string Description { get; private set; }

@@ -1,0 +1,26 @@
+﻿@model AdminPanel.ViewModels.ShopManagement.Categories.AddShopCategoryViewModel
+<form data-ajax="true" method="post" asp-page="Index" asp-page-handler="AddCategory" class="row">
+    @Html.HiddenFor(m => m.ParentId)
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.Title)
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.Slug)
+    </div>
+
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.MetaTitle)
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.MetaKeyWords)
+    </div>
+    <div class="col-md-12">
+        @Html.EditorFor(m => m.MetaDescription)
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.ImageFile)
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(m => m.ShowInMenu)
+    </div>
+</form>

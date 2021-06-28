@@ -26,7 +26,6 @@
                     <td>
                         @if (Model.Groups.Any(g => g.ParentId == item.Id))
                         {
-
                             @foreach (var sub in Model.Groups.Where(g => g.ParentId == item.Id))
                             {
                                 <ul class=" table-bordered" style="box-shadow: 0 0 5px rgba(27, 27, 27, 0.12); padding-right: 5px;">

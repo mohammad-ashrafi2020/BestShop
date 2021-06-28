@@ -34,6 +34,7 @@ namespace Blog.Application.Services.PostGroups.Commands.CreateGroup
             //Create New Group
             var group = new BlogPostGroup(request.EnglishGroupTitle, request.GroupTitle, request.MetaDescription, _checker);
             await _context.AddAsync(group, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
             return OperationResult.Success();
         }
     }

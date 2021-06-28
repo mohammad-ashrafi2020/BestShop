@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-namespace Common.EndPoints.CustomValidation.IFormFile
+
+namespace Common.Application.Validation.CustomValidation.IFormFile
 {
     public class FileImageAttribute : ValidationAttribute, IClientModelValidator
     {

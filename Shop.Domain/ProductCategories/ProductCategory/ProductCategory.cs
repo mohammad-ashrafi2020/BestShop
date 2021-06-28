@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using Common.Core.Utilities;
-using Common.Domain.Domain;
+using Common.Domain;
 using Common.Domain.Exceptions;
 using Common.Domain.Utils;
 using Shop.Domain.ProductCategories.ProductCategory.Rule;
@@ -13,10 +13,7 @@ namespace Shop.Domain.ProductCategories.ProductCategory
 {
     public class ProductCategory : BaseEntity<int>
     {
-        private ProductCategory()
-        {
 
-        }
         public string CategoryTitle { get; private set; }
         public string Slug { get; private set; }
         public MetaValue MetaValue { get; private set; }
@@ -28,9 +25,16 @@ namespace Shop.Domain.ProductCategories.ProductCategory
         public ICollection<ProductCategory> SubCategories { get; set; }
         public ICollection<ProductCategoryAttribute> Attributes { get; set; }
 
+        private ProductCategory()
+        {
+            SubCategories = new List<ProductCategory>();
+        }
         public ProductCategory(string categoryTitle, string slug, MetaValue metaValue, string imageName, bool showInMenu, IProductCategorySlugUniquenessChecker _slugChecker)
         {
-            Validate(categoryTitle, slug, _slugChecker);
+            Validate(categoryTitle, slug);
+
+            if (_slugChecker.IsUniq(slug))
+                throw new InvalidDomainDataException("Slug تکراری است");
 
 
             CategoryTitle = categoryTitle;
@@ -42,15 +46,19 @@ namespace Shop.Domain.ProductCategories.ProductCategory
             SubCategories = new List<ProductCategory>();
         }
 
-        public void Edit(string categoryTitle, string slug, string imageName, MetaValue metaValue, IProductCategorySlugUniquenessChecker _slugChecker)
+        public void Edit(string categoryTitle, string slug, string imageName, MetaValue metaValue,bool shoInMenu, IProductCategorySlugUniquenessChecker _slugChecker)
         {
-            Validate(categoryTitle, slug, _slugChecker);
+            Validate(categoryTitle, slug);
 
+            if (slug != Slug)
+                if (_slugChecker.IsUniq(slug))
+                    throw new InvalidDomainDataException("Slug تکراری است");
 
             CategoryTitle = categoryTitle;
             Slug = slug.ToSlug();
             ImageName = imageName;
             MetaValue = metaValue;
+            ShowInMenu = shoInMenu;
             ModifyDate = DateTime.Now;
         }
 
@@ -65,16 +73,13 @@ namespace Shop.Domain.ProductCategories.ProductCategory
 
 
 
-        private static void Validate(string categoryTitle, string slug, IProductCategorySlugUniquenessChecker _slugChecker)
+        private static void Validate(string categoryTitle, string slug)
         {
             if (string.IsNullOrEmpty(slug))
                 throw new InvalidDomainDataException("slug Is Null");
 
             if (slug.IsUniCode())
                 throw new InvalidDomainDataException("Slug فقط قادر به ذخیره  حروف انگلیسی می باشد");
-
-            if (_slugChecker.IsUniq(slug))
-                throw new InvalidDomainDataException("This Slug Exist In Database");
 
             if (string.IsNullOrEmpty(categoryTitle))
                 throw new InvalidDomainDataException("عنوان دسته بندی را وارد کنید");

@@ -18,6 +18,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Blog.Configuration\Blog.Configuration.csproj" />
     <ProjectReference Include="..\Shop.Configuration\Shop.Configuration.csproj" />
+    <ProjectReference Include="..\Shop.Query\Shop.Query.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\productCategories\" />
   </ItemGroup>
 
 </Project>
