@@ -9,9 +9,9 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using Shop.Application.ProductCategories.ProductCategory.Create;
-using Shop.Application.ProductCategories.ProductCategory.Edit;
-using Shop.Application.ProductCategories.ProductCategory.ToggleStatus;
+using Shop.Application.Categories.Create;
+using Shop.Application.Categories.Edit;
+using Shop.Application.Categories.ToggleStatus;
 using Shop.Domain.ValueObjects;
 using Shop.Query.Categories.Category.GetByFilter;
 using Shop.Query.Categories.Category.GetById;
@@ -41,13 +41,13 @@ namespace AdminPanel.Pages.ShopManagement.Categories
         public async Task<IActionResult> OnGetToggleStatus(int id)
         {
             return await AjaxTryCatch(async () =>
-                await Mediator.Send(new ProductCategoryToggleStatusCommand(id)), true);
+                await Mediator.Send(new ToggleCategoryStatusCommand(id)), true);
         }
         public async Task<IActionResult> OnPostAddCategory(AddShopCategoryViewModel model)
         {
             return await AjaxTryCatch(async () =>
             {
-                var command = new CreateProductCategoryCommand(
+                var command = new CreateCategoryCommand(
                     model.Slug, model.Title
                     , new MetaValue(model.MetaTitle, model.MetaDescription, model.MetaKeyWords)
                     , model.ShowInMenu,
@@ -61,7 +61,7 @@ namespace AdminPanel.Pages.ShopManagement.Categories
         {
             return await AjaxTryCatch(async () =>
             {
-                var command = new EditProductCategoryCommand(
+                var command = new EditCategoryCommand(
                     model.Id, model.Slug, model.Title
                     , new MetaValue(model.MetaTitle, model.MetaDescription, model.MetaKeyWords)
                     , model.ShowInMenu, model.ImageFile);

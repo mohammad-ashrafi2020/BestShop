@@ -1,10 +1,16 @@
-﻿using Common.Domain;
+﻿using System.Collections.Generic;
+using Common.Domain;
 using Common.Domain.Exceptions;
+using Shop.Domain.Products;
 
 namespace Shop.Domain.Brands
 {
     public class Brand : BaseEntity<int>
     {
+        public Brand()
+        {
+            
+        }
         public Brand(string name,string mainImage, string logo)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -27,5 +33,6 @@ namespace Shop.Domain.Brands
         public string Name { get; private set; }
         public string MainImage { get; private set; }
         public string Logo { get; private set; }
+        public ICollection<Product> Products { get; set; }
     }
 }

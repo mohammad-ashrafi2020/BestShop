@@ -5,6 +5,7 @@ using Common.Domain;
 using Common.Domain.Exceptions;
 using Shop.Domain.Brands;
 using Shop.Domain.Products.ProductPictures;
+using Shop.Domain.Products.ProductSpecifications;
 using Shop.Domain.ValueObjects;
 
 namespace Shop.Domain.Products
@@ -21,12 +22,13 @@ namespace Shop.Domain.Products
         public string BitMapImageName { get; private set; }
 
         public Brand Brand { get; set; }
-        public ICollection<ProductPicture> ProductImages { get; set; }
-
+        public ICollection<ProductSpecification> ProductSpecifications { get; set; }
+        public ICollection<ProductPicture> ProductPictures { get; set; }
+        public ICollection<ProductCategory> ProductCategories { get; set; }
 
         public Product()
         {
-            
+            ProductCategories = new List<ProductCategory>();
         }
         public Product(string englishName, string persianName, string shortDescription, string fullDescription, MetaValue metaValue, string imageName, string bitMapImageName)
         {
@@ -39,6 +41,7 @@ namespace Shop.Domain.Products
             MetaValue = metaValue;
             ImageName = imageName ?? "Default.png";
             BitMapImageName = bitMapImageName ?? "Default.png";
+            ProductCategories = new List<ProductCategory>();
         }
         public void Edit(string englishName, string persianName, string shortDescription, string fullDescription, MetaValue metaValue, string imageName, string bitMapImageName)
         {
@@ -61,6 +64,15 @@ namespace Shop.Domain.Products
         {
             BitMapImageName = bitMapImageName;
             ModifyDate = DateTime.Now;
+        }
+
+        public void SetCategories(List<ProductCategory> categories)
+        {
+            ProductCategories.Clear();
+            foreach (var category in categories)
+            {
+                ProductCategories.Add(new ProductCategory(Id, category.CategoryId, category.Level));
+            }
         }
 
         private static void Validate(string englishName, string persianName, string shortDescription, string fullDescription)

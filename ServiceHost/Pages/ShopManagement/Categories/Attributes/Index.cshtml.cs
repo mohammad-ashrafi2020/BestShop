@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,17 +8,15 @@ using Common.Application;
 using Common.Core.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using Shop.Application.ProductCategories.ProductCategoryAttribute.Create;
-using Shop.Application.ProductCategories.ProductCategoryAttribute.Edit;
-using Shop.Application.ProductCategories.ProductCategoryAttribute.ToggleStatus;
+using Shop.Application.Categories.CategoryAttribute.Create;
+using Shop.Application.Categories.CategoryAttribute.Edit;
+using Shop.Application.Categories.CategoryAttribute.ToggleStatus;
 using Shop.Query.Categories.Category.GetByFilter;
 using Shop.Query.Categories.CategoryAttributes.GetByFilter;
 using Shop.Query.Categories.CategoryAttributes.GetById;
 using Shop.Query.DTOs.ProductCategories;
-using Shop.Query.ProductCategories.ProductCategoryAttributes.GetById;
 
 namespace AdminPanel.Pages.ShopManagement.Categories.Attributes
 {
@@ -73,14 +70,14 @@ namespace AdminPanel.Pages.ShopManagement.Categories.Attributes
         public async Task<IActionResult> OnGetToggleStatus(long id)
         {
             return await AjaxTryCatch(async () =>
-               await Mediator.Send(new ToggleProductCategoryAttributeStatusCommand(id)), true);
+               await Mediator.Send(new ToggleCategoryAttributeStatusCommand(id)), true);
         }
         #region Insert
 
         public async Task<IActionResult> OnPostInsert(AddProductCategoryAttributeViewModel model)
         {
             return await AjaxTryCatch(async ()
-                    => await Mediator.Send(new CreateProductCategoryAttributeCommand
+                    => await Mediator.Send(new CreateCategoryAttributeCommand
                         (model.Key, model.Hint, model.DisplayOrder, model.CategoryId, model.ShowInLandingPage, model.ParentId))
                 , true);
         }
@@ -104,7 +101,7 @@ namespace AdminPanel.Pages.ShopManagement.Categories.Attributes
         public async Task<IActionResult> OnPostEdit(EditProductCategoryAttributeViewModel model)
         {
             return await AjaxTryCatch(async ()
-                    => await Mediator.Send(new EditProductCategoryAttributeCommand
+                    => await Mediator.Send(new EditCategoryAttributeCommand
                         (model.Id, model.Key, model.Hint, model.DisplayOrder))
                 , true);
         }

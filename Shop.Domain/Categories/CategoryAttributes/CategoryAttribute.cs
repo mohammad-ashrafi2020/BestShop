@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using Common.Domain;
 using Common.Domain.Exceptions;
@@ -40,6 +41,7 @@ namespace Shop.Domain.Categories.CategoryAttributes
             Key = key;
             Hint = hint;
             DisplayOrder = displayOrder;
+            ModifyDate = DateTime.Now;
         }
 
         public void AddChild(string kay, string hint, int displayOrder, bool showInLandingPage)

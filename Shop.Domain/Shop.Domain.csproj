@@ -6,7 +6,8 @@
 
   <ItemGroup>
     <Folder Include="Order\" />
-    <Folder Include="Products\ProductSpecification\" />
+    <Folder Include="Products\Rules\" />
+    <Folder Include="Products\ProductSpecifications\" />
   </ItemGroup>
 
   <ItemGroup>

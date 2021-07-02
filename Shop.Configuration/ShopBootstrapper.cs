@@ -1,16 +1,18 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Shop.Application.Categories.Create;
 using Shop.Application.DomainServices;
-using Shop.Application.ProductCategories.ProductCategory.Create;
 using Shop.Domain.Brands;
 using Shop.Domain.Categories;
 using Shop.Domain.Categories.CategoryAttributes;
 using Shop.Domain.Categories.Rule;
 using Shop.Domain.Products;
+using Shop.Domain.Products.ProductPictures;
+using Shop.Domain.Products.ProductSpecifications;
 using Shop.Infrastructure.EF.Context;
 using Shop.Infrastructure.EF.Repository.Brands;
-using Shop.Infrastructure.EF.Repository.ProductCategories;
+using Shop.Infrastructure.EF.Repository.Categories;
 using Shop.Infrastructure.EF.Repository.Products;
 using Shop.Query.Categories.Category.GetById;
 
@@ -23,6 +25,8 @@ namespace Shop.Configuration
 
             #region Repositories
             service.AddScoped<IProductRepository, ProductRepository>();
+            service.AddScoped<IProductPictureRepository, ProductPictureRepository>();
+            service.AddScoped<IProductSpecificationRepository, ProductSpecificationRepository>();
             service.AddScoped<ICategoryAttributeRepository, CategoryAttributeRepository>();
             service.AddScoped<ICategoryRepository, CategoryRepository>();
             service.AddScoped<IBrandRepository, BrandRepository>();
@@ -34,7 +38,7 @@ namespace Shop.Configuration
 
 
             //Commands
-            service.AddMediatR(typeof(CreateProductCategoryCommand).Assembly);
+            service.AddMediatR(typeof(CreateCategoryCommand).Assembly);
 
             //Queries
             service.AddMediatR(typeof(GetProductCategoryById).Assembly);

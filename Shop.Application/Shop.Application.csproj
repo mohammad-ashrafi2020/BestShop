@@ -15,9 +15,6 @@
     <Folder Include="Brands\Create\" />
     <Folder Include="Brands\Edit\" />
     <Folder Include="Brands\ToggleStatus\" />
-    <Folder Include="ProductCategories\ProductCategoryAttribute\Create\" />
-    <Folder Include="ProductCategories\ProductCategoryAttribute\Edit\" />
-    <Folder Include="ProductCategories\ProductCategoryAttribute\ToggleStatus\" />
     <Folder Include="Utilities\" />
   </ItemGroup>
 
